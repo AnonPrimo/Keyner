@@ -30,14 +30,14 @@ namespace Keyner_v1
             InitializeComponent();
 
             timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             timer.Tick += timer_Tick;
             timer.Start();
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            PB.Value++;
+            PB.Value+=2;
             if (PB.Value == PB.Maximum)
             {
                 View.Autorization a = new View.Autorization();

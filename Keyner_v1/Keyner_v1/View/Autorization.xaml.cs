@@ -19,9 +19,38 @@ namespace Keyner_v1.View
     /// </summary>
     public partial class Autorization : Window
     {
+        Model.KeynerContext keynerContext;
+
+        Controller.AutorizAndRegistr aar;
         public Autorization()
         {
             InitializeComponent();
+            keynerContext = new Model.KeynerContext();
+            aar = new Controller.AutorizAndRegistr();
+            //comboBoxGroup.DataContext = keynerContext.
+
+            comboBoxUser.ItemsSource = keynerContext.UserSet.ToList();
+            comboBoxUser.DisplayMemberPath = "Name";
+            comboBoxUser.SelectedValue = "Id";
+
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (aar.GetPass((int)comboBoxUser.SelectedValue, passBox.SecurePassword.ToString()))
+            {
+                MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
+                mw.Show();
+                this.Close();
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Registration r = new Registration();
+            r.Show();
+            this.Close();
         }
     }
 }

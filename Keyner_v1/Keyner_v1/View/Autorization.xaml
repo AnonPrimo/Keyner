@@ -7,7 +7,19 @@
         mc:Ignorable="d"
         Title="Autorization" Height="300" Width="300">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="94,26,0,0" TextWrapping="Wrap" Text="Авторизація" VerticalAlignment="Top" RenderTransformOrigin="0.627,3.408"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="18" Margin="86,10,0,0" TextWrapping="Wrap" Text="Авторизація" VerticalAlignment="Top" RenderTransformOrigin="0.627,3.408"/>
+
+        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="44,62,0,0" TextWrapping="Wrap" Text="Група" VerticalAlignment="Top" Height="22" RenderTransformOrigin="0.659,-3.85"/>
+        <ComboBox Name="comboBoxGroup" HorizontalAlignment="Left" Margin="109,62,0,0" VerticalAlignment="Top" Width="164"/>
+
+        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="19,101,0,0" TextWrapping="Wrap" Text="Користувач" VerticalAlignment="Top" Height="22" Width="82"/>
+        <ComboBox Name="comboBoxUser" HorizontalAlignment="Left" Margin="109,101,0,0" VerticalAlignment="Top" Width="164"/>
+      
+        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="32,140,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Height="20"/>
+        <PasswordBox Name="passBox" PasswordChar="*" HorizontalAlignment="Left" Margin="109,140,0,0" VerticalAlignment="Top" Width="164"/>
+
+        <Button Content="Увійти" Click="Button_Click" HorizontalAlignment="Left" Margin="19,185,0,0" VerticalAlignment="Top" Width="254"/>
+        <Button Content="Реєстрація" Click="Button_Click_1" HorizontalAlignment="Left" Margin="19,221,0,0" VerticalAlignment="Top" Width="254"/>
 
     </Grid>
 </Window>
