@@ -1,0 +1,13 @@
+﻿<Window x:Class="Keyner_v1.View.Autorization"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Keyner_v1.View"
+        mc:Ignorable="d"
+        Title="Autorization" Height="300" Width="300">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="94,26,0,0" TextWrapping="Wrap" Text="Авторизація" VerticalAlignment="Top" RenderTransformOrigin="0.627,3.408"/>
+
+    </Grid>
+</Window>

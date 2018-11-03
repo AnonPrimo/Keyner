@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="325" Width="525"
+        Loaded="Window_Loaded">
     <Grid>
-        
+        <ProgressBar Name="PB" HorizontalAlignment="Left" Height="32" Margin="30,214,0,0" VerticalAlignment="Top" Width="450" RenderTransformOrigin="0.494,0.822"  Minimum="0" Maximum="100"/>
+        <TextBlock FontWeight="SemiBold" FontSize="45" Foreground="DarkCyan" Margin="166,95,199,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="64" Text="Keyner"/>
+
+
     </Grid>
 </Window>
