@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Keyner_v1.Model
 {
-    [Table("Users")]
     class User
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

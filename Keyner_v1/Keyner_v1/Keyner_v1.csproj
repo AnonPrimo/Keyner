@@ -78,6 +78,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Group.cs" />
     <Compile Include="Model\KeynerContext.cs" />
     <Compile Include="Model\Monster.cs" />
     <Compile Include="Model\MonsterLevel.cs" />

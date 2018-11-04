@@ -21,6 +21,7 @@ namespace Keyner_v1.Model
         public DbSet<Shop> ShopSet { get; set; }
         public DbSet<Statistic> StatisticSet { get; set; }
         public DbSet<MonsterLevel> MonsterLevelSet { get; set; }
+        public DbSet<Group> GroupSet { get; set; }
 
     }
 }

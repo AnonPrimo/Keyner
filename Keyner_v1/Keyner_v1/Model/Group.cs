@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace Keyner_v1.Model
 {
-    class MonsterLevel
+    class Group
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int Id_Monster { get; set; }
-        public byte[] Image { get; set; }
+
+        public string Name { get; set; }
+
     }
 }
