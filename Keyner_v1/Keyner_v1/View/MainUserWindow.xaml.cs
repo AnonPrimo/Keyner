@@ -19,15 +19,21 @@ namespace Keyner_v1.View
     /// </summary>
     public partial class MainUserWindow : Window
     {
+        Model.User user;
+        Keyner_v1.Model.KeynerContext kcon;
 
         public MainUserWindow()
         {
             InitializeComponent();
+            
+            kcon = new Model.KeynerContext();
+
         }
 
         private void fillGrid()
         {
-            
+
+            datagrid1.DataContext = kcon.TestSet;
         }
 
         private void fillInfo(string name, string money, string level)
@@ -38,7 +44,7 @@ namespace Keyner_v1.View
             txt2.Text = money;
             txt2.FontSize = 20;
 
-            txt3.Text = "Level: " + level;
+            txt3.Text = "Рівень: " + level;
         }
 
         private void fillImage(Image im)
