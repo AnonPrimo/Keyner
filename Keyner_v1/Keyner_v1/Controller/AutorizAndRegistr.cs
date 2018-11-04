@@ -31,21 +31,16 @@ namespace Keyner_v1.Controller
 
         public void AddUser(string name, string pass, string pp, int group)
         {
-            if (pp == pass)
-            {
-                User user = new User();
-                user.Name = name;
-                user.Password = pass;
-                user.Id_Group = group;
-                user.Id_Monster = 1;
-                user.Money = 0;
+            User user = new User();
+            user.Name = name;
+            user.Password = pass;
+            user.Id_Group = group;
+            user.Id_Monster = 1;
+            user.Money = 0;
 
-                keyCont.UserSet.Add(user);
-                keyCont.SaveChanges();
-            }
+            keyCont.UserSet.Add(user);
+            keyCont.SaveChanges();
+
         }
-
-
-
     }
 }

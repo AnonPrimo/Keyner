@@ -27,8 +27,7 @@
         <ComboBox Name="comboBoxGroup" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Користувач" Height="22" Width="82"/>
-        <TextBox Name="fio"  TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="120"
-                 Text="{Binding Name, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+        <TextBox Name="fio"  TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="120"></TextBox>
 
         <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Пароль" Height="20"/>
         <PasswordBox Name="passBox" PasswordChar="*"  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
