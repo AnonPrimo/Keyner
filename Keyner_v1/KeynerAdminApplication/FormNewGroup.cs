@@ -11,36 +11,34 @@ using System.Windows.Forms;
 
 namespace KeynerAdminApplication
 {
-    public partial class FormNewTest : Form
+    public partial class FormNewGroup : Form
     {
-        private Model.Test _test = null;
+        private Model.Group _group = null;
         private bool _modified = false;
 
-        public FormNewTest()
+        public FormNewGroup()
         {
             InitializeComponent();
         }
 
-        public FormNewTest(ref Model.Test test): this()
+        public FormNewGroup(ref Model.Group group): this()
         {
-            _test = test;
-            richTextBoxText.Text = _test.Text;
-            numericUpDownCountMistakes.Value = _test.CountMistakes;
+            this._group = group;
+            textBoxGroupName.Text = _group.Name;
             _modified = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonSaveGroup_Click(object sender, EventArgs e)
         {
-            if (_test == null)
-                _test = new Model.Test();
+            if (_group == null)
+                _group = new Model.Group();
 
-            _test.Text = richTextBoxText.Text;
-            _test.CountMistakes = (int)numericUpDownCountMistakes.Value;
+            _group.Name = textBoxGroupName.Text;
 
             List<ValidationResult> validationResults = new List<ValidationResult>();
-            ValidationContext validationContext = new ValidationContext(_test);
+            ValidationContext validationContext = new ValidationContext(_group);
 
-            if (!Validator.TryValidateObject(_test, validationContext, validationResults, true))
+            if (!Validator.TryValidateObject(_group, validationContext, validationResults, true))
             {
                 string errorMesseges = "";
                 foreach (ValidationResult item in validationResults)
@@ -54,13 +52,14 @@ namespace KeynerAdminApplication
             using (Model.KeynerContext db = new Model.KeynerContext())
             {
                 if (_modified)
-                    db.Entry(_test).State = System.Data.Entity.EntityState.Modified;
+                    db.Entry(_group).State = System.Data.Entity.EntityState.Modified;
                 else
-                    db.TestSet.Add(_test);
+                    db.GroupSet.Add(_group);
                 db.SaveChanges();
                 this.DialogResult = DialogResult.Yes;
                 this.Close();
             }
+
         }
     }
 }
