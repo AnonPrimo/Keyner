@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace KeynerAdminApplication
 {
     public partial class FormNewTest : Form
     {
-        private Model.Test _test;
+        private Model.Test _test = null;
+        private bool _modified = false;
 
         public FormNewTest()
         {
@@ -26,26 +28,32 @@ namespace KeynerAdminApplication
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string text = richTextBoxText.Text;
-            int countMistakes = (int)numericUpDownCountMistakes.Value;
+            if (_test == null)
+                _test = new Model.Test();
+
+            _test.Text = richTextBoxText.Text;
+            _test.CountMistakes = (int)numericUpDownCountMistakes.Value;
+
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            ValidationContext validationContext = new ValidationContext(_test);
+
+            if (!Validator.TryValidateObject(_test, validationContext, validationResults, true))
+            {
+                string errorMesseges = "";
+                foreach (ValidationResult item in validationResults)
+                {
+                    errorMesseges += item.ErrorMessage + "\n";
+                }
+                MessageBox.Show(errorMesseges, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             using (Model.KeynerContext db = new Model.KeynerContext())
             {
-                if (_test != null)
-                {
-                    _test.Text = text;
-                    _test.CountMistakes = countMistakes;
+                if (_modified)
                     db.Entry(_test).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
-                    this.Close();
-                }
-                _test = new Model.Test
-                {
-                    Text = text,
-                    CountMistakes = countMistakes,
-                    BestTime = 0
-                };
-                db.TestSet.Add(_test);
+                else
+                    db.TestSet.Add(_test);
                 db.SaveChanges();
                 this.Close();
             }
