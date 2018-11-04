@@ -65,6 +65,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\AutorizAndRegistr.cs" />
+    <Compile Include="View\Administrator.xaml.cs">
+      <DependentUpon>Administrator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainUserWindow.xaml.cs">
       <DependentUpon>MainUserWindow.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Administrator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
