@@ -42,5 +42,19 @@ namespace Keyner_v1.Controller
             keyCont.SaveChanges();
 
         }
+
+        public bool GetPassTest(int id, string p, View.Autorization viv)
+        {
+            foreach (var item in viv.user)
+            {
+                if (item.Id == id)
+                {
+                    if (item.Password == p)
+                        return true;
+                }
+            }
+            return false;
+        }
+
     }
 }
