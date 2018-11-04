@@ -28,7 +28,7 @@ namespace Keyner_v1
         public MainWindow()
         {
             InitializeComponent();
-
+            
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             timer.Tick += timer_Tick;
@@ -45,12 +45,17 @@ namespace Keyner_v1
                 this.Close();
                 timer.Stop();
             }
-            
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             timer.Start();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

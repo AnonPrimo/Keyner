@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace Keyner_v1.Model
 {
-    class Monster
+    public class Monster
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Name required")]
         public string Name { get; set; }
         public int Id_MonserLevel { get; set; }
     }

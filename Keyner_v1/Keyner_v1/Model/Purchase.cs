@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Keyner_v1.Model
 {
-    class Purchase
+    public class Purchase
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
