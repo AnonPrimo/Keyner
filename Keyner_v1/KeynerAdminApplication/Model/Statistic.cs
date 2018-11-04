@@ -6,13 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Keyner_v1.Model
+namespace KeynerAdminApplication.Model
 {
-    public class MonsterLevel
+    public class Statistic
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int Id_Monster { get; set; }
-        public byte[] Image { get; set; }
+        public int Id_User { get; set; }
+        public int Id_Test { get; set; }
+        public int Time { get; set; }
+        public int Mark { get; set; } // 1..3
+        public int CountMistakes { get; set; }
+        public bool IsPassed { get; set; }
     }
 }

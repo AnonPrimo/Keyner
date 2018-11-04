@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Keyner_v1.Model
 {
-    public class User
+    public class Group
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -16,18 +16,5 @@ namespace Keyner_v1.Model
         [Required(ErrorMessage = "Name required")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Text required")]
-        public string Password { get; set; }
-
-        public int Id_Group { get; set; }
-
-        public int Id_Monster { get; set; }
-
-        public int Money { get; set; }
-
-        public User()
-        {
-
-        }
     }
 }

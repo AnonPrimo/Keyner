@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace Keyner_v1.Model
 {
-    class Test
+    public class Test
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "Text required")]
         public string Text { get; set; }
 
+        [Required(ErrorMessage = "CountMistakes required")]
         public int CountMistakes { get; set; }
 
         public int BestTime { get; set; }
