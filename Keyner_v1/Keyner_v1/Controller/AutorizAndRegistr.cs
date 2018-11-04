@@ -31,7 +31,6 @@ namespace Keyner_v1.Controller
 
         public void AddUser(string name, string pass, string pp, int group)
         {
-
             if (pp == pass)
             {
                 User user = new User();
