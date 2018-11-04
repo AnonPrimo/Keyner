@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Keyner_v1.Model
+namespace KeynerAdminApplication.Model
 {
     public class Purchase
     {
