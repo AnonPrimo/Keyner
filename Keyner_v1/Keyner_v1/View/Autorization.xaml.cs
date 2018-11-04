@@ -32,8 +32,6 @@ namespace Keyner_v1.View
             comboBoxUser.DataContext = keynerContext.UserSet.ToList();
             comboBoxUser.DisplayMemberPath = "Name";
             comboBoxUser.SelectedValue = "Id";
-
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
