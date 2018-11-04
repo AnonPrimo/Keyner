@@ -24,7 +24,7 @@ namespace Keyner_v1.View
         public Registration()
         {
             InitializeComponent();
-            aar = new Controller.AutorizAndRegistr(); 
+            aar = new Controller.AutorizAndRegistr();
 
         }
 
@@ -35,5 +35,7 @@ namespace Keyner_v1.View
             mw.Show();
             this.Close();
         }
+
+      
     }
 }

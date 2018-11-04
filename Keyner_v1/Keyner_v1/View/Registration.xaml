@@ -5,23 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Registration" Height="300" Width="310">
+        Title="Registration" Height="300" Width="400">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" FontSize="18" Margin="86,10,0,0" TextWrapping="Wrap" Text="Реєстрація" VerticalAlignment="Top" RenderTransformOrigin="0.627,3.408"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
+   
+        </Grid.ColumnDefinitions>
 
-        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="50,62,0,0" TextWrapping="Wrap" Text="Група" VerticalAlignment="Top" Height="22" RenderTransformOrigin="0.659,-3.85"/>
-        <ComboBox Name="comboBoxGroup" HorizontalAlignment="Left" Margin="128,62,0,0" VerticalAlignment="Top" Width="164"/>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="18" TextWrapping="Wrap" Text="Реєстрація" VerticalAlignment="Center" RenderTransformOrigin="0.627,3.408"/>
 
-        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="25,101,0,0" TextWrapping="Wrap" Text="Користувач" VerticalAlignment="Top" Height="22" Width="82"/>
-        <TextBox Name="fio" HorizontalAlignment="Left" Height="22" Margin="128,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="164"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Група" RenderTransformOrigin="0.659,-3.85" Width="53"/>
+        <ComboBox Name="comboBoxGroup" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
 
-        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="38,140,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Height="20"/>
-        <PasswordBox Name="passBox" PasswordChar="*" HorizontalAlignment="Left" Margin="128,140,0,0" VerticalAlignment="Top" Width="164"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Користувач" Height="22" Width="82"/>
+        <TextBox Name="fio"  TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="120"></TextBox>
 
-        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="10,178,0,0" TextWrapping="Wrap" Text="Підтвердження" VerticalAlignment="Top" Height="20" Width="109"/>
-        <PasswordBox x:Name="passBox_Copy" PasswordChar="*" HorizontalAlignment="Left" Margin="128,178,0,0" VerticalAlignment="Top" Width="164"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Пароль" Height="20"/>
+        <PasswordBox Name="passBox" PasswordChar="*"  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
 
-        <Button Content="Зареєструватись" Click="Button_Click" HorizontalAlignment="Left" Margin="19,221,0,0" VerticalAlignment="Top" Width="254"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Підтвердження" Height="20" Width="120"/>
+        <PasswordBox x:Name="passBox_Copy" PasswordChar="*" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+
+        <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Зареєструватись" Click="Button_Click" Width="120"/>
+
+
 
     </Grid>
 </Window>

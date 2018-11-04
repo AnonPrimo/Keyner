@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace Keyner_v1.Model
 {
-    class Shop
+    public class Shop
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int Id_Monster { get; set; }
+        [Required(ErrorMessage = "Cost required")]
         public int Cost { get; set; }
     }
 }
