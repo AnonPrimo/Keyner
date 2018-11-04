@@ -29,7 +29,7 @@ namespace Keyner_v1.View
             aar = new Controller.AutorizAndRegistr();
             //comboBoxGroup.DataContext = keynerContext.
 
-            comboBoxUser.ItemsSource = keynerContext.UserSet.ToList();
+            comboBoxUser.DataContext = keynerContext.UserSet.ToList();
             comboBoxUser.DisplayMemberPath = "Name";
             comboBoxUser.SelectedValue = "Id";
 
