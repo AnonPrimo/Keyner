@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="MainUserWindow" Height="350" Width="550" Background="LightCyan">
+        Title="MainUserWindow" Height="450" Width="750" Background="LightCyan">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Name="datagrid1" Grid.Column="0" Grid.RowSpan="3" Margin="10" Background="Lavender" SelectionUnit="FullRow" SelectionMode="Single" MouseDown="datagrid1_MouseDown">
+        <DataGrid Name="datagrid1" Grid.Column="0" Grid.RowSpan="3" Margin="10" Background="Lavender" SelectionUnit="FullRow" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" SelectionChanged="datagrid1_SelectionChanged">
         </DataGrid>
 
         <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Center">
@@ -33,9 +33,9 @@
 
             <Image Name="monster" Grid.Column="1" Grid.Row="1" Margin="20"></Image>
         
-        <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Center">
-            <Button Name="gamebutton" Content="Go" FontSize="20" FontWeight="Bold" Width="50" Margin="10"  Background="LightGreen" HorizontalAlignment="Left" Click="gamebutton_Click"></Button>
-            <Button Name="shopbutton" Content="Shop"  Margin="30,10" Width="60" Background="Cyan" Click="shopbutton_Click"></Button>
+        <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" >
+            <Button Name="gamebutton" Content="Go" FontSize="30" FontWeight="Bold" Width="70" Margin="5"  Background="LightGreen" HorizontalAlignment="Left" Click="gamebutton_Click"></Button>
+            <Button Name="shopbutton" Content="Shop"  Margin="40,10" Width="60" Background="Cyan" Click="shopbutton_Click"></Button>
             <Button Name="settingbutton" Content="Settings" Margin="10" Width="50" Background="CadetBlue"></Button>
         </DockPanel>
         

@@ -16,11 +16,23 @@ namespace Keyner_v1.Controller
         public UserFormController(int id)
         {
             db = new Model.KeynerContext();
-            CurrentUser = db.UserSet.Find(id);
+            CurrentUser = getUser(id);
             UserTest = new List<UserTests>();
-            fillUserTest();
+            //fillUser();
+            fillUserLocal();
         }
 
+        public Model.User getUser(int id)
+        {
+            //return db.UserSet.Find(id);
+
+
+            //test
+            return new Model.User();
+        }
+
+
+        //user tests
         public List<Model.Statistic> getUserTests()
         {
             List<Model.Statistic> stat = new List<Model.Statistic>();
@@ -34,8 +46,9 @@ namespace Keyner_v1.Controller
             return stat;
         }
 
-        private void fillUserTest()
+        private void fillUser()
         {
+            //list of all tests
             foreach(var item in db.TestSet)
             {
                 UserTest.Add(new UserTests() { TestName = "Тест №"+item.Id, BestTime = item.BestTime});
@@ -49,6 +62,23 @@ namespace Keyner_v1.Controller
                 UserTest[i].Time = tmp[i].Time;
                 UserTest[i].IsPassed = tmp[i].IsPassed;
            }
+        }
+
+        //test
+        private void fillUserLocal()
+        {
+          
+            for (int i = 0; i < 5; i++)
+            {
+                UserTest.Add(new UserTests()
+                {
+                    TestName = "TestName" + i,
+                    BestTime = DateTime.Now.Minute,
+                    Mark = i * i ^ 4,
+                    Mistakes = i + (i << 5),
+                    IsPassed = false
+                });
+            }
         }
 
         public byte[] getMonsterImage()

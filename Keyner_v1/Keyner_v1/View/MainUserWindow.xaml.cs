@@ -23,19 +23,26 @@ namespace Keyner_v1.View
         Controller.UserFormController usercon;
         int index;
 
-        public MainUserWindow(int id)
+        public MainUserWindow()
         {
             InitializeComponent();
-            usercon = new Controller.UserFormController(id);
+            gamebutton.IsEnabled = false;
+            usercon = getUserFormController();
             CurrentTest();
             fillImage(usercon.getMonsterImage());
             fillGrid();
             fillInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
         }
 
+        private Controller.UserFormController getUserFormController()
+        {
+           return new Controller.UserFormController(1);
+        }
+
         private void fillGrid()
         {
-            datagrid1.DataContext = usercon.UserTest;
+            datagrid1.ItemsSource = usercon.UserTest;
+            datagrid1.FontSize = 15;
         }
 
         private void CurrentTest()
@@ -43,7 +50,10 @@ namespace Keyner_v1.View
             for(int i = 0; i < usercon.UserTest.Count;i++)
             {
                 if (!usercon.UserTest[i].IsPassed)
+                {
                     index = i;
+                    return;
+                }
             }
         }
 
@@ -94,12 +104,16 @@ namespace Keyner_v1.View
             this.Visibility = Visibility.Visible;
         }
 
-        private void datagrid1_MouseDown(object sender, MouseButtonEventArgs e)
+        private void datagrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (((Controller.UserTests)datagrid1.SelectedItem).IsPassed || (Controller.UserTests)datagrid1.SelectedItem == usercon.UserTest[index])
+            try
+            {
+                if (((Controller.UserTests)datagrid1.SelectedItem).IsPassed || (Controller.UserTests)datagrid1.SelectedItem == usercon.UserTest[index])
                 gamebutton.IsEnabled = true;
             else
                 gamebutton.IsEnabled = false;
+            }
+            catch { }
         }
     }
 }
