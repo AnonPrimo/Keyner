@@ -64,6 +64,7 @@ namespace Keyner_v1.Controller
 
         public void AddUserTest(string name, string pass, int group, List<Model.User> us)
         {
+
             User user = new User();
             user.Name = name;
             user.Password = pass;
@@ -72,6 +73,7 @@ namespace Keyner_v1.Controller
             user.Money = 0;
 
             us.Add(user);
+
         }
 
         public bool GetPassTest(int id, string p, View.Autorization viv)
