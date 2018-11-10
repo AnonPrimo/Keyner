@@ -49,7 +49,7 @@ namespace Keyner_v1.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //if (aar.GetPass((int)comboBoxUser.SelectedValue, passBox.SecurePassword.ToString()))
+            //if (aar.GetPass((comboBoxUser.SelectedValue as UserTest).Id, passBox.Password, this))
             //{
             //    MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
             //    mw.Show();
@@ -59,7 +59,7 @@ namespace Keyner_v1.View
             if (comboBoxUser.SelectedValue is UserTest)
                 if (GetPassTest())
                 {
-                    MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
+                    MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as UserTest).Id);
                     mw.Show();
                     this.Close();
                 }
@@ -68,6 +68,7 @@ namespace Keyner_v1.View
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Registration r = new Registration();
+            r.Owner = this;
             r.Show();
             this.Close();
         }
