@@ -20,22 +20,31 @@ namespace Keyner_v1.View
     public partial class Registration : Window
     {
         Controller.AutorizAndRegistr aar;
+        Autorization autor;
 
-        public Registration()
+        public Registration(Autorization a)
         {
             InitializeComponent();
             aar = new Controller.AutorizAndRegistr();
 
+            autor = new Autorization();
+            autor = a;
+
+            comboBoxGroup.DisplayMemberPath = "Name";
+            comboBoxGroup.SelectedValue = "Id";
+            comboBoxGroup.ItemsSource = autor.group;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            aar.AddUser(fio.Text, passBox.SecurePassword.ToString(), passBox_Copy.SecurePassword.ToString(), (int)comboBoxGroup.SelectedValue);
-            MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
-            mw.Show();
+            if(passBox.Password == passBox_Copy.Password)
+                aar.AddUserTest(fio.Text, passBox.Password, (comboBoxGroup.SelectedValue as Model.Group).Id, autor.user);
+
+            int id_user = aar.GetIdUserTest(fio.Text, passBox.Password, autor);
+            MainUserWindow mw = new MainUserWindow(id_user);
+            this.Hide();
+            mw.ShowDialog();
             this.Close();
         }
-
-      
     }
 }

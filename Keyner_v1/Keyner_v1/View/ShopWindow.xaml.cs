@@ -19,9 +19,20 @@ namespace Keyner_v1.View
     /// </summary>
     public partial class ShopWindow : Window
     {
+        public Controller.ShopWindowController shopcon;
+
         public ShopWindow()
         {
             InitializeComponent();
+            shopcon = new Controller.ShopWindowController();
+
+
         }
+
+        private void fillUserInfo(string name, string money)
+        {
+
+        }
+
     }
 }

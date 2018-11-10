@@ -69,6 +69,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\AutorizAndRegistr.cs" />
+    <Compile Include="Controller\ShopWindowController.cs" />
     <Compile Include="Controller\TestController.cs" />
     <Compile Include="Controller\UserFormController.cs" />
     <Compile Include="View\MainUserWindow.xaml.cs">
@@ -161,6 +162,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="TextDoc\TextFile1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="keylog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Monster\monster_no_im.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Monster\money_im.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Monster\star.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

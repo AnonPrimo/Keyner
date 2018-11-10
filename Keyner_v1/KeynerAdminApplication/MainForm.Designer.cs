@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.dataGridViewTests = new System.Windows.Forms.DataGridView();
-            this.buttonNewTest = new System.Windows.Forms.Button();
             this.ColumnTestNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCountMistakes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnBestTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEditTestButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ColumnDeleteTestButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.buttonNewTest = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewGroups = new System.Windows.Forms.DataGridView();
             this.ColumnGroupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,8 +43,16 @@
             this.ColumnDeleteGroupButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.buttonNewGroup = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.dataGridViewMonsters = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEditMonsterButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ColumnDeleteMonsterButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.buttonNewMonster = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGroups)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMonsters)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewTests
@@ -66,16 +74,6 @@
             this.dataGridViewTests.Size = new System.Drawing.Size(546, 372);
             this.dataGridViewTests.TabIndex = 0;
             this.dataGridViewTests.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTests_CellContentClick);
-            // 
-            // buttonNewTest
-            // 
-            this.buttonNewTest.Location = new System.Drawing.Point(12, 410);
-            this.buttonNewTest.Name = "buttonNewTest";
-            this.buttonNewTest.Size = new System.Drawing.Size(75, 23);
-            this.buttonNewTest.TabIndex = 1;
-            this.buttonNewTest.Text = "New test";
-            this.buttonNewTest.UseVisualStyleBackColor = true;
-            this.buttonNewTest.Click += new System.EventHandler(this.button1_Click);
             // 
             // ColumnTestNumber
             // 
@@ -110,6 +108,16 @@
             this.ColumnDeleteTestButton.ReadOnly = true;
             this.ColumnDeleteTestButton.Text = "Delete";
             this.ColumnDeleteTestButton.UseColumnTextForButtonValue = true;
+            // 
+            // buttonNewTest
+            // 
+            this.buttonNewTest.Location = new System.Drawing.Point(12, 410);
+            this.buttonNewTest.Name = "buttonNewTest";
+            this.buttonNewTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonNewTest.TabIndex = 1;
+            this.buttonNewTest.Text = "New test";
+            this.buttonNewTest.UseVisualStyleBackColor = true;
+            this.buttonNewTest.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -185,11 +193,79 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Groups";
             // 
+            // dataGridViewMonsters
+            // 
+            this.dataGridViewMonsters.AllowUserToAddRows = false;
+            this.dataGridViewMonsters.AllowUserToDeleteRows = false;
+            this.dataGridViewMonsters.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMonsters.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.ColumnEditMonsterButton,
+            this.ColumnDeleteMonsterButton});
+            this.dataGridViewMonsters.Location = new System.Drawing.Point(917, 32);
+            this.dataGridViewMonsters.Name = "dataGridViewMonsters";
+            this.dataGridViewMonsters.ReadOnly = true;
+            this.dataGridViewMonsters.Size = new System.Drawing.Size(352, 372);
+            this.dataGridViewMonsters.TabIndex = 6;
+            this.dataGridViewMonsters.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMonsters_CellContentClick);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "ColumnMonsterId";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Monster name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // ColumnEditMonsterButton
+            // 
+            this.ColumnEditMonsterButton.HeaderText = "";
+            this.ColumnEditMonsterButton.Name = "ColumnEditMonsterButton";
+            this.ColumnEditMonsterButton.ReadOnly = true;
+            this.ColumnEditMonsterButton.Text = "Edit";
+            this.ColumnEditMonsterButton.UseColumnTextForButtonValue = true;
+            // 
+            // ColumnDeleteMonsterButton
+            // 
+            this.ColumnDeleteMonsterButton.HeaderText = "";
+            this.ColumnDeleteMonsterButton.Name = "ColumnDeleteMonsterButton";
+            this.ColumnDeleteMonsterButton.ReadOnly = true;
+            this.ColumnDeleteMonsterButton.Text = "Delete";
+            this.ColumnDeleteMonsterButton.UseColumnTextForButtonValue = true;
+            // 
+            // buttonNewMonster
+            // 
+            this.buttonNewMonster.Location = new System.Drawing.Point(917, 410);
+            this.buttonNewMonster.Name = "buttonNewMonster";
+            this.buttonNewMonster.Size = new System.Drawing.Size(81, 23);
+            this.buttonNewMonster.TabIndex = 7;
+            this.buttonNewMonster.Text = "New monster";
+            this.buttonNewMonster.UseVisualStyleBackColor = true;
+            this.buttonNewMonster.Click += new System.EventHandler(this.buttonNewMonster_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(914, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Monsters";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1124, 449);
+            this.ClientSize = new System.Drawing.Size(1281, 449);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.buttonNewMonster);
+            this.Controls.Add(this.dataGridViewMonsters);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonNewGroup);
             this.Controls.Add(this.dataGridViewGroups);
@@ -198,8 +274,10 @@
             this.Controls.Add(this.dataGridViewTests);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGroups)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMonsters)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,5 +300,12 @@
         private System.Windows.Forms.DataGridViewButtonColumn ColumnDeleteGroupButton;
         private System.Windows.Forms.Button buttonNewGroup;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dataGridViewMonsters;
+        private System.Windows.Forms.Button buttonNewMonster;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewButtonColumn ColumnEditMonsterButton;
+        private System.Windows.Forms.DataGridViewButtonColumn ColumnDeleteMonsterButton;
     }
 }

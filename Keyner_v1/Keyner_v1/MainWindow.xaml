@@ -9,7 +9,8 @@
         Loaded="Window_Loaded"
         WindowStyle="None" 
         AllowsTransparency="True" 
-        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Background>
         <ImageBrush ImageSource="keylog.png"></ImageBrush>

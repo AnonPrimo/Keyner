@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Autorization" Height="300" Width="300">
+        Title="Autorization" Height="300" Width="300"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock HorizontalAlignment="Left" FontSize="18" Margin="86,10,0,0" TextWrapping="Wrap" Text="Авторизація" VerticalAlignment="Top" RenderTransformOrigin="0.627,3.408"/>
 
         <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="44,62,0,0" TextWrapping="Wrap" Text="Група" VerticalAlignment="Top" Height="22" RenderTransformOrigin="0.659,-3.85"/>
-        <ComboBox Name="comboBoxGroup" HorizontalAlignment="Left" Margin="109,62,0,0" VerticalAlignment="Top" Width="164"/>
+        <ComboBox Name="comboBoxGroup" HorizontalAlignment="Left" Margin="109,62,0,0" VerticalAlignment="Top" Width="164" SelectionChanged="comboBoxGroup_SelectionChanged"/>
 
         <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="19,101,0,0" TextWrapping="Wrap" Text="Користувач" VerticalAlignment="Top" Height="22" Width="82"/>
         <ComboBox Name="comboBoxUser" HorizontalAlignment="Left" Margin="109,101,0,0" VerticalAlignment="Top" Width="164"/>
