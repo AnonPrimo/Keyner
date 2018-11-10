@@ -60,7 +60,9 @@ namespace Keyner_v1.View
                 if (GetPassTest())
                 {
                     MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as Model.User).Id);
-                    mw.Show();
+                    this.Hide();
+
+                    mw.ShowDialog();
                     this.Close();
                 }
         }
@@ -68,7 +70,8 @@ namespace Keyner_v1.View
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Registration r = new Registration(this);
-            r.Show();
+            this.Hide();
+            r.ShowDialog();
             this.Close();
         }
 
@@ -83,9 +86,7 @@ namespace Keyner_v1.View
                  new Model.User { Id = 5, Name = "Катя5",  Password = "p5", Id_Group = 2, Id_Monster = 1, Money = 0 }
             };
 
-            comboBoxUser.DisplayMemberPath = "Name";
-            comboBoxUser.SelectedValue = "Id";
-            comboBoxUser.ItemsSource = user;
+            
 
             group = new List<Model.Group>
             {
@@ -113,5 +114,19 @@ namespace Keyner_v1.View
             return false;
         }
 
+        private void comboBoxGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<Model.User> us = new List<Model.User>();
+
+            foreach (var item in user)
+            {
+                if ((comboBoxGroup.SelectedValue as Model.Group).Id == item.Id_Group)
+                    us.Add(item);
+            }
+
+            comboBoxUser.DisplayMemberPath = "Name";
+            comboBoxUser.SelectedValue = "Id";
+            comboBoxUser.ItemsSource = us;
+        }
     }
 }

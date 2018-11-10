@@ -26,6 +26,8 @@ namespace Keyner_v1.View
         {
             InitializeComponent();
             aar = new Controller.AutorizAndRegistr();
+
+            autor = new Autorization();
             autor = a;
 
             comboBoxGroup.DisplayMemberPath = "Name";
@@ -40,11 +42,9 @@ namespace Keyner_v1.View
 
             int id_user = aar.GetIdUserTest(fio.Text, passBox.Password, autor);
             MainUserWindow mw = new MainUserWindow(id_user);
-            mw.Show();
-            
-           // this.Close();
+            this.Hide();
+            mw.ShowDialog();
+            this.Close();
         }
-
-      
     }
 }
