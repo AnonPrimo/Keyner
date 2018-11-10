@@ -12,6 +12,7 @@ namespace KeynerAdminApplication.Model
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         public int Id_Monster { get; set; }
         public byte[] Image { get; set; }
     }

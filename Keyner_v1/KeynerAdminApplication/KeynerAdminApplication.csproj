@@ -61,6 +61,18 @@
     <Compile Include="FormNewGroup.Designer.cs">
       <DependentUpon>FormNewGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormNewMonster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNewMonster.Designer.cs">
+      <DependentUpon>FormNewMonster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNewMonsterLevel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNewMonsterLevel.Designer.cs">
+      <DependentUpon>FormNewMonsterLevel.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormNewTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +98,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormNewGroup.resx">
       <DependentUpon>FormNewGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNewMonster.resx">
+      <DependentUpon>FormNewMonster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNewMonsterLevel.resx">
+      <DependentUpon>FormNewMonsterLevel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormNewTest.resx">
       <DependentUpon>FormNewTest.cs</DependentUpon>
