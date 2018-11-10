@@ -41,9 +41,11 @@ namespace Keyner_v1
             if (PB.Value == PB.Maximum)
             {
                 View.Autorization a = new View.Autorization();
-                a.Show();
-                this.Close();
+                this.Hide();
+                a.ShowDialog();
                 timer.Stop();
+                this.Close();
+               
             }
 
         }

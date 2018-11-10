@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Keyner_v1.Controller
 {
@@ -16,11 +18,23 @@ namespace Keyner_v1.Controller
         public UserFormController(int id)
         {
             db = new Model.KeynerContext();
-            CurrentUser = db.UserSet.Find(id);
+            CurrentUser = getUser(id);
             UserTest = new List<UserTests>();
-            fillUserTest();
+            //fillUser();
+            fillUserLocal();
         }
 
+        public Model.User getUser(int id)
+        {
+            //return db.UserSet.Find(id);
+
+
+            //test
+            return new Model.User();
+        }
+
+
+        //user tests
         public List<Model.Statistic> getUserTests()
         {
             List<Model.Statistic> stat = new List<Model.Statistic>();
@@ -34,8 +48,9 @@ namespace Keyner_v1.Controller
             return stat;
         }
 
-        private void fillUserTest()
+        private void fillUser()
         {
+            //list of all tests
             foreach(var item in db.TestSet)
             {
                 UserTest.Add(new UserTests() { TestName = "Тест №"+item.Id, BestTime = item.BestTime});
@@ -51,7 +66,24 @@ namespace Keyner_v1.Controller
            }
         }
 
-        public byte[] getMonsterImage()
+        //test
+        private void fillUserLocal()
+        {
+          
+            for (int i = 0; i < 5; i++)
+            {
+                UserTest.Add(new UserTests()
+                {
+                    TestName = "TestName" + i,
+                    BestTime = DateTime.Now.Minute,
+                    Mark = i * i ^ 4,
+                    Mistakes = i + (i << 5),
+                    IsPassed = false
+                });
+            }
+        }
+
+        private byte[] getMonsterImageByteArray()
         {
             foreach(var item in db.MonsterLevelSet)
             {
@@ -59,6 +91,26 @@ namespace Keyner_v1.Controller
                     return item.Image;
             }
             return null;
+        }
+
+        public bool getMonsterImage(ref BitmapImage image)
+        {
+            var imageData = getMonsterImageByteArray();
+            if (imageData == null || imageData.Length == 0) return false;
+
+            image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return true;
         }
 
     }

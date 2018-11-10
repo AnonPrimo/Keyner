@@ -21,21 +21,38 @@ namespace Keyner_v1.View
     public partial class MainUserWindow : Window
     {
         Controller.UserFormController usercon;
-        int index;
+        int indexOfCurrentTest;
 
-        public MainUserWindow(int id)
+        public MainUserWindow()
         {
             InitializeComponent();
-            usercon = new Controller.UserFormController(id);
+            gamebutton.IsEnabled = false;
+            fillWindowFields(1);
+        }
+
+        public MainUserWindow(int id) : this()
+        {
+            fillWindowFields(id);
+        }
+
+        private void fillWindowFields(int id)
+        {
+            usercon = getUserFormController();
             CurrentTest();
-            fillImage(usercon.getMonsterImage());
+            fillImage();
             fillGrid();
-            fillInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+            fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+        }
+
+        private Controller.UserFormController getUserFormController()
+        {
+           return new Controller.UserFormController(1);
         }
 
         private void fillGrid()
         {
-            datagrid1.DataContext = usercon.UserTest;
+            datagrid1.ItemsSource = usercon.UserTest;
+            datagrid1.FontSize = 15;
         }
 
         private void CurrentTest()
@@ -43,11 +60,14 @@ namespace Keyner_v1.View
             for(int i = 0; i < usercon.UserTest.Count;i++)
             {
                 if (!usercon.UserTest[i].IsPassed)
-                    index = i;
+                {
+                    indexOfCurrentTest = i;
+                    return;
+                }
             }
         }
 
-        private void fillInfo(string name, string money)
+        private void fillUserInfo(string name, string money)
         {
             txt1.Text = name;
             txt1.FontSize = 20;
@@ -55,29 +75,29 @@ namespace Keyner_v1.View
             txt2.Text = money;
             txt2.FontSize = 20;
             
-            if(index <= 100)
-                txt3.Text = "Наступний тест №: " + index;
+            if(indexOfCurrentTest <= 100)
+                txt3.Text = "Наступний тест №: " + indexOfCurrentTest;
             else
                 txt3.Text = "Ви пройшли всі тести!!!";
         }
 
-        private void fillImage(byte[] imageData)
+        private void fillImage()
         {
-            if (imageData == null || imageData.Length == 0) return;
-            var image = new BitmapImage();
-            using (var mem = new MemoryStream(imageData))
-            {
-                mem.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = mem;
-                image.EndInit();
-            }
-            image.Freeze();
+            //if (imageData == null || imageData.Length == 0) return;
+            //var image = new BitmapImage();
+            //using (var mem = new MemoryStream(imageData))
+            //{
+            //    mem.Position = 0;
+            //    image.BeginInit();
+            //    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+            //    image.CacheOption = BitmapCacheOption.OnLoad;
+            //    image.UriSource = null;
+            //    image.StreamSource = mem;
+            //    image.EndInit();
+            //}
+            //image.Freeze();
 
-            monster.Source = image;
+            //usercon.getMonsterImage(ref monster);
         }
 
         private void shopbutton_Click(object sender, RoutedEventArgs e)
@@ -94,12 +114,16 @@ namespace Keyner_v1.View
             this.Visibility = Visibility.Visible;
         }
 
-        private void datagrid1_MouseDown(object sender, MouseButtonEventArgs e)
+        private void datagrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (((Controller.UserTests)datagrid1.SelectedItem).IsPassed || (Controller.UserTests)datagrid1.SelectedItem == usercon.UserTest[index])
+            try
+            {
+                if (((Controller.UserTests)datagrid1.SelectedItem).IsPassed || (Controller.UserTests)datagrid1.SelectedItem == usercon.UserTest[indexOfCurrentTest])
                 gamebutton.IsEnabled = true;
             else
                 gamebutton.IsEnabled = false;
+            }
+            catch { }
         }
     }
 }
