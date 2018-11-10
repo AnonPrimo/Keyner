@@ -99,8 +99,23 @@ namespace KeynerAdminApplication
             int id = (int)dataGridViewMonsterLevels.SelectedRows[0].Cells[0].Value;
             using (Model.KeynerContext db = new Model.KeynerContext())
             {
-                MemoryStream ms = new MemoryStream(db.MonsterLevelSet.FirstOrDefault(l => l.Id == id).Image);
-                pictureBoxMonsterLevelImage.Image = Image.FromStream(ms);
+                MemoryStream ms = new MemoryStream(db.MonsterLevelSet.FirstOrDefault(l => l.Id == id).HappyImage);
+                pictureBoxHappy.Image = Image.FromStream(ms);
+            }
+            using (Model.KeynerContext db = new Model.KeynerContext())
+            {
+                MemoryStream ms = new MemoryStream(db.MonsterLevelSet.FirstOrDefault(l => l.Id == id).SadImage);
+                pictureBoxSad.Image = Image.FromStream(ms);
+            }
+            using (Model.KeynerContext db = new Model.KeynerContext())
+            {
+                MemoryStream ms = new MemoryStream(db.MonsterLevelSet.FirstOrDefault(l => l.Id == id).NeutralImage);
+                pictureBoxNeutral.Image = Image.FromStream(ms);
+            }
+            using (Model.KeynerContext db = new Model.KeynerContext())
+            {
+                MemoryStream ms = new MemoryStream(db.MonsterLevelSet.FirstOrDefault(l => l.Id == id).ReadyImage);
+                pictureBoxReady.Image = Image.FromStream(ms);
             }
         }
 

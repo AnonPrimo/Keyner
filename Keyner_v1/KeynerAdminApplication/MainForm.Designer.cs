@@ -44,12 +44,12 @@
             this.buttonNewGroup = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridViewMonsters = new System.Windows.Forms.DataGridView();
-            this.buttonNewMonster = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEditMonsterButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ColumnDeleteMonsterButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.buttonNewMonster = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGroups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMonsters)).BeginInit();
@@ -210,25 +210,6 @@
             this.dataGridViewMonsters.TabIndex = 6;
             this.dataGridViewMonsters.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewMonsters_CellContentClick);
             // 
-            // buttonNewMonster
-            // 
-            this.buttonNewMonster.Location = new System.Drawing.Point(917, 410);
-            this.buttonNewMonster.Name = "buttonNewMonster";
-            this.buttonNewMonster.Size = new System.Drawing.Size(81, 23);
-            this.buttonNewMonster.TabIndex = 7;
-            this.buttonNewMonster.Text = "New monster";
-            this.buttonNewMonster.UseVisualStyleBackColor = true;
-            this.buttonNewMonster.Click += new System.EventHandler(this.buttonNewMonster_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(914, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Monsters";
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "ColumnMonsterId";
@@ -257,6 +238,25 @@
             this.ColumnDeleteMonsterButton.ReadOnly = true;
             this.ColumnDeleteMonsterButton.Text = "Delete";
             this.ColumnDeleteMonsterButton.UseColumnTextForButtonValue = true;
+            // 
+            // buttonNewMonster
+            // 
+            this.buttonNewMonster.Location = new System.Drawing.Point(917, 410);
+            this.buttonNewMonster.Name = "buttonNewMonster";
+            this.buttonNewMonster.Size = new System.Drawing.Size(81, 23);
+            this.buttonNewMonster.TabIndex = 7;
+            this.buttonNewMonster.Text = "New monster";
+            this.buttonNewMonster.UseVisualStyleBackColor = true;
+            this.buttonNewMonster.Click += new System.EventHandler(this.buttonNewMonster_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(914, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Monsters";
             // 
             // MainForm
             // 
