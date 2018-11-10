@@ -20,6 +20,7 @@ namespace Keyner_v1.View
     public partial class Registration : Window
     {
         Controller.AutorizAndRegistr aar;
+        Autorization autor;
 
         public Registration()
         {
@@ -30,9 +31,9 @@ namespace Keyner_v1.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            aar.AddUser(fio.Text, passBox.SecurePassword.ToString(), passBox_Copy.SecurePassword.ToString(), (int)comboBoxGroup.SelectedValue);
-            MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
-            mw.Show();
+            aar.AddUser(fio.Text, passBox.Password, passBox_Copy.Password, (int)comboBoxGroup.SelectedValue);
+            //MainUserWindow mw = new MainUserWindow();
+            //mw.Show();
             this.Close();
         }
 

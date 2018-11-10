@@ -28,7 +28,7 @@ namespace Keyner_v1
         public MainWindow()
         {
             InitializeComponent();
-
+            
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             timer.Tick += timer_Tick;

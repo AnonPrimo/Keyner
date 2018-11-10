@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="MainUserWindow" Height="350" Width="500">
+        Title="MainUserWindow" Height="350" Width="550" Background="LightCyan">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,7 +19,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Name="datagrid1" Grid.Column="0" Grid.RowSpan="3" Margin="10">
+        <DataGrid Name="datagrid1" Grid.Column="0" Grid.RowSpan="3" Margin="10" Background="Lavender" SelectionUnit="FullRow" SelectionMode="Single" MouseDown="datagrid1_MouseDown">
         </DataGrid>
 
         <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Center">
@@ -34,8 +34,9 @@
             <Image Name="monster" Grid.Column="1" Grid.Row="1" Margin="20"></Image>
         
         <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Center">
-            <Button Name="shopbutton" Content="Shop" FontSize="18" Margin="10" Width="60" Height="30" HorizontalAlignment="Left" Click="shopbutton_Click"></Button>
-            <Button Name="settingbutton" Content="Settings" Margin="10" HorizontalAlignment="Right" Width="50"></Button>
+            <Button Name="gamebutton" Content="Go" FontSize="20" FontWeight="Bold" Width="50" Margin="10"  Background="LightGreen" HorizontalAlignment="Left" Click="gamebutton_Click"></Button>
+            <Button Name="shopbutton" Content="Shop"  Margin="30,10" Width="60" Background="Cyan" Click="shopbutton_Click"></Button>
+            <Button Name="settingbutton" Content="Settings" Margin="10" Width="50" Background="CadetBlue"></Button>
         </DockPanel>
         
     </Grid>

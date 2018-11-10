@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,43 +20,86 @@ namespace Keyner_v1.View
     /// </summary>
     public partial class MainUserWindow : Window
     {
-        Model.User user;
-        Keyner_v1.Model.KeynerContext kcon;
+        Controller.UserFormController usercon;
+        int index;
 
-        public MainUserWindow()
+        public MainUserWindow(int id)
         {
             InitializeComponent();
-            
-            kcon = new Model.KeynerContext();
-
+            usercon = new Controller.UserFormController(id);
+            CurrentTest();
+            fillImage(usercon.getMonsterImage());
+            fillGrid();
+            fillInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
         }
 
         private void fillGrid()
         {
-
-            datagrid1.DataContext = kcon.TestSet;
+            datagrid1.DataContext = usercon.UserTest;
         }
 
-        private void fillInfo(string name, string money, string level)
+        private void CurrentTest()
+        {
+            for(int i = 0; i < usercon.UserTest.Count;i++)
+            {
+                if (!usercon.UserTest[i].IsPassed)
+                    index = i;
+            }
+        }
+
+        private void fillInfo(string name, string money)
         {
             txt1.Text = name;
             txt1.FontSize = 20;
 
             txt2.Text = money;
             txt2.FontSize = 20;
-
-            txt3.Text = "Рівень: " + level;
+            
+            if(index <= 100)
+                txt3.Text = "Наступний тест №: " + index;
+            else
+                txt3.Text = "Ви пройшли всі тести!!!";
         }
 
-        private void fillImage(Image im)
+        private void fillImage(byte[] imageData)
         {
-            monster = im;
+            if (imageData == null || imageData.Length == 0) return;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+
+            monster.Source = image;
         }
 
         private void shopbutton_Click(object sender, RoutedEventArgs e)
         {
             ShopWindow sw = new ShopWindow();
             sw.Show();
+        }
+
+        private void gamebutton_Click(object sender, RoutedEventArgs e)
+        {
+            Test test = new Test();
+            this.Visibility = Visibility.Hidden;
+            test.ShowDialog();
+            this.Visibility = Visibility.Visible;
+        }
+
+        private void datagrid1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (((Controller.UserTests)datagrid1.SelectedItem).IsPassed || (Controller.UserTests)datagrid1.SelectedItem == usercon.UserTest[index])
+                gamebutton.IsEnabled = true;
+            else
+                gamebutton.IsEnabled = false;
         }
     }
 }
