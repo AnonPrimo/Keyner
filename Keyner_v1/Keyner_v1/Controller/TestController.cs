@@ -20,7 +20,7 @@ namespace Keyner_v1.Controller
 
         public void myMethod()
         {
-            CurrentStr = "A а а а а а а о о о о о о о о ";
+            CurrentStr = "a а а а а а а о о о о о о о о";
             RepeatCount = 3;
         }
         

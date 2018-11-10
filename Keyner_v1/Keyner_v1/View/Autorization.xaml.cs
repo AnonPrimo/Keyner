@@ -59,9 +59,9 @@ namespace Keyner_v1.View
             if (comboBoxUser.SelectedValue is UserTest)
                 if (GetPassTest())
                 {
-                    MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
-                    mw.Show();
-                    this.Close();
+                    //MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
+                    //mw.Show();
+                    //this.Close();
                 }
         }
 
