@@ -23,8 +23,8 @@ namespace Keyner_v1.View
 
         Controller.AutorizAndRegistr aar;
 
-        List<GroupTest> group;
-        public List<UserTest> user;
+        public List<Model.Group> group;
+        public List<Model.User> user;
 
         public Autorization()
         {
@@ -49,17 +49,17 @@ namespace Keyner_v1.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //if (aar.GetPass((int)comboBoxUser.SelectedValue, passBox.SecurePassword.ToString()))
+            //if (aar.GetPass((comboBoxUser.SelectedValue as UserTest).Id, passBox.Password, this))
             //{
             //    MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
             //    mw.Show();
             //    this.Close();
             //}
 
-            if (comboBoxUser.SelectedValue is UserTest)
+            if (comboBoxUser.SelectedValue is Model.User)
                 if (GetPassTest())
                 {
-                    MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
+                    MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as Model.User).Id);
                     mw.Show();
                     this.Close();
                 }
@@ -67,66 +67,44 @@ namespace Keyner_v1.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Registration r = new Registration();
+            Registration r = new Registration(this);
             r.Show();
             this.Close();
         }
 
         public void ConTest()
         {
-            user = new List<UserTest>();
-            user.Add(new UserTest(1, "Катя1", 1, "p1"));
-            user.Add(new UserTest(2, "Катя2", 1, "p2"));
-            user.Add(new UserTest(3, "Катя3", 1, "p3"));
-            user.Add(new UserTest(4, "Катя4", 2, "p4"));
-            user.Add(new UserTest(5, "Катя5", 2, "p5"));
+            user = new List<Model.User>()
+            {
+                 new Model.User { Id = 1, Name = "Катя1",  Password = "p1", Id_Group = 1, Id_Monster = 1, Money = 0 },
+                 new Model.User { Id = 2, Name = "Катя2",  Password = "p2", Id_Group = 1, Id_Monster = 1, Money = 0 },
+                 new Model.User { Id = 3, Name = "Катя3",  Password = "p3", Id_Group = 1, Id_Monster = 1, Money = 0 },
+                 new Model.User { Id = 4, Name = "Катя4",  Password = "p4", Id_Group = 2, Id_Monster = 1, Money = 0 },
+                 new Model.User { Id = 5, Name = "Катя5",  Password = "p5", Id_Group = 2, Id_Monster = 1, Money = 0 }
+            };
 
             comboBoxUser.DisplayMemberPath = "Name";
             comboBoxUser.SelectedValue = "Id";
             comboBoxUser.ItemsSource = user;
 
-            group = new List<GroupTest>();
-            group.Add(new GroupTest(1, "RPZ3"));
-            group.Add(new GroupTest(2, "RPZ6"));
-
+            group = new List<Model.Group>
+            {
+                new Model.Group { Id = 1, Name = "RPZ3" },
+                new Model.Group { Id = 2, Name = "RPZ6" }
+            };
+            
             comboBoxGroup.DisplayMemberPath = "Name";
             comboBoxGroup.SelectedValue = "Id";
             comboBoxGroup.ItemsSource = group;
         }
 
-        public class UserTest
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public string Password { get; set; }
-            public int Id_Group { get; set; }
-
-            public UserTest(int i, string n, int g, string p)
-            {
-                Id = i;
-                Name = n;
-                Id_Group = g;
-                Password = p;
-            }
-        }
-
-        public class GroupTest
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-
-            public GroupTest(int i, string n)
-            {
-                Id = i;
-                Name = n;
-            }
-        }
+      
 
         public bool GetPassTest()
         {
             foreach (var item in user)
             {
-                if (item.Id == (comboBoxUser.SelectedValue as UserTest).Id)
+                if (item.Id == (comboBoxUser.SelectedValue as Model.User).Id)
                 {
                     if (item.Password == passBox.Password)
                         return true;
