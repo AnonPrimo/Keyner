@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.dataGridViewTests = new System.Windows.Forms.DataGridView();
-            this.buttonNewTest = new System.Windows.Forms.Button();
             this.ColumnTestNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCountMistakes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnBestTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEditTestButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ColumnDeleteTestButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.buttonNewTest = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewGroups = new System.Windows.Forms.DataGridView();
             this.ColumnGroupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,16 +66,6 @@
             this.dataGridViewTests.Size = new System.Drawing.Size(546, 372);
             this.dataGridViewTests.TabIndex = 0;
             this.dataGridViewTests.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTests_CellContentClick);
-            // 
-            // buttonNewTest
-            // 
-            this.buttonNewTest.Location = new System.Drawing.Point(12, 410);
-            this.buttonNewTest.Name = "buttonNewTest";
-            this.buttonNewTest.Size = new System.Drawing.Size(75, 23);
-            this.buttonNewTest.TabIndex = 1;
-            this.buttonNewTest.Text = "New test";
-            this.buttonNewTest.UseVisualStyleBackColor = true;
-            this.buttonNewTest.Click += new System.EventHandler(this.button1_Click);
             // 
             // ColumnTestNumber
             // 
@@ -110,6 +100,16 @@
             this.ColumnDeleteTestButton.ReadOnly = true;
             this.ColumnDeleteTestButton.Text = "Delete";
             this.ColumnDeleteTestButton.UseColumnTextForButtonValue = true;
+            // 
+            // buttonNewTest
+            // 
+            this.buttonNewTest.Location = new System.Drawing.Point(12, 410);
+            this.buttonNewTest.Name = "buttonNewTest";
+            this.buttonNewTest.Size = new System.Drawing.Size(75, 23);
+            this.buttonNewTest.TabIndex = 1;
+            this.buttonNewTest.Text = "New test";
+            this.buttonNewTest.UseVisualStyleBackColor = true;
+            this.buttonNewTest.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -189,7 +189,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1124, 449);
+            this.ClientSize = new System.Drawing.Size(928, 449);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonNewGroup);
             this.Controls.Add(this.dataGridViewGroups);
@@ -198,6 +198,7 @@
             this.Controls.Add(this.dataGridViewTests);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGroups)).EndInit();
             this.ResumeLayout(false);
