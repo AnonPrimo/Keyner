@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Keyner_v1.Controller
 {
@@ -81,7 +83,7 @@ namespace Keyner_v1.Controller
             }
         }
 
-        public byte[] getMonsterImage()
+        private byte[] getMonsterImageByteArray()
         {
             foreach(var item in db.MonsterLevelSet)
             {
@@ -89,6 +91,26 @@ namespace Keyner_v1.Controller
                     return item.Image;
             }
             return null;
+        }
+
+        public bool getMonsterImage(ref BitmapImage image)
+        {
+            var imageData = getMonsterImageByteArray();
+            if (imageData == null || imageData.Length == 0) return false;
+
+            image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return true;
         }
 
     }
