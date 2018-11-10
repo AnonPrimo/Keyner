@@ -14,6 +14,11 @@ namespace KeynerAdminApplication.Model
         public int Id { get; set; }
 
         public int Id_Monster { get; set; }
-        public byte[] Image { get; set; }
+
+        public byte[] HappyImage { get; set; }
+        public byte[] SadImage { get; set; }
+        public byte[] NeutralImage { get; set; }
+        public byte[] ReadyImage { get; set; }
+
     }
 }

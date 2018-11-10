@@ -27,10 +27,21 @@ namespace KeynerAdminApplication
         public FormNewMonsterLevel(ref Model.MonsterLevel monsterLevel, int monsterId) : this(monsterId)
         {
             this._monsterLevel = monsterLevel;
-            using (Model.KeynerContext db = new Model.KeynerContext())
+            using (MemoryStream ms = new MemoryStream(_monsterLevel.HappyImage))
             {
-                MemoryStream ms = new MemoryStream(_monsterLevel.Image);
-                pictureBoxMonsterLevelImage.Image = Image.FromStream(ms);
+                pictureBoxHappy.Image = Image.FromStream(ms);
+            }
+            using (MemoryStream ms = new MemoryStream(_monsterLevel.SadImage))
+            {
+                pictureBoxSad.Image = Image.FromStream(ms);
+            }
+            using (MemoryStream ms = new MemoryStream(_monsterLevel.NeutralImage))
+            {
+                pictureBoxNeutral.Image = Image.FromStream(ms);
+            }
+            using (MemoryStream ms = new MemoryStream(_monsterLevel.ReadyImage))
+            {
+                pictureBoxReady.Image = Image.FromStream(ms);
             }
             _modified = true;
         }
@@ -47,8 +58,26 @@ namespace KeynerAdminApplication
 
             using (MemoryStream ms = new MemoryStream())
             {
-                pictureBoxMonsterLevelImage.Image.Save(ms, ImageFormat.Jpeg);
-                _monsterLevel.Image = ms.ToArray();
+                pictureBoxHappy.Image.Save(ms, ImageFormat.Gif);
+                _monsterLevel.HappyImage = ms.ToArray();
+            }
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                pictureBoxSad.Image.Save(ms, ImageFormat.Gif);
+                _monsterLevel.SadImage = ms.ToArray();
+            }
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                pictureBoxNeutral.Image.Save(ms, ImageFormat.Gif);
+                _monsterLevel.NeutralImage = ms.ToArray();
+            }
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                pictureBoxReady.Image.Save(ms, ImageFormat.Gif);
+                _monsterLevel.ReadyImage = ms.ToArray();
             }
 
             using (Model.KeynerContext db = new Model.KeynerContext())
@@ -72,7 +101,34 @@ namespace KeynerAdminApplication
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                pictureBoxMonsterLevelImage.Image = Image.FromFile(openFileDialog.FileName);
+                pictureBoxHappy.Image = Image.FromFile(openFileDialog.FileName);
+            }
+        }
+
+        private void buttonSetPathSad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxSad.Image = Image.FromFile(openFileDialog.FileName);
+            }
+        }
+
+        private void buttonSetPathNeutral_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxNeutral.Image = Image.FromFile(openFileDialog.FileName);
+            }
+        }
+
+        private void buttonSetPathReady_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxReady.Image = Image.FromFile(openFileDialog.FileName);
             }
         }
     }

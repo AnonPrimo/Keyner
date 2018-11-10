@@ -34,7 +34,16 @@ namespace KeynerAdminApplication
             if (_test == null)
                 _test = new Model.Test();
 
-            _test.Text = richTextBoxText.Text;
+            _test.Text = "";
+
+            if (numericUpDownCountRepeat.Value > 0)
+            {
+                for (int i = 0; i < (int)numericUpDownCountRepeat.Value; i++)
+                {
+                    _test.Text += richTextBoxText.Text + "\n";
+                }
+            }
+            else _test.Text = richTextBoxText.Text;
             _test.CountMistakes = (int)numericUpDownCountMistakes.Value;
 
             List<ValidationResult> validationResults = new List<ValidationResult>();
