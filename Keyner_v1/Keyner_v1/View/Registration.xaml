@@ -5,38 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Registration" Height="300" Width="400"
-        WindowStartupLocation="CenterScreen">
+        Title="Registration" Height="500" Width="600"
+        WindowStartupLocation="CenterScreen"
+        Background="CadetBlue">
+
+    <Window.Resources>
+        <Style x:Key="ButtonStyle">
+            <Setter Property="Button.FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="Button.FontSize" Value="18" />
+            <Setter Property="Button.FontWeight" Value="Thin"/>
+            <Setter Property="Button.Foreground" Value="DarkCyan"/>
+
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Control.IsMouseOver" Value="True"></Condition>
+                    </MultiTrigger.Conditions>
+
+                    <MultiTrigger.Setters>
+                        <Setter Property="Control.FontSize" Value="24"></Setter>
+                    </MultiTrigger.Setters>
+
+                </MultiTrigger>
+            </Style.Triggers>
+
+        </Style>
+
+        <Style x:Key="TBstyle">
+            <Setter Property="TextBlock.FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="TextBlock.FontSize" Value="24" />
+            <Setter Property="TextBlock.FontWeight" Value="Thin"/>
+            <Setter Property="TextBlock.Foreground" Value="LightGray"/>
+        </Style>
+        
+        <Style x:Key="TBstyle1">
+            <Setter Property="TextBox.FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="TextBox.FontSize" Value="24" />
+            <Setter Property="TextBox.FontWeight" Value="Thin"/>
+            <Setter Property="TextBox.Foreground" Value="DarkCyan"/>
+        </Style>
+
+        <Style x:Key="CBstyle">
+            <Setter Property="ComboBox.FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="ComboBox.FontSize" Value="18" />
+            <Setter Property="ComboBox.FontWeight" Value="Thin"/>
+            <Setter Property="ComboBox.Foreground" Value="DarkCyan"/>
+        </Style>
+
+        <Style x:Key="PBstyle">
+            <Setter Property="PasswordBox.FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="PasswordBox.FontSize" Value="18" />
+            <Setter Property="PasswordBox.FontWeight" Value="Thin"/>
+            <Setter Property="PasswordBox.Foreground" Value="DarkCyan"/>
+        </Style>
+        
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="4*"/>
-   
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="18" TextWrapping="Wrap" Text="Реєстрація" VerticalAlignment="Center" RenderTransformOrigin="0.627,3.408"/>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource TBstyle}" FontSize="32" TextWrapping="Wrap" Text="Реєстрація" VerticalAlignment="Center" RenderTransformOrigin="0.627,3.408"/>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Група" RenderTransformOrigin="0.659,-3.85" Width="53"/>
-        <ComboBox Name="comboBoxGroup" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Група" RenderTransformOrigin="0.659,-3.85" />
+        <ComboBox Name="comboBoxGroup" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CBstyle}" Height="35" Width="264"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Користувач" Height="22" Width="82"/>
-        <TextBox Name="fio"  TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Width="120"></TextBox>
+        <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Користувач"/>
+        <TextBox Name="fio"  TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Style="{StaticResource TBstyle1}" HorizontalAlignment="Center" Height="35" Width="264"></TextBox>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Пароль" Height="20"/>
-        <PasswordBox Name="passBox" PasswordChar="*"  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Пароль"/>
+        <PasswordBox Name="passBox" PasswordChar="*" Style="{StaticResource PBstyle}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="264"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Text="Підтвердження" Height="20" Width="120"/>
-        <PasswordBox x:Name="passBox_Copy" PasswordChar="*" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Підтвердження"/>
+        <PasswordBox x:Name="passBox_Copy" PasswordChar="*" Style="{StaticResource PBstyle}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="264"/>
 
-        <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Зареєструватись" Click="Button_Click" Width="120"/>
+        <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Зареєструватись" Click="Button_Click" Width="300" Style="{StaticResource ButtonStyle}"/>
 
 
 

@@ -49,19 +49,19 @@ namespace Keyner_v1.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //if (aar.GetPass((comboBoxUser.SelectedValue as UserTest).Id, passBox.Password, this))
-            //{
-            //    MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
-            //    mw.Show();
-            //    this.Close();
-            //}
+            //if (comboBoxUser.SelectedValue is Model.User)
+                //if (aar.GetPass((comboBoxUser.SelectedValue as Model.User).Id, passBox.Password, this))
+                //{
+                //    MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as Model.User).Id);
+                //    mw.Show();
+                //    this.Close();
+                //}
 
-            if (comboBoxUser.SelectedValue is Model.User)
+                if (comboBoxUser.SelectedValue is Model.User)
                 if (GetPassTest())
                 {
                     MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as Model.User).Id);
                     this.Hide();
-
                     mw.ShowDialog();
                     this.Close();
                 }
