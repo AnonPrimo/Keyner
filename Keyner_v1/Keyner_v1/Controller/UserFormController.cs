@@ -20,32 +20,25 @@ namespace Keyner_v1.Controller
             db = new Model.KeynerContext();
             CurrentUser = getUser(id);
             UserTest = new List<UserTests>();
-            //fillUserTests();
+            fillUserTests();
+
             //test
-            fillUserLocal();
+            //fillUserLocal();
         }
 
         public Model.User getUser(int id)
         {
-            //return db.UserSet.Find(id);
+            return db.UserSet.Find(id);
 
             //test
-            return new Model.User() { Name = "Lastname Firstname"};
+            //return new Model.User() { Name = "Lastname Firstname"};
         }
 
 
         //user tests
         public List<Model.Statistic> getUserTests()
         {
-            List<Model.Statistic> stat = new List<Model.Statistic>();
-
-            foreach(var item in db.StatisticSet)
-            {
-                if (item.Id_User == CurrentUser.Id)
-                    stat.Add(item);
-            }
-
-            return stat;
+            return db.StatisticSet.Where(s => s.Id_User == CurrentUser.Id).ToList();
         }
 
         private void fillUserTests()
@@ -64,6 +57,11 @@ namespace Keyner_v1.Controller
                 UserTest[i].Time = tmp[i].Time;
                 UserTest[i].IsPassed = tmp[i].IsPassed;
            }
+        }
+
+        public int getTestCount()
+        {
+            return db.TestSet.Count();
         }
 
         //test
@@ -107,7 +105,8 @@ namespace Keyner_v1.Controller
         //get byte array from db
         private byte[] getMonsterImageByteArray()
         {
-            return db.MonsterLevelSet.Find(CurrentUser.Id_Monster).NeutralImage??null;
+            var list = db.MonsterLevelSet.Where(l=>l.Id_Monster == CurrentUser.Id_Monster).ToList();
+            return list[0].NeutralImage;
         }
 
         //test
@@ -119,10 +118,10 @@ namespace Keyner_v1.Controller
         //convert byte array to bitmap image
         public bool getMonsterImage(ref BitmapImage image)
         {
-            //var imageData = getMonsterImageByteArray();
+            var imageData = getMonsterImageByteArray();
 
             //test
-            var imageData = getMonsterImageTest();
+            //var imageData = getMonsterImageTest();
 
             if (imageData == null || imageData.Length == 0) return false;
 

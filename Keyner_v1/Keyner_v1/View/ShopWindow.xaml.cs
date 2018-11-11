@@ -31,6 +31,8 @@ namespace Keyner_v1.View
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             fillUserInfo(shopcon.CurrentUser.Name, shopcon.CurrentUser.Money);
+            datagrid.ItemsSource = shopcon.getMonsters();
+
         }
 
         private void fillUserInfo(string name, int money)

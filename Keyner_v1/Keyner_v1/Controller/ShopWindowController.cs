@@ -9,7 +9,6 @@ namespace Keyner_v1.Controller
 {
     public class ShopWindowController
     {
-        public int CurrentLevel { get; set; }
         Model.KeynerContext context;
         public List<MonsterItem> monsterList { get; set; }
         public Model.User CurrentUser { get; set; }
@@ -18,14 +17,29 @@ namespace Keyner_v1.Controller
         {
             context = new Model.KeynerContext();
             monsterList = new List<MonsterItem>();
-            //CurrentLevel = context.MonsterLevelSet CurrentUser.
+            fillMonsterList();
         }
 
-        private void getMonsters()
+        public List<Model.Monster> getMonsters()
         {
-            foreach(var item in context.MonsterSet)
+          return context.MonsterSet.ToList();
+        }
+
+        public List<Model.Monster> getUserMonsters()
+        {
+            return context.MonsterSet.Where(m=>m.Id == CurrentUser.Id_Monster).ToList();
+        }
+
+        private void fillMonsterList()
+        {
+            List<Model.Monster> user = getUserMonsters();
+            List<Model.Monster> all = getMonsters();
+
+            for(int i = 0; i < all.Count; i++)
             {
-                monsterList.Add(new MonsterItem());
+                monsterList.Add(new MonsterItem() { Name = all[i].Name });
+                if (user.Contains(all[i]))
+                    monsterList.Last().IsBought = true;
             }
         }
 

@@ -44,6 +44,7 @@ namespace Keyner_v1.View
             fillImage();
             fillGrid();
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+            fillNextTest(usercon.getTestCount());
             MoneyImage.Source = new BitmapImage(new Uri("/Pictures/money_im.png", UriKind.Relative));
         }
 
@@ -80,9 +81,14 @@ namespace Keyner_v1.View
             txt2.Text = money;
             txt2.FontSize = 20;
 
+           
+        }
+
+        private void fillNextTest(int count)
+        {
             txt3.FontSize = 15;
-            if(indexOfCurrentTest <= 100)
-                txt3.Text = "Наступний тест №: " + indexOfCurrentTest;
+            if (indexOfCurrentTest <= count)
+                txt3.Text = "Наступний тест №: " + (indexOfCurrentTest+1);
             else
                 txt3.Text = "Ви пройшли всі тести!!!";
         }
