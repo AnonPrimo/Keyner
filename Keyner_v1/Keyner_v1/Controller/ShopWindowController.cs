@@ -18,7 +18,7 @@ namespace Keyner_v1.Controller
         {
             context = new Model.KeynerContext();
             monsterList = new List<MonsterItem>();
-            CurrentLevel = context.MonsterLevelSet CurrentUser.
+            //CurrentLevel = context.MonsterLevelSet CurrentUser.
         }
 
         private void getMonsters()

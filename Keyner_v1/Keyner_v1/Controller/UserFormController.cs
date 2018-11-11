@@ -107,7 +107,7 @@ namespace Keyner_v1.Controller
         //get byte array from db
         private byte[] getMonsterImageByteArray()
         {
-            return db.MonsterLevelSet.Find(CurrentUser.Id_Monster).Image??null;
+            return db.MonsterLevelSet.Find(CurrentUser.Id_Monster).NeutralImage??null;
         }
 
         //test
