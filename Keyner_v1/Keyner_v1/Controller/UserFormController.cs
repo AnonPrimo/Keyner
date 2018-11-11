@@ -21,6 +21,7 @@ namespace Keyner_v1.Controller
             CurrentUser = getUser(id);
             UserTest = new List<UserTests>();
             //fillUserTests();
+            //test
             fillUserLocal();
         }
 
@@ -58,7 +59,7 @@ namespace Keyner_v1.Controller
             List<Model.Statistic> tmp = getUserTests();
             for(int i = 0; i < tmp.Count; i++)
             {
-                //UserTest[i].Mark = tmp[i].Mark;
+                UserTest[i].Mark = SetMarkStar(tmp[i].Mark);
                 UserTest[i].Mistakes = tmp[i].CountMistakes;
                 UserTest[i].Time = tmp[i].Time;
                 UserTest[i].IsPassed = tmp[i].IsPassed;
@@ -75,26 +76,38 @@ namespace Keyner_v1.Controller
                 {
                     TestName = "TestName" + i,
                     BestTime = DateTime.Now.Minute,
-                    Mark = new BitmapImage(new Uri("/Monster/money_im.png", UriKind.Relative)),
+                    Mark = SetMarkStar(i),
                     Mistakes = i + (i << 5),
                     IsPassed = false
                 });
             }
         }
 
+        //mark images
+        private BitmapImage SetMarkStar(int mark)
+        {
+            BitmapImage im;
+            switch (mark){
+                case 1:
+                    im = new BitmapImage(new Uri("/Pictures/gold_star1.png", UriKind.Relative));
+                    break;
+                case 2:
+                    im = new BitmapImage(new Uri("/Pictures/gold_star2.png", UriKind.Relative));
+                    break;
+                case 3:
+                    im = new BitmapImage(new Uri("/Pictures/gold_star3.png", UriKind.Relative));
+                    break;
+                default:
+                    im = new BitmapImage(new Uri("/Pictures/grey_star3.png", UriKind.Relative));
+                    break;
+            }
+            return im;
+        }
+
         //get byte array from db
         private byte[] getMonsterImageByteArray()
         {
-            try
-            {
-                foreach (var item in db.MonsterLevelSet)
-                {
-                    if (item.Id_Monster == CurrentUser.Id_Monster)
-                        return item.Image;
-                }
-            }
-            catch { }
-            return null;
+            return db.MonsterLevelSet.Find(CurrentUser.Id_Monster).Image??null;
         }
 
         //test
@@ -113,19 +126,28 @@ namespace Keyner_v1.Controller
 
             if (imageData == null || imageData.Length == 0) return false;
 
-            image = new BitmapImage();
-            using (var mem = new MemoryStream(imageData))
-            {
-                mem.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = mem;
-                image.EndInit();
-            }
-            image.Freeze();
+            image = ImageConvert.Convert(imageData);
             return true;
+        }
+
+        class ImageConvert
+        {
+            public static BitmapImage Convert(byte[] array)
+            {
+                BitmapImage image = new BitmapImage();
+                using (var mem = new MemoryStream(array))
+                {
+                    mem.Position = 0;
+                    image.BeginInit();
+                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = null;
+                    image.StreamSource = mem;
+                    image.EndInit();
+                }
+                image.Freeze();
+                return image;
+            }
         }
     }
 

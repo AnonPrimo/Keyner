@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Shop" Height="350" Width="600" Background="Honeydew" WindowStartupLocation="CenterScreen">
+        Title="Shop" Height="750" Width="600" Background="Honeydew" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -17,11 +17,18 @@
             <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Name="txt1" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Background="Red" Margin="5"></TextBlock>
-        <TextBlock Name="txt2" Grid.Column="1" Grid.Row="1"></TextBlock>
+        <TextBlock Name="txt1" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Background="DarkOrchid" FontSize="25" FontWeight="UltraBold" Margin="5"></TextBlock>
+        <DockPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
+            <Image Name="moneyImage" Width="60"></Image>
+            <TextBlock Name="txt2" VerticalAlignment="Center" FontSize="20"></TextBlock>
+        </DockPanel>
 
         <DataGrid Name="datagrid" Grid.Column="0" Grid.Row="1" Background="AntiqueWhite">
-            
+            <DataGrid.Columns>
+                <DataGridTextColumn>
+                    
+                </DataGridTextColumn>
+            </DataGrid.Columns>
         </DataGrid>
         
 

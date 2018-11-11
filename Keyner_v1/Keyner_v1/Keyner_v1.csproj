@@ -173,7 +173,19 @@
     <Resource Include="Monster\money_im.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Monster\star.png" />
+    <Resource Include="Pictures\monster_no_im.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\money_im.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\gold_star1.png" />
+    <Resource Include="Pictures\gold_star2.png" />
+    <Resource Include="Pictures\gold_star3.png" />
+    <Resource Include="Pictures\grey_star3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\setting-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
