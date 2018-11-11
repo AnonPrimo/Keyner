@@ -44,7 +44,8 @@ namespace Keyner_v1.View
             fillImage();
             fillGrid();
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
-            MoneyImage.Source = new BitmapImage(new Uri("/Monster/money_im.png", UriKind.Relative));
+            fillNextTest(usercon.getTestCount());
+            MoneyImage.Source = new BitmapImage(new Uri("/Pictures/money_im.png", UriKind.Relative));
         }
 
         private Controller.UserFormController getUserFormController()
@@ -59,6 +60,7 @@ namespace Keyner_v1.View
 
         }
 
+        //index of current test
         private void CurrentTest()
         {
             for(int i = 0; i < usercon.UserTest.Count;i++)
@@ -79,20 +81,27 @@ namespace Keyner_v1.View
             txt2.Text = money;
             txt2.FontSize = 20;
 
+           
+        }
+
+        private void fillNextTest(int count)
+        {
             txt3.FontSize = 15;
-            if(indexOfCurrentTest <= 100)
-                txt3.Text = "Наступний тест №: " + indexOfCurrentTest;
+            if (indexOfCurrentTest <= count)
+                txt3.Text = "Наступний тест №: " + (indexOfCurrentTest+1);
             else
                 txt3.Text = "Ви пройшли всі тести!!!";
         }
 
+        //monster image filling
         private void fillImage()
         {
-            BitmapImage im = new BitmapImage(new Uri("/Monster/monster_no_im.png", UriKind.Relative));
+            BitmapImage im = new BitmapImage(new Uri("/Pictures/monster_no_im.png", UriKind.Relative));
             usercon.getMonsterImage(ref im);
             monster.Source = im;
         }
 
+        //shop window
         private void shopbutton_Click(object sender, RoutedEventArgs e)
         {
             ShopWindow sw = new ShopWindow();
@@ -100,6 +109,7 @@ namespace Keyner_v1.View
             sw.ShowDialog();
         }
 
+        //game window
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
             Test test = new Test();

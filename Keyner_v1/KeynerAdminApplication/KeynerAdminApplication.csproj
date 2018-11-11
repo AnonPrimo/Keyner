@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormEditShop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditShop.Designer.cs">
+      <DependentUpon>FormEditShop.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormNewGroup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormEditShop.resx">
+      <DependentUpon>FormEditShop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormNewGroup.resx">
       <DependentUpon>FormNewGroup.cs</DependentUpon>
     </EmbeddedResource>

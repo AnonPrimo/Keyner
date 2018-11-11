@@ -180,12 +180,22 @@ namespace KeynerAdminApplication
                     using (Model.KeynerContext db = new Model.KeynerContext())
                     {
                         db.Entry(db.MonsterSet.FirstOrDefault(m => m.Id == id)).State = System.Data.Entity.EntityState.Deleted;
+                        foreach (Model.MonsterLevel item in db.MonsterLevelSet.Where(l => l.Id_Monster == id).ToList())
+                        {
+                            db.Entry(item).State = System.Data.Entity.EntityState.Deleted;
+                        }
                         db.SaveChanges();
                         dataGrid.Rows.RemoveAt(e.RowIndex);
                     }
                 }
             }
 
+        }
+
+        private void buttonEditShop_Click(object sender, EventArgs e)
+        {
+            FormEditShop form = new FormEditShop();
+            form.ShowDialog();
         }
     }
 }

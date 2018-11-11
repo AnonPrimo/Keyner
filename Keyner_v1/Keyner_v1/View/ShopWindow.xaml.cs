@@ -25,13 +25,21 @@ namespace Keyner_v1.View
         {
             InitializeComponent();
             shopcon = new Controller.ShopWindowController();
+            
+        }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            fillUserInfo(shopcon.CurrentUser.Name, shopcon.CurrentUser.Money);
+            datagrid.ItemsSource = shopcon.getMonsters();
 
         }
 
-        private void fillUserInfo(string name, string money)
+        private void fillUserInfo(string name, int money)
         {
-
+            txt1.Text = name;
+            txt2.Text = money.ToString();
+            moneyImage.Source = new BitmapImage(new Uri("/Pictures/money_im.png", UriKind.Relative));
         }
 
     }

@@ -20,31 +20,25 @@ namespace Keyner_v1.Controller
             db = new Model.KeynerContext();
             CurrentUser = getUser(id);
             UserTest = new List<UserTests>();
-            //fillUserTests();
-            fillUserLocal();
+            fillUserTests();
+
+            //test
+            //fillUserLocal();
         }
 
         public Model.User getUser(int id)
         {
-            //return db.UserSet.Find(id);
+            return db.UserSet.Find(id);
 
             //test
-            return new Model.User() { Name = "Lastname Firstname"};
+            //return new Model.User() { Name = "Lastname Firstname"};
         }
 
 
         //user tests
         public List<Model.Statistic> getUserTests()
         {
-            List<Model.Statistic> stat = new List<Model.Statistic>();
-
-            foreach(var item in db.StatisticSet)
-            {
-                if (item.Id_User == CurrentUser.Id)
-                    stat.Add(item);
-            }
-
-            return stat;
+            return db.StatisticSet.Where(s => s.Id_User == CurrentUser.Id).ToList();
         }
 
         private void fillUserTests()
@@ -58,11 +52,16 @@ namespace Keyner_v1.Controller
             List<Model.Statistic> tmp = getUserTests();
             for(int i = 0; i < tmp.Count; i++)
             {
-                //UserTest[i].Mark = tmp[i].Mark;
+                UserTest[i].Mark = SetMarkStar(tmp[i].Mark);
                 UserTest[i].Mistakes = tmp[i].CountMistakes;
                 UserTest[i].Time = tmp[i].Time;
                 UserTest[i].IsPassed = tmp[i].IsPassed;
            }
+        }
+
+        public int getTestCount()
+        {
+            return db.TestSet.Count();
         }
 
         //test
@@ -75,26 +74,39 @@ namespace Keyner_v1.Controller
                 {
                     TestName = "TestName" + i,
                     BestTime = DateTime.Now.Minute,
-                    Mark = new BitmapImage(new Uri("/Monster/money_im.png", UriKind.Relative)),
+                    Mark = SetMarkStar(i),
                     Mistakes = i + (i << 5),
                     IsPassed = false
                 });
             }
         }
 
+        //mark images
+        private BitmapImage SetMarkStar(int mark)
+        {
+            BitmapImage im;
+            switch (mark){
+                case 1:
+                    im = new BitmapImage(new Uri("/Pictures/gold_star1.png", UriKind.Relative));
+                    break;
+                case 2:
+                    im = new BitmapImage(new Uri("/Pictures/gold_star2.png", UriKind.Relative));
+                    break;
+                case 3:
+                    im = new BitmapImage(new Uri("/Pictures/gold_star3.png", UriKind.Relative));
+                    break;
+                default:
+                    im = new BitmapImage(new Uri("/Pictures/grey_star3.png", UriKind.Relative));
+                    break;
+            }
+            return im;
+        }
+
         //get byte array from db
         private byte[] getMonsterImageByteArray()
         {
-            try
-            {
-                foreach (var item in db.MonsterLevelSet)
-                {
-                    if (item.Id_Monster == CurrentUser.Id_Monster)
-                        return item.Image;
-                }
-            }
-            catch { }
-            return null;
+            var list = db.MonsterLevelSet.Where(l=>l.Id_Monster == CurrentUser.Id_Monster).ToList();
+            return list[0].NeutralImage;
         }
 
         //test
@@ -106,26 +118,35 @@ namespace Keyner_v1.Controller
         //convert byte array to bitmap image
         public bool getMonsterImage(ref BitmapImage image)
         {
-            //var imageData = getMonsterImageByteArray();
+            var imageData = getMonsterImageByteArray();
 
             //test
-            var imageData = getMonsterImageTest();
+            //var imageData = getMonsterImageTest();
 
             if (imageData == null || imageData.Length == 0) return false;
 
-            image = new BitmapImage();
-            using (var mem = new MemoryStream(imageData))
-            {
-                mem.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = mem;
-                image.EndInit();
-            }
-            image.Freeze();
+            image = ImageConvert.Convert(imageData);
             return true;
+        }
+
+        class ImageConvert
+        {
+            public static BitmapImage Convert(byte[] array)
+            {
+                BitmapImage image = new BitmapImage();
+                using (var mem = new MemoryStream(array))
+                {
+                    mem.Position = 0;
+                    image.BeginInit();
+                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.UriSource = null;
+                    image.StreamSource = mem;
+                    image.EndInit();
+                }
+                image.Freeze();
+                return image;
+            }
         }
     }
 

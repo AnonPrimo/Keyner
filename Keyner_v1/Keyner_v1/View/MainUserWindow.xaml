@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="MainUserWindow" Height="450" Width="750" Background="LightCyan">
+        Title="MainUserWindow" Height="450" Width="800" Background="LightCyan" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,28 +19,20 @@
             <ColumnDefinition Width="300"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Name="datagrid1" Grid.Column="0" Grid.RowSpan="3" Margin="10"  Background="Lavender" SelectionUnit="FullRow" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" SelectionChanged="datagrid1_SelectionChanged">
+        <DataGrid Name="datagrid1" Grid.Column="0" Grid.RowSpan="3" Margin="10" AutoGenerateColumns="False" Background="Lavender" SelectionUnit="FullRow" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" SelectionChanged="datagrid1_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Тест" Binding="{Binding TestName}" />
                 <DataGridTextColumn Header="Найкращий час" Binding="{Binding BestTime}" />
                 <DataGridTemplateColumn Header="Оцінка">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Mark}" />
+                            <Image Source="{Binding Mark}" Width="50" Height="30" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Час" Binding="{Binding Time}" />
                 <DataGridTextColumn Header="Помилки" Binding="{Binding Mistakes}" />
-                <DataGridTemplateColumn Header="Пройдено">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsThingPhase1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                
-
+                <DataGridCheckBoxColumn Header="Пройдено" Binding="{Binding IsPassed}" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -58,7 +50,11 @@
         <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" >
             <Button Name="gamebutton" Content="Go" FontSize="30" FontWeight="Bold" Width="70" Margin="5"  Background="LightGreen" HorizontalAlignment="Left" Click="gamebutton_Click"></Button>
             <Button Name="shopbutton" Content="Shop"  Margin="40,10" Width="60" Background="Cyan" Click="shopbutton_Click"></Button>
-            <Button Name="settingbutton" Content="Settings" Margin="10" Width="50" Background="CadetBlue"></Button>
+            <Button Name="settingbutton" Margin="10" Width="50" Height="50" >
+                <Button.Background>
+                    <ImageBrush ImageSource="../Pictures/setting-icon.png"></ImageBrush>
+                </Button.Background>
+            </Button>
         </DockPanel>
         
     </Grid>
