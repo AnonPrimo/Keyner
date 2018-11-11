@@ -33,6 +33,8 @@ namespace Keyner_v1
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             timer.Tick += timer_Tick;
             timer.Start();
+            this.Top += 500;
+            this.Left += 500;
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -45,7 +47,6 @@ namespace Keyner_v1
                 a.ShowDialog();
                 timer.Stop();
                 this.Close();
-               
             }
 
         }
@@ -59,5 +60,6 @@ namespace Keyner_v1
         {
             DragMove();
         }
+
     }
 }

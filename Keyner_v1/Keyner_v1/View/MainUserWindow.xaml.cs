@@ -27,12 +27,14 @@ namespace Keyner_v1.View
         {
             InitializeComponent();
             gamebutton.IsEnabled = false;
+
+            //test
             fillWindowFields(1);
         }
 
         public MainUserWindow(int id) : this()
         {
-            fillWindowFields(id);
+            //fillWindowFields(id);
         }
 
         private void fillWindowFields(int id)
@@ -42,6 +44,7 @@ namespace Keyner_v1.View
             fillImage();
             fillGrid();
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+            MoneyImage.Source = new BitmapImage(new Uri("/Monster/money_im.png", UriKind.Relative));
         }
 
         private Controller.UserFormController getUserFormController()
@@ -53,6 +56,7 @@ namespace Keyner_v1.View
         {
             datagrid1.ItemsSource = usercon.UserTest;
             datagrid1.FontSize = 15;
+
         }
 
         private void CurrentTest()
@@ -74,7 +78,8 @@ namespace Keyner_v1.View
 
             txt2.Text = money;
             txt2.FontSize = 20;
-            
+
+            txt3.FontSize = 15;
             if(indexOfCurrentTest <= 100)
                 txt3.Text = "Наступний тест №: " + indexOfCurrentTest;
             else
@@ -83,35 +88,24 @@ namespace Keyner_v1.View
 
         private void fillImage()
         {
-            //if (imageData == null || imageData.Length == 0) return;
-            //var image = new BitmapImage();
-            //using (var mem = new MemoryStream(imageData))
-            //{
-            //    mem.Position = 0;
-            //    image.BeginInit();
-            //    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-            //    image.CacheOption = BitmapCacheOption.OnLoad;
-            //    image.UriSource = null;
-            //    image.StreamSource = mem;
-            //    image.EndInit();
-            //}
-            //image.Freeze();
-
-            //usercon.getMonsterImage(ref monster);
+            BitmapImage im = new BitmapImage(new Uri("/Monster/monster_no_im.png", UriKind.Relative));
+            usercon.getMonsterImage(ref im);
+            monster.Source = im;
         }
 
         private void shopbutton_Click(object sender, RoutedEventArgs e)
         {
             ShopWindow sw = new ShopWindow();
-            sw.Show();
+            sw.shopcon.CurrentUser = usercon.CurrentUser;
+            sw.ShowDialog();
         }
 
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
             Test test = new Test();
-            this.Visibility = Visibility.Hidden;
+            this.Hide();
             test.ShowDialog();
-            this.Visibility = Visibility.Visible;
+            this.Show();
         }
 
         private void datagrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)

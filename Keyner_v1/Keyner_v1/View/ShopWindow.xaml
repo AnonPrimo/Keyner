@@ -5,13 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Shop" Height="350" Width="600">
+        Title="Shop" Height="350" Width="600" Background="Honeydew" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+
+        <TextBlock Name="txt1" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Background="Red" Margin="5"></TextBlock>
+        <TextBlock Name="txt2" Grid.Column="1" Grid.Row="1"></TextBlock>
+
+        <DataGrid Name="datagrid" Grid.Column="0" Grid.Row="1" Background="AntiqueWhite">
+            
+        </DataGrid>
         
-        
+
     </Grid>
 </Window>

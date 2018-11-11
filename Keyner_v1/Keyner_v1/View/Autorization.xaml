@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Autorization" Height="300" Width="300">
+        Title="Autorization" Height="300" Width="300"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock HorizontalAlignment="Left" FontSize="18" Margin="86,10,0,0" TextWrapping="Wrap" Text="Авторизація" VerticalAlignment="Top" RenderTransformOrigin="0.627,3.408"/>
 
