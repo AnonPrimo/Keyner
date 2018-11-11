@@ -50,6 +50,7 @@
             this.ColumnDeleteMonsterButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.buttonNewMonster = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.buttonEditShop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGroups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMonsters)).BeginInit();
@@ -258,11 +259,22 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Monsters";
             // 
+            // buttonEditShop
+            // 
+            this.buttonEditShop.Location = new System.Drawing.Point(12, 451);
+            this.buttonEditShop.Name = "buttonEditShop";
+            this.buttonEditShop.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditShop.TabIndex = 9;
+            this.buttonEditShop.Text = "Edit shop";
+            this.buttonEditShop.UseVisualStyleBackColor = true;
+            this.buttonEditShop.Click += new System.EventHandler(this.buttonEditShop_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1281, 449);
+            this.ClientSize = new System.Drawing.Size(1281, 498);
+            this.Controls.Add(this.buttonEditShop);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonNewMonster);
             this.Controls.Add(this.dataGridViewMonsters);
@@ -307,5 +319,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewButtonColumn ColumnEditMonsterButton;
         private System.Windows.Forms.DataGridViewButtonColumn ColumnDeleteMonsterButton;
+        private System.Windows.Forms.Button buttonEditShop;
     }
 }
