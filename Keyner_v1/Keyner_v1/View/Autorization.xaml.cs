@@ -29,8 +29,8 @@ namespace Keyner_v1.View
         public Autorization()
         {
             InitializeComponent();
-            //   Con();
-            ConTest();
+            Con();
+            //  ConTest();
         }
 
         private void Con()
@@ -38,9 +38,9 @@ namespace Keyner_v1.View
             keynerContext = new Model.KeynerContext();
             aar = new Controller.AutorizAndRegistr();
 
-            comboBoxGroup.DataContext = keynerContext.GroupSet.ToList();
-            comboBoxGroup.DisplayMemberPath = "Name";
-            comboBoxGroup.SelectedValue = "Id";
+            //comboBoxGroup.DataContext = keynerContext.GroupSet.ToList();
+            //comboBoxGroup.DisplayMemberPath = "Name";
+            //comboBoxGroup.SelectedValue = "Id";
 
             comboBoxUser.DataContext = keynerContext.UserSet.ToList();
             comboBoxUser.DisplayMemberPath = "Name";
@@ -49,14 +49,6 @@ namespace Keyner_v1.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //if (comboBoxUser.SelectedValue is Model.User)
-                //if (aar.GetPass((comboBoxUser.SelectedValue as Model.User).Id, passBox.Password, this))
-                //{
-                //    MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as Model.User).Id);
-                //    mw.Show();
-                //    this.Close();
-                //}
-
                 if (comboBoxUser.SelectedValue is Model.User)
                 if (GetPassTest())
                 {
@@ -98,12 +90,10 @@ namespace Keyner_v1.View
             comboBoxGroup.SelectedValue = "Id";
             comboBoxGroup.ItemsSource = group;
         }
-
-      
-
+        
         public bool GetPassTest()
         {
-            foreach (var item in user)
+            foreach (var item in keynerContext.UserSet)
             {
                 if (item.Id == (comboBoxUser.SelectedValue as Model.User).Id)
                 {
@@ -118,7 +108,7 @@ namespace Keyner_v1.View
         {
             List<Model.User> us = new List<Model.User>();
 
-            foreach (var item in user)
+            foreach (var item in keynerContext.UserSet)
             {
                 if ((comboBoxGroup.SelectedValue as Model.Group).Id == item.Id_Group)
                     us.Add(item);
