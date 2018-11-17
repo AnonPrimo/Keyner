@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Registration" Height="500" Width="600"
+        Title="Registration" Height="400" Width="600"
         WindowStartupLocation="CenterScreen"
         Background="CadetBlue">
 
@@ -40,21 +40,21 @@
         
         <Style x:Key="TBstyle1">
             <Setter Property="TextBox.FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="TextBox.FontSize" Value="24" />
+            <Setter Property="TextBox.FontSize" Value="16" />
             <Setter Property="TextBox.FontWeight" Value="Thin"/>
             <Setter Property="TextBox.Foreground" Value="DarkCyan"/>
         </Style>
 
         <Style x:Key="CBstyle">
             <Setter Property="ComboBox.FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="ComboBox.FontSize" Value="18" />
+            <Setter Property="ComboBox.FontSize" Value="16" />
             <Setter Property="ComboBox.FontWeight" Value="Thin"/>
             <Setter Property="ComboBox.Foreground" Value="DarkCyan"/>
         </Style>
 
         <Style x:Key="PBstyle">
             <Setter Property="PasswordBox.FontFamily" Value="Comic Sans MS"/>
-            <Setter Property="PasswordBox.FontSize" Value="18" />
+            <Setter Property="PasswordBox.FontSize" Value="16" />
             <Setter Property="PasswordBox.FontWeight" Value="Thin"/>
             <Setter Property="PasswordBox.Foreground" Value="DarkCyan"/>
         </Style>
@@ -78,16 +78,16 @@
         <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" Style="{StaticResource TBstyle}" FontSize="32" TextWrapping="Wrap" Text="Реєстрація" VerticalAlignment="Center" RenderTransformOrigin="0.627,3.408"/>
 
         <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Група" RenderTransformOrigin="0.659,-3.85" />
-        <ComboBox Name="comboBoxGroup" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CBstyle}" Height="35" Width="264"/>
+        <ComboBox Name="comboBoxGroup" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CBstyle}" Height="30" Width="264"/>
 
         <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Користувач"/>
-        <TextBox Name="fio"  TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Style="{StaticResource TBstyle1}" HorizontalAlignment="Center" Height="35" Width="264"></TextBox>
+        <TextBox Name="fio"  TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Style="{StaticResource TBstyle1}" HorizontalAlignment="Center" Height="30" Width="264"></TextBox>
 
         <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Пароль"/>
-        <PasswordBox Name="passBox" PasswordChar="*" Style="{StaticResource PBstyle}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="264"/>
+        <PasswordBox Name="passBox" PasswordChar="*" Style="{StaticResource PBstyle}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="264"/>
 
         <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Підтвердження"/>
-        <PasswordBox x:Name="passBox_Copy" PasswordChar="*" Style="{StaticResource PBstyle}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="264"/>
+        <PasswordBox x:Name="passBox_Copy" PasswordChar="*" Style="{StaticResource PBstyle}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="264"/>
 
         <Button Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Зареєструватись" Click="Button_Click" Width="300" Style="{StaticResource ButtonStyle}"/>
 

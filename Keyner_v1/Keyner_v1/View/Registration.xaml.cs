@@ -37,14 +37,16 @@ namespace Keyner_v1.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(passBox.Password == passBox_Copy.Password)
-                aar.AddUserTest(fio.Text, passBox.Password, (comboBoxGroup.SelectedValue as Model.Group).Id, autor.user);
+            if (passBox.Password == passBox_Copy.Password)
+            {
+                aar.AddUser(fio.Text, passBox.Password, (comboBoxGroup.SelectedValue as Model.Group).Id);
 
-            int id_user = aar.GetIdUserTest(fio.Text, passBox.Password, autor);
-            MainUserWindow mw = new MainUserWindow(id_user);
-            this.Hide();
-            mw.ShowDialog();
-            this.Close();
+                int id_user = aar.GetIdUser(fio.Text, passBox.Password);
+                MainUserWindow mw = new MainUserWindow(id_user);
+                this.Hide();
+                mw.ShowDialog();
+                this.Close();
+            }
         }
     }
 }
