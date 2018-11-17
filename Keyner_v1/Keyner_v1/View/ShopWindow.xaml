@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Shop" Height="450" Width="600" Background="Honeydew" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Shop" Height="600" Width="700" Background="Honeydew" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -23,22 +23,22 @@
             <TextBlock Name="txt2" VerticalAlignment="Center" FontSize="20"></TextBlock>
         </DockPanel>
 
-        <DataGrid Name="datagrid" Grid.Column="0" Grid.Row="1" Background="AntiqueWhite">
-            <!--<DataGrid.Columns>
-                <DataGridTextColumn Header="Монстр" Binding="{Binding Name}" />
+        <DataGrid Name="datagrid" Grid.Column="0" Grid.Row="1" Background="AntiqueWhite" IsReadOnly="True" AutoGenerateColumns="False" SelectionUnit="FullRow" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" SelectionChanged="datagrid_SelectionChanged" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Монстр" Width="70" Binding="{Binding Name}"  />
                 <DataGridTemplateColumn Header="">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Image}" Width="100" Height="200" />
+                            <Image Source="{Binding Image}" Width="100" Height="150" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Ціна" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Ціна" Width="50" Binding="{Binding Price}" />
                 <DataGridCheckBoxColumn Header="Куплено" Binding="{Binding IsBought}"  />
-            </DataGrid.Columns>-->
+            </DataGrid.Columns>
         </DataGrid>
 
-        <Button Name="buybutton" Grid.Column="1" Grid.Row="1" Background="Teal" Height="100" Content="Купити" Margin="10"></Button>
+        <Button Name="buybutton" Grid.Column="1" Grid.Row="1" Background="Teal" Height="100" Content="Купити" Margin="10" Click="buybutton_Click"></Button>
 
     </Grid>
 </Window>

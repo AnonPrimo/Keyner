@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace Keyner_v1.Controller
@@ -46,7 +43,7 @@ namespace Keyner_v1.Controller
             //list of all tests
             foreach(var item in db.TestSet)
             {
-                UserTest.Add(new UserTests() { TestName = "Тест №"+item.Id, BestTime = item.BestTime});
+                UserTest.Add(new UserTests() { TestName = "Тест №"+item.Id, BestTime = item.BestTime, Mark=SetMarkStar(0)});
             }
 
             List<Model.Statistic> tmp = getUserTests();
@@ -129,7 +126,7 @@ namespace Keyner_v1.Controller
             return true;
         }
 
-        class ImageConvert
+        public class ImageConvert
         {
             public static BitmapImage Convert(byte[] array)
             {

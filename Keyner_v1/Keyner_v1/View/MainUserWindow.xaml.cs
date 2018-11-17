@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Keyner_v1.View
 {
@@ -80,8 +70,6 @@ namespace Keyner_v1.View
 
             txt2.Text = money;
             txt2.FontSize = 20;
-
-           
         }
 
         private void fillNextTest(int count)
@@ -107,6 +95,9 @@ namespace Keyner_v1.View
             ShopWindow sw = new ShopWindow();
             sw.shopcon.CurrentUser = usercon.CurrentUser;
             sw.ShowDialog();
+
+            fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+            fillGrid();
         }
 
         //game window
@@ -115,6 +106,8 @@ namespace Keyner_v1.View
             Test test = new Test();
             this.Hide();
             test.ShowDialog();
+            fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+            fillGrid();
             this.Show();
         }
 
