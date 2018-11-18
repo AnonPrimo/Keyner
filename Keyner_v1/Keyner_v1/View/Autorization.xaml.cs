@@ -19,7 +19,7 @@ namespace Keyner_v1.View
     /// </summary>
     public partial class Autorization : Window
     {
-        Model.KeynerContext keynerContext;
+        public Model.KeynerContext keynerContext;
 
         Controller.AutorizAndRegistr aar;
 
@@ -29,22 +29,24 @@ namespace Keyner_v1.View
         public Autorization()
         {
             InitializeComponent();
-            Con();
-            //  ConTest();
+            
+           Con();
+            //ConTest();
         }
 
         private void Con()
         {
             keynerContext = new Model.KeynerContext();
-            aar = new Controller.AutorizAndRegistr();
+            //aar = new Controller.AutorizAndRegistr();
 
-            //comboBoxGroup.DataContext = keynerContext.GroupSet.ToList();
-            //comboBoxGroup.DisplayMemberPath = "Name";
-            //comboBoxGroup.SelectedValue = "Id";
+            comboBoxGroup.DisplayMemberPath = "Name";
+            comboBoxGroup.SelectedValue = "Id";
+            comboBoxGroup.ItemsSource = keynerContext.GroupSet.ToList();
+            
 
-            comboBoxUser.DataContext = keynerContext.UserSet.ToList();
-            comboBoxUser.DisplayMemberPath = "Name";
-            comboBoxUser.SelectedValue = "Id";
+            //comboBoxUser.DataContext = keynerContext.UserSet.ToList();
+            //comboBoxUser.DisplayMemberPath = "Name";
+            //comboBoxUser.SelectedValue = "Id";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -77,8 +79,6 @@ namespace Keyner_v1.View
                  new Model.User { Id = 4, Name = "Катя4",  Password = "p4", Id_Group = 2, Id_Monster = 1, Money = 0 },
                  new Model.User { Id = 5, Name = "Катя5",  Password = "p5", Id_Group = 2, Id_Monster = 1, Money = 0 }
             };
-
-            
 
             group = new List<Model.Group>
             {
