@@ -32,7 +32,7 @@ namespace Keyner_v1.View
 
             comboBoxGroup.DisplayMemberPath = "Name";
             comboBoxGroup.SelectedValue = "Id";
-            comboBoxGroup.ItemsSource = autor.group;
+            comboBoxGroup.ItemsSource = autor.keynerContext.GroupSet.ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
