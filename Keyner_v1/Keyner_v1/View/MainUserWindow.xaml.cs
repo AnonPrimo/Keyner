@@ -122,5 +122,13 @@ namespace Keyner_v1.View
             }
             catch { }
         }
+
+        private void settingbutton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow sw = new SettingsWindow();
+            this.Hide();
+            sw.ShowDialog();
+            this.Show();
+        }
     }
 }

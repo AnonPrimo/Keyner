@@ -50,7 +50,7 @@
         <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" >
             <Button Name="gamebutton" Content="Go" FontSize="30" FontWeight="Bold" Width="70" Margin="5"  Background="LightGreen" HorizontalAlignment="Left" Click="gamebutton_Click"></Button>
             <Button Name="shopbutton" Content="Shop"  Margin="40,10" Width="60" Background="Cyan" Click="shopbutton_Click"></Button>
-            <Button Name="settingbutton" Margin="10" Width="50" Height="50" >
+            <Button Name="settingbutton" Margin="10" Width="50" Height="50" Click="settingbutton_Click" >
                 <Button.Background>
                     <ImageBrush ImageSource="../Pictures/setting-icon.png"></ImageBrush>
                 </Button.Background>
