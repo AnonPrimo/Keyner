@@ -91,10 +91,7 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="25"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="2" Grid.Row="0" >
-            <Button Style="{StaticResource FolderTemplate}" Margin="0, 5, 0, 5"   Width="20" Height="20"/>
-            <Button Style="{StaticResource FolderTemplate}" Width="20" Height="20"/>
-        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="0" />
         <TextBlock  Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="32" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Авторизація" VerticalAlignment="Center" RenderTransformOrigin="0.627,3.408"/>
 
        
