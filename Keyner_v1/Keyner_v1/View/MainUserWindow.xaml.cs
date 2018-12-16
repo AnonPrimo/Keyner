@@ -94,7 +94,9 @@ namespace Keyner_v1.View
         {
             ShopWindow sw = new ShopWindow();
             sw.shopcon.CurrentUser = usercon.CurrentUser;
+            this.Hide();
             sw.ShowDialog();
+            this.Show();
 
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
             fillGrid();

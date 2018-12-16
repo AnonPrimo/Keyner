@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,35 +14,61 @@ namespace Keyner_v1.View
     public partial class ShopWindow : Window
     {
         public Controller.ShopWindowController shopcon;
+        int index;
+        List<Controller.MonsterItem> monList;
 
         public ShopWindow()
         {
             InitializeComponent();
             shopcon = new Controller.ShopWindowController();
-            buybutton.IsEnabled = false;
+            index = 0;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            refresh();
-        }
-
-        private void fillGrid()
-        {
-            datagrid.ItemsSource = shopcon.getMonsterItems();
-        }
-
-        private void refresh()
-        {
+            monList = shopcon.getMonsterItems();
             fillUserInfo(shopcon.CurrentUser.Name, shopcon.CurrentUser.Money);
-            fillGrid();
+            fillThreeMosterFields();
         }
 
-        private byte[] datagrid_imageFill()
+        //filling monster data
+        private void fillThreeMosterFields()
         {
-            return shopcon.getListOfMonsterImages()[shopcon.Index];
+            fillMonsterStackpnl(monList[index], stackpanel1);
+            fillMonsterStackpnl(monList[index+1], stackpanel2);
+            fillMonsterStackpnl(monList[index+2], stackpanel3);
         }
 
+        private void fillMonsterStackpnl(Controller.MonsterItem monster, StackPanel s)
+        {
+            BitmapImage bitIm = new BitmapImage();
+            bitIm = Controller.UserFormController.ImageConvert.Convert(monster.Image);
+
+            foreach(var uielement in s.Children)
+            {
+                if(uielement is TextBlock)
+                    (uielement as TextBlock).Text = monster.Name;
+                if (uielement is Image)
+                    (uielement as Image).Source = bitIm;
+                if (uielement is Button)
+                {
+                    if (monster.IsBought)
+                    {
+                        (uielement as Button).Content = "Куплено!";
+                        (uielement as Button).IsEnabled = false;
+                        return;
+                    }
+                    else
+                    {
+                        (uielement as Button).Content = monster.Price;
+                        (uielement as Button).IsEnabled = true;
+                        return;
+                    }
+                }
+            }
+        }
+
+        //filling user data
         private void fillUserInfo(string name, int money)
         {
             txt1.Text = name;
@@ -49,27 +76,39 @@ namespace Keyner_v1.View
             moneyImage.Source = new BitmapImage(new Uri("/Pictures/money_im.png", UriKind.Relative));
         }
 
-        private void datagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (((Controller.MonsterItem)datagrid.SelectedItem).IsBought)
-                buybutton.IsEnabled = false;
-            else
-                buybutton.IsEnabled = true;
-        }
-
         private void buybutton_Click(object sender, RoutedEventArgs e)
         {
-            Controller.MonsterItem m = (Controller.MonsterItem)datagrid.SelectedItem;
-            if (m.Price > shopcon.CurrentUser.Money)
+
+            int price = Int32.Parse((e.Source as Button).Content.ToString());
+            if (price > shopcon.CurrentUser.Money)
             {
                 MessageBox.Show("На жаль, у вас не вистачає коштів, щоб купити цього монстра!", "Увага!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 
-            shopcon.BuyMonster(m.Id_Monster);
-            shopcon.payForMonster(shopcon.CurrentUser.Money-m.Price);
-            MessageBox.Show("Дякуємо за покупку!", "Увага!", MessageBoxButton.OK, MessageBoxImage.Information);
-            refresh();
+            //shopcon.BuyMonster(m.Id_Monster);
+            //shopcon.payForMonster(price);
+            MessageBox.Show("Дякуємо за покупку!", "Thank you!", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        //return to previous form
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void prevImage_Click(object sender, RoutedEventArgs e)
+        {
+            if (index > 0)
+                index--;
+            fillThreeMosterFields();
+        }
+
+        private void nextButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (index < monList.Count - 3)
+                index++;
+            fillThreeMosterFields();
         }
     }
 }

@@ -31,7 +31,6 @@ namespace Keyner_v1.Controller
             //return new Model.User() { Name = "Lastname Firstname"};
         }
 
-
         //user tests
         public List<Model.Statistic> getUserTests()
         {

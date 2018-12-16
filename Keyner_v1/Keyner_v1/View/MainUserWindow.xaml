@@ -45,7 +45,7 @@
             </DockPanel>
         </StackPanel>
 
-            <Image Name="monster" Grid.Column="1" Grid.Row="1" Margin="20"></Image>
+        <Image Name="monster" Grid.Column="1" Grid.Row="1" Margin="20"></Image>
         
         <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" >
             <Button Name="gamebutton" Content="Go" FontSize="30" FontWeight="Bold" Width="70" Margin="5"  Background="LightGreen" HorizontalAlignment="Left" Click="gamebutton_Click"></Button>

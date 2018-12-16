@@ -52,6 +52,7 @@ namespace Keyner_v1.Controller
 
             foreach (MonsterItem item in monsters.ToList())
             {
+                SetMonsterImage(item);
                 if (bought.Contains(item))
                     item.IsBought = true;
             }
@@ -59,7 +60,8 @@ namespace Keyner_v1.Controller
             return monsters;
         }
 
-        private List<Model.MonsterLevel> MonsterImage(int id)
+        //get list of all certain monster images by monsterID
+        public List<Model.MonsterLevel> MonsterImage(int id)
         {
             using (context = new Model.KeynerContext())
             {
@@ -69,17 +71,13 @@ namespace Keyner_v1.Controller
             }
         }
 
-        public List<byte[]> getListOfMonsterImages()
+        //filling image in monsterItem instance
+        public void SetMonsterImage(MonsterItem mitem)
         {
-            List<byte[]> list = new List<byte[]>();
-            using (context = new Model.KeynerContext())
-            {
-                foreach (var item in context.MonsterSet)
-                {
-                    list.Add(MonsterImage(item.Id)[Index].NeutralImage);
-                }
-            }
-            return list;
+            List<Model.MonsterLevel> tmp = MonsterImage(mitem.Id_Monster);
+
+            Model.MonsterLevel mlevel = tmp[Index];
+            mitem.Image = mlevel.NeutralImage;
         }
 
         public bool BuyMonster(int id_monster)
@@ -88,7 +86,11 @@ namespace Keyner_v1.Controller
             {
                 using(context = new Model.KeynerContext())
                 {
-                    context.Database.ExecuteSqlCommand("insert into Purchases (Id_Monster, Id_User) values ({0}, {1})", id_monster, CurrentUser.Id);
+                    Model.Purchase p = new Model.Purchase();
+                    p.Id_Monster = id_monster;
+                    p.Id_User = CurrentUser.Id;
+                    context.PurchaseSet.Add(p);
+                    context.SaveChanges();
                 }
                 return true;
             }
@@ -101,9 +103,10 @@ namespace Keyner_v1.Controller
             {
                 using (context = new Model.KeynerContext())
                 {
-                    context.Database.ExecuteSqlCommand("update Users set Money = {0} where Id = {1}", money, CurrentUser.Id);
+                    context.UserSet.Find(CurrentUser.Id).Money -= money;
+                    context.SaveChanges();
 
-                    CurrentUser.Money = context.UserSet.Find(CurrentUser.Id).Money;
+                    CurrentUser = context.UserSet.Find(CurrentUser.Id);
                     return true;
                 }
             }
