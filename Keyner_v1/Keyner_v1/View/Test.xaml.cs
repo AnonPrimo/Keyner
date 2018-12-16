@@ -13,22 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Keyner_v1.Controller;
 using System.Text.RegularExpressions;
+using System.Windows.Threading;
 
 namespace Keyner_v1.View
 {
     class KeyboardKey
     {
-        TextBlock txt;
-        Key key;
+        public TextBlock txt;
+        public Key key;
         string charKey;
-        public bool IsHighlighted { get; set; }
-
+        public Brush background;
         public KeyboardKey(TextBlock txt, Key k, string ch)
         {
             this.txt = txt;
             key = k;
             charKey = ch;
-            IsHighlighted = false;
+            background = txt.Background;
         }
         public bool EqualsKey(Key k)
         {
@@ -39,19 +39,52 @@ namespace Keyner_v1.View
             return s == charKey;
         }
     }
+    
+    class SpeedText
+    {
+        float  maxCount;
+        float  prevCount;
+        float  currCount;
+        float speed;
+        float timeInterval = 0.1F;
+        public SpeedText(int max)
+        {
+            maxCount = max;
+            prevCount = 0;
+            currCount = 0;
+            speed = 0;
+        }
+
+        public float CountSpeed(float left)
+        {
+            prevCount = currCount;
+            currCount = maxCount - left;
+            speed = ((currCount - prevCount) / timeInterval) * 60;
+            return speed;
+        }
+    }
+
     /// <summary>
     /// Логика взаимодействия для Test.xaml
     /// </summary>
-
     public partial class Test : Window
     {
         List<KeyboardKey> dictionaryKeys;
         TestController controller;
         TextPointer position;
+        string current;
         bool isTestCompleted = false;
+        DispatcherTimer dt;
+        SpeedText st;
+        TextRange textRange;
         public Test()
         {
             InitializeComponent();
+            dt = new DispatcherTimer();
+            dt.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            st = new SpeedText(TestController.collection.Count);
+            dt.Tick += new EventHandler(Dt_Tick);
+            dt.Start();
             dictionaryKeys = new List<KeyboardKey>();
             FillKeys();
             controller = new TestController();
@@ -59,9 +92,15 @@ namespace Keyner_v1.View
             TextToWrite.FontFamily = new FontFamily("Courier New, monospace");
             InputText.FontFamily = new FontFamily("Courier New, monospace");
             FillText();
-            ChangeColorByPosition();
+            ClearColors();
+            label_error.Visibility = Visibility.Collapsed;
         }
 
+        private void Dt_Tick(object sender, EventArgs e)
+        {
+            label_speed.Content = "Швидкість набору: " + st.CountSpeed(TestController.collection.Count).ToString();
+        }
+        
         /// <summary>
         /// test method will be replaced
         /// </summary>
@@ -77,58 +116,8 @@ namespace Keyner_v1.View
                 addText--;
             }
             TextToWrite.Document = flowDoc;
-            position = TextToWrite.Document.ContentStart.GetPositionAtOffset(3);
+            position = TextToWrite.Document.ContentStart.GetPositionAtOffset(0);
         }
-
-
-
-
-
-
-        private void StartContinueTest()
-        {
-            for (position = TextToWrite.Document.ContentStart; position != TextToWrite.Document.ContentEnd; position = position.GetPositionAtOffset(1))
-            {
-                while (IsEmptyRange())
-                {
-                    ChangeToBlack();
-                    position = position.GetPositionAtOffset(1);
-                }
-                ChangeToBlack();
-                position = position.GetPositionAtOffset(1);
-                ChangeColorByPosition();
-            }
-        }
-
-        private bool IsEmptyRange()
-        {
-            var endPos = position.GetPositionAtOffset(1);
-            TextRange textRange = new TextRange(position, endPos);
-            foreach (char c in textRange.Text)
-            {
-                if (c == '\n')
-                {
-                    InputText.Text += Environment.NewLine;
-                    return true;
-                }
-                if(c == '\r')
-                {
-                    return true;
-                }
-            }
-            return false;
-
-        }
-
-
-
-
-
-
-
-
-        
-        
         /// <summary>
         /// fills keys dictionary
         /// </summary>
@@ -178,8 +167,7 @@ namespace Keyner_v1.View
             dictionaryKeys.Add(new KeyboardKey(txt_rightShift, Key.RightShift, "rShift"));
             dictionaryKeys.Add(new KeyboardKey(txt_leftCtrl, Key.LeftCtrl, "lCtrl"));
             dictionaryKeys.Add(new KeyboardKey(txt_leftAlt, Key.LeftAlt, "lAlt"));
-            dictionaryKeys.Add(new KeyboardKey(txt_leftSpace, Key.Space, " "));
-            dictionaryKeys.Add(new KeyboardKey(txt_rightSpace, Key.Space, " "));
+            dictionaryKeys.Add(new KeyboardKey(txt_Space, Key.Space, " "));
             dictionaryKeys.Add(new KeyboardKey(txt_rightAlt, Key.RightAlt, "rAlt"));
             dictionaryKeys.Add(new KeyboardKey(txt_rightPKM, Key.Apps, "apps"));
             dictionaryKeys.Add(new KeyboardKey(txt_rightCtrl, Key.RightCtrl, "rCtrl"));
@@ -192,10 +180,28 @@ namespace Keyner_v1.View
         {
             if (!isTestCompleted)
             {
-                StartContinueTest();
+                label_error.Visibility = Visibility.Collapsed;
+                ClearColors();
                 Key pressedKey = e.Key;
-                //if (dictionaryKeys[FindByKey(pressedKey)].IsHighlighted == true) CorrectSymbol();
-                CorrectSymbol();
+                if (pressedKey == dictionaryKeys[FindByChar(TestController.collection[0].ToString())].key)
+                {
+                    CorrectSymbol();
+                    TestController.collection.RemoveAt(0);
+                    if (TestController.collection.Count == 0) isTestCompleted = true;
+                    ClearColors();
+                }
+                else
+                {
+                    int i = FindByKey(pressedKey);
+                    if (i >= 0)
+                        dictionaryKeys[i].txt.Background = Brushes.Red;
+                    label_error.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ви успішно пройшли тест!\nЧасу витрачено: \nЗароблено монет: \nСередня швидкість: \nКількість помилок: ");
+                this.Close();
             }
         }
 
@@ -204,79 +210,60 @@ namespace Keyner_v1.View
         /// </summary>
         private void CorrectSymbol()
         {
-            MovePosition();
-            ChangeToBlack();
-
-            var startPos = position;
-            var endPos = position.GetPositionAtOffset(1);
-
-            TextRange textRange = new TextRange(startPos, endPos);
+            SkipEmpty();
+            ChangeColorByPosition();
             InputText.Text += textRange.Text;
-            ChangeToBlack();
             ChangeColorByPosition();
             position = position.GetPositionAtOffset(1);
-
         }
 
-        /// <summary>
-        /// skips the "" in string
-        /// </summary>
-        private void MovePosition()
+        private void SkipEmpty()
         {
-            var startPos = position.GetPositionAtOffset(-1);
-            var endPos = position;
-            TextRange textRange = new TextRange(startPos, endPos);
+            SetPositions();
+            int c = 0;
             while (textRange.Text == "")
             {
-                foreach (char c in textRange.Text)
-                {
-                    if (c == '\r')
-                    {
-                        ChangeToBlack();
-                    }
-                    if (c == '\n')
-                    {
-                        ChangeToBlack();
-                        InputText.Text += Environment.NewLine;
-                    }
-                }
+                c++;
+                if (c==4)
+                    InputText.Text += Environment.NewLine;
+
+                SetPositions();
                 position = position.GetPositionAtOffset(1);
-                startPos = position;
-                endPos = position.GetPositionAtOffset(1);
-                textRange = new TextRange(startPos, endPos);
             }
         }
 
+        private void SetPositions()
+        {
+            var startPos = position.GetPositionAtOffset(0);
+            var endPos = position.GetPositionAtOffset(1);
+             textRange = new TextRange(startPos, endPos);
+
+        }
+
+        private void ClearColors()
+        {
+            foreach (KeyboardKey k in dictionaryKeys)
+            {
+                k.txt.Background = k.background;
+            }
+            if (TestController.collection.Count != 0)
+                dictionaryKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+
+        }
         /// <summary>
         /// changes color of the character you need to write
         /// </summary>
         private void ChangeColorByPosition()
         {
+            textRange.ApplyPropertyValue(TextElement.BackgroundProperty, new SolidColorBrush(Colors.Green));
+            current = textRange.Text;
 
-            var startPos = position.GetPositionAtOffset(-1);
-            var endPos = position;
-            TextRange textRange = new TextRange(startPos, endPos);
-
-            textRange.ApplyPropertyValue(TextElement.BackgroundProperty, new SolidColorBrush(Colors.Red));
-            textRange.Text = textRange.Text.Replace("", " ");
-            dictionaryKeys[FindByChar(textRange.Text)].IsHighlighted = true;
         }
 
         /// <summary>
         /// returns color to black if pressed the right button
         /// </summary>
-        private void ChangeToBlack()
-        {
-            var startPos = position;
-            var endPos = position.GetPositionAtOffset(1);
 
-            TextRange textRange = new TextRange(startPos, endPos);
-            textRange.ApplyPropertyValue(TextElement.BackgroundProperty, new SolidColorBrush(Colors.White));
-            foreach (char c in textRange.Text)
-            {
-                dictionaryKeys[FindByChar(c.ToString())].IsHighlighted = false;
-            }
-        }
 
         /// <summary>
         /// finds a needed dictionaryKeys index by Key
@@ -290,9 +277,9 @@ namespace Keyner_v1.View
             }
             return -1;
         }
+
         private int FindByChar(string k)
         {
-
             for (int i = 0; i < dictionaryKeys.Count; i++)
             {
                 if (dictionaryKeys[i].EqualsString(k.ToLower())) return i;

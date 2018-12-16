@@ -102,7 +102,7 @@
         <ComboBox Name="comboBoxUser" Style="{StaticResource CBstyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="264"/>
 
         <TextBlock  Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Пароль"/>
-        <PasswordBox Name="passBox" PasswordChar="§" Grid.Row="3" Grid.Column="1" Style="{StaticResource PBstyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="264"/>
+        <PasswordBox Name="passBox" PasswordChar="☺" Grid.Row="3" Grid.Column="1" Style="{StaticResource PBstyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="264"/>
 
         <Button Content="Увійти" Click="Button_Click"  Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300"  Style="{StaticResource ButtonStyle}"/>
         <Button Content="Реєстрація" Click="Button_Click_1"  Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Style="{StaticResource ButtonStyle}"/>

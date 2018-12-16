@@ -38,9 +38,8 @@
             <Setter Property="TextBlock.Background" Value="LightPink"/>
         </Style>
 
-        <Style x:Key="InfoTextBlock_style" TargetType="TextBlock">
+        <Style x:Key="InfoLabel_style" TargetType="Label">
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
 
@@ -60,14 +59,6 @@
                             <Setter Property="Margin" Value="0" />
                         </Style>
                     </RichTextBox.Resources>
-                   
-                    <!--<FlowDocument>
-                        <Paragraph>I am a flow document. Would you like to edit me?
-                            <Bold>Go ahead.</Bold>
-                        </Paragraph>
-                        <Paragraph Foreground="Blue">I am blue I am blue I am blue.</Paragraph>
-                    </FlowDocument>-->
-                    
                 </RichTextBox>
             </Border>
             <Border BorderThickness="1" Margin="5" BorderBrush="Black">
@@ -140,8 +131,7 @@
                     <TextBlock Name="txt_leftCtrl" Width="36" Text="Ctrl" FontSize="19" Style="{StaticResource pinky}"/>
                     <TextBlock Name="txt_leftWin" Width="36" Text="Win" FontSize="19" Style="{StaticResource pinky}"/>
                     <TextBlock Name="txt_leftAlt" Width="36" Text="Alt" FontSize="19" Style="{StaticResource leftThumb}"/>
-                    <TextBlock Name="txt_leftSpace" Width="178" Style="{StaticResource leftThumb}" Margin="5,5,0,5" TextAlignment="Right" Text="Sp"/>
-                    <TextBlock Name="txt_rightSpace" Width="178" Style="{StaticResource rightThumb}" Margin="0,5,5,5" TextAlignment="Left" Text="ace"/>
+                    <TextBlock Name="txt_Space" Width="356" Style="{StaticResource leftThumb}" Margin="5,5,5,5" Text="Space"/>
                     <TextBlock Name="txt_rightAlt" Width="36" Text="Alt" FontSize="19" Style="{StaticResource rightThumb}"/>
                     <TextBlock Name="txt_rightWin" Width="36" Text="Win" FontSize="19" Style="{StaticResource rightThumb}"/>
                     <TextBlock Name="txt_rightPKM" Width="36" Text="⊞" Style="{StaticResource pinky}"/>
@@ -150,15 +140,15 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2" Background="Wheat">
-            <TextBlock Text="Кількість помилок: " Style="{StaticResource InfoTextBlock_style}"/>
-            <TextBlock Text="Час: " Style="{StaticResource InfoTextBlock_style}"/>
-            <TextBlock Text="Ваш рекорд: " Style="{StaticResource InfoTextBlock_style}"/>
-            <TextBlock Text="Загальний рекорд: " Style="{StaticResource InfoTextBlock_style}"/>
-            <TextBlock Text="Швидкість набору: " Style="{StaticResource InfoTextBlock_style}"/>
+            <Label Content="Кількість помилок: " Style="{StaticResource InfoLabel_style}"/>
+            <Label Content="Час: " Style="{StaticResource InfoLabel_style}"/>
+            <Label Content="Ваш рекорд: " Style="{StaticResource InfoLabel_style}"/>
+            <Label Content="Загальний рекорд: " Style="{StaticResource InfoLabel_style}"/>
+            <Label Content="Швидкість набору: " Style="{StaticResource InfoLabel_style}" Name="label_speed"/>
             <Separator/>
             <Image gif:ImageBehavior.AnimatedSource="/Monster/base.gif" Margin="5"/>
             <Separator/>
-            <TextBlock Name="txt_complete" Foreground="Green"/>
+            <TextBlock Name="label_error" Foreground="Red" FontSize="170" Text="!" FontWeight="Bold" TextAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Window>
