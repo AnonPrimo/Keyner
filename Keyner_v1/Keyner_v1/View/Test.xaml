@@ -134,7 +134,7 @@
                     <TextBlock Name="txt_coma" Width="36" Text="Б" Style="{StaticResource middle}"/>
                     <TextBlock Name="txt_dot" Width="36" Text="Ю" Style="{StaticResource ring}"/>
                     <TextBlock Name="txt_slash" Width="36" Text="." Style="{StaticResource pinky}"/>
-                    <TextBlock Name="rightShift" Width="109" Text="Shift"  Style="{StaticResource pinky}"/>
+                    <TextBlock Name="txt_rightShift" Width="109" Text="Shift"  Style="{StaticResource pinky}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="45">
                     <TextBlock Name="txt_leftCtrl" Width="36" Text="Ctrl" FontSize="19" Style="{StaticResource pinky}"/>
@@ -157,6 +157,8 @@
             <TextBlock Text="Швидкість набору: " Style="{StaticResource InfoTextBlock_style}"/>
             <Separator/>
             <Image gif:ImageBehavior.AnimatedSource="/Monster/base.gif" Margin="5"/>
+            <Separator/>
+            <TextBlock Name="txt_complete" Foreground="Green"/>
         </StackPanel>
     </Grid>
 </Window>

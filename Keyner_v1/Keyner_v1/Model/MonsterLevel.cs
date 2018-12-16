@@ -12,7 +12,13 @@ namespace Keyner_v1.Model
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         public int Id_Monster { get; set; }
-        public byte[] Image { get; set; }
+
+        public byte[] HappyImage { get; set; }
+        public byte[] SadImage { get; set; }
+        public byte[] NeutralImage { get; set; }
+        public byte[] ReadyImage { get; set; }
+
     }
 }

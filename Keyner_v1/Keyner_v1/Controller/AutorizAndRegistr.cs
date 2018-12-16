@@ -33,7 +33,6 @@ namespace Keyner_v1.Controller
 
         public int GetIdUserTest(string name, string pass, View.Autorization viv)
         {
-
             foreach (var item in viv.user)
             {
                 if (item.Name == name)
@@ -42,9 +41,21 @@ namespace Keyner_v1.Controller
                         return item.Id;
                 }
             }
-
             return 0;
+        }
 
+
+        public int GetIdUser(string name, string pass)
+        {
+            foreach (var item in keyCont.UserSet)
+            {
+                if (item.Name == name)
+                {
+                    if (item.Password == pass)
+                        return item.Id;
+                }
+            }
+            return 0;
         }
 
         public void AddUser(string name, string pass, int group)
@@ -64,7 +75,6 @@ namespace Keyner_v1.Controller
 
         public void AddUserTest(string name, string pass, int group, List<Model.User> us)
         {
-
             User user = new User();
             user.Name = name;
             user.Password = pass;
@@ -73,7 +83,6 @@ namespace Keyner_v1.Controller
             user.Money = 0;
 
             us.Add(user);
-
         }
 
         public bool GetPassTest(int id, string p, View.Autorization viv)

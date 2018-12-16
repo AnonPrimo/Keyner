@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Keyner_v1.View
 {
@@ -44,7 +34,8 @@ namespace Keyner_v1.View
             fillImage();
             fillGrid();
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
-            MoneyImage.Source = new BitmapImage(new Uri("/Monster/money_im.png", UriKind.Relative));
+            fillNextTest(usercon.getTestCount());
+            MoneyImage.Source = new BitmapImage(new Uri("/Pictures/money_im.png", UriKind.Relative));
         }
 
         private Controller.UserFormController getUserFormController()
@@ -59,6 +50,7 @@ namespace Keyner_v1.View
 
         }
 
+        //index of current test
         private void CurrentTest()
         {
             for(int i = 0; i < usercon.UserTest.Count;i++)
@@ -78,33 +70,44 @@ namespace Keyner_v1.View
 
             txt2.Text = money;
             txt2.FontSize = 20;
+        }
 
+        private void fillNextTest(int count)
+        {
             txt3.FontSize = 15;
-            if(indexOfCurrentTest <= 100)
-                txt3.Text = "Наступний тест №: " + indexOfCurrentTest;
+            if (indexOfCurrentTest <= count)
+                txt3.Text = "Наступний тест №: " + (indexOfCurrentTest+1);
             else
                 txt3.Text = "Ви пройшли всі тести!!!";
         }
 
+        //monster image filling
         private void fillImage()
         {
-            BitmapImage im = new BitmapImage(new Uri("/Monster/monster_no_im.png", UriKind.Relative));
+            BitmapImage im = new BitmapImage(new Uri("/Pictures/monster_no_im.png", UriKind.Relative));
             usercon.getMonsterImage(ref im);
             monster.Source = im;
         }
 
+        //shop window
         private void shopbutton_Click(object sender, RoutedEventArgs e)
         {
             ShopWindow sw = new ShopWindow();
             sw.shopcon.CurrentUser = usercon.CurrentUser;
             sw.ShowDialog();
+
+            fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+            fillGrid();
         }
 
+        //game window
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
             Test test = new Test();
             this.Hide();
             test.ShowDialog();
+            fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+            fillGrid();
             this.Show();
         }
 
@@ -118,6 +121,14 @@ namespace Keyner_v1.View
                 gamebutton.IsEnabled = false;
             }
             catch { }
+        }
+
+        private void settingbutton_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow sw = new SettingsWindow();
+            this.Hide();
+            sw.ShowDialog();
+            this.Show();
         }
     }
 }

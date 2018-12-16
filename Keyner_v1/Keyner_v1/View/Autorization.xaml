@@ -5,22 +5,108 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Autorization" Height="300" Width="300"
-        WindowStartupLocation="CenterScreen">
+        Title="Autorization" Height="400" Width="600"
+        WindowStartupLocation="CenterScreen"
+        Background="CadetBlue">
+
+    <Window.Resources>
+        <Style x:Key="ButtonStyle">
+            <Setter Property="Button.FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="Button.FontSize" Value="18" />
+            <Setter Property="Button.FontWeight" Value="Thin"/>
+            <Setter Property="Button.Foreground" Value="DarkCyan"/>
+
+
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Control.IsMouseOver" Value="True"></Condition>
+                    </MultiTrigger.Conditions>
+
+                    <MultiTrigger.Setters>
+                        <Setter Property="Control.FontSize" Value="24"></Setter>
+                    </MultiTrigger.Setters>
+
+                </MultiTrigger>
+            </Style.Triggers>
+
+        </Style>
+
+        <Style x:Key="TBstyle">
+            <Setter Property="TextBlock.FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="TextBlock.FontSize" Value="24" />
+            <Setter Property="TextBlock.FontWeight" Value="Thin"/>
+            <Setter Property="TextBlock.Foreground" Value="LightGray"/>
+        </Style>
+
+        <Style x:Key="CBstyle">
+            <Setter Property="ComboBox.FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="ComboBox.FontSize" Value="16" />
+            <Setter Property="ComboBox.FontWeight" Value="Thin"/>
+            <Setter Property="ComboBox.Foreground" Value="DarkCyan"/>
+        </Style>
+
+        <Style x:Key="PBstyle">
+            <Setter Property="PasswordBox.FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="PasswordBox.FontSize" Value="16" />
+            <Setter Property="PasswordBox.FontWeight" Value="Thin"/>
+            <Setter Property="PasswordBox.Foreground" Value="DarkCyan"/>
+        </Style>
+
+        <Style x:Key="FolderTemplate" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Black" />
+              <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Name="ButtonBorder" CornerRadius="36,36,36,36" BorderBrush="Crimson" BorderThickness="2">
+                                <ContentPresenter  />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="Orange" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+
     <Grid>
-        <TextBlock HorizontalAlignment="Left" FontSize="18" Margin="86,10,0,0" TextWrapping="Wrap" Text="Авторизація" VerticalAlignment="Top" RenderTransformOrigin="0.627,3.408"/>
 
-        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="44,62,0,0" TextWrapping="Wrap" Text="Група" VerticalAlignment="Top" Height="22" RenderTransformOrigin="0.659,-3.85"/>
-        <ComboBox Name="comboBoxGroup" HorizontalAlignment="Left" Margin="109,62,0,0" VerticalAlignment="Top" Width="164" SelectionChanged="comboBoxGroup_SelectionChanged"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="25"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="2" Grid.Row="0" />
+        <TextBlock  Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="32" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Авторизація" VerticalAlignment="Center" RenderTransformOrigin="0.627,3.408"/>
 
-        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="19,101,0,0" TextWrapping="Wrap" Text="Користувач" VerticalAlignment="Top" Height="22" Width="82"/>
-        <ComboBox Name="comboBoxUser" HorizontalAlignment="Left" Margin="109,101,0,0" VerticalAlignment="Top" Width="164"/>
-      
-        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="32,140,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Height="20"/>
-        <PasswordBox Name="passBox" PasswordChar="*" HorizontalAlignment="Left" Margin="109,140,0,0" VerticalAlignment="Top" Width="164"/>
+       
+        <TextBlock  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Група" RenderTransformOrigin="0.659,-3.85"/>
+        <ComboBox Name="comboBoxGroup" Style="{StaticResource CBstyle}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="264" Height="30" SelectionChanged="comboBoxGroup_SelectionChanged"/>
 
-        <Button Content="Увійти" Click="Button_Click" HorizontalAlignment="Left" Margin="19,185,0,0" VerticalAlignment="Top" Width="254"/>
-        <Button Content="Реєстрація" Click="Button_Click_1" HorizontalAlignment="Left" Margin="19,221,0,0" VerticalAlignment="Top" Width="254"/>
+        <TextBlock  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Користувач" />
+        <ComboBox Name="comboBoxUser" Style="{StaticResource CBstyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="264"/>
+
+        <TextBlock  Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource TBstyle}" TextWrapping="Wrap" Text="Пароль"/>
+        <PasswordBox Name="passBox" PasswordChar="☺" Grid.Row="3" Grid.Column="1" Style="{StaticResource PBstyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="264"/>
+
+        <Button Content="Увійти" Click="Button_Click"  Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300"  Style="{StaticResource ButtonStyle}"/>
+        <Button Content="Реєстрація" Click="Button_Click_1"  Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Style="{StaticResource ButtonStyle}"/>
+
 
     </Grid>
 </Window>

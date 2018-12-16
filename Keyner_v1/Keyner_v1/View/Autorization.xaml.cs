@@ -19,7 +19,7 @@ namespace Keyner_v1.View
     /// </summary>
     public partial class Autorization : Window
     {
-        Model.KeynerContext keynerContext;
+        public Model.KeynerContext keynerContext;
 
         Controller.AutorizAndRegistr aar;
 
@@ -29,39 +29,33 @@ namespace Keyner_v1.View
         public Autorization()
         {
             InitializeComponent();
-            //   Con();
-            ConTest();
+            
+           Con();
+            //ConTest();
         }
 
         private void Con()
         {
             keynerContext = new Model.KeynerContext();
-            aar = new Controller.AutorizAndRegistr();
+            //aar = new Controller.AutorizAndRegistr();
 
-            comboBoxGroup.DataContext = keynerContext.GroupSet.ToList();
             comboBoxGroup.DisplayMemberPath = "Name";
             comboBoxGroup.SelectedValue = "Id";
+            comboBoxGroup.ItemsSource = keynerContext.GroupSet.ToList();
+            
 
-            comboBoxUser.DataContext = keynerContext.UserSet.ToList();
-            comboBoxUser.DisplayMemberPath = "Name";
-            comboBoxUser.SelectedValue = "Id";
+            //comboBoxUser.DataContext = keynerContext.UserSet.ToList();
+            //comboBoxUser.DisplayMemberPath = "Name";
+            //comboBoxUser.SelectedValue = "Id";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //if (aar.GetPass((comboBoxUser.SelectedValue as UserTest).Id, passBox.Password, this))
-            //{
-            //    MainUserWindow mw = new MainUserWindow(/*(int)comboBoxUser.SelectedValue*/);
-            //    mw.Show();
-            //    this.Close();
-            //}
-
-            if (comboBoxUser.SelectedValue is Model.User)
+                if (comboBoxUser.SelectedValue is Model.User)
                 if (GetPassTest())
                 {
                     MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as Model.User).Id);
                     this.Hide();
-
                     mw.ShowDialog();
                     this.Close();
                 }
@@ -86,8 +80,6 @@ namespace Keyner_v1.View
                  new Model.User { Id = 5, Name = "Катя5",  Password = "p5", Id_Group = 2, Id_Monster = 1, Money = 0 }
             };
 
-            
-
             group = new List<Model.Group>
             {
                 new Model.Group { Id = 1, Name = "RPZ3" },
@@ -98,12 +90,10 @@ namespace Keyner_v1.View
             comboBoxGroup.SelectedValue = "Id";
             comboBoxGroup.ItemsSource = group;
         }
-
-      
-
+        
         public bool GetPassTest()
         {
-            foreach (var item in user)
+            foreach (var item in keynerContext.UserSet)
             {
                 if (item.Id == (comboBoxUser.SelectedValue as Model.User).Id)
                 {
@@ -118,7 +108,7 @@ namespace Keyner_v1.View
         {
             List<Model.User> us = new List<Model.User>();
 
-            foreach (var item in user)
+            foreach (var item in keynerContext.UserSet)
             {
                 if ((comboBoxGroup.SelectedValue as Model.Group).Id == item.Id_Group)
                     us.Add(item);
