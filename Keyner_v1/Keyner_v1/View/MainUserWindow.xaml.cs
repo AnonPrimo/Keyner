@@ -29,7 +29,7 @@ namespace Keyner_v1.View
 
         private void fillWindowFields(int id)
         {
-            usercon = getUserFormController();
+            usercon = getUserFormController(id);
             CurrentTest();
             fillImage();
             fillGrid();
@@ -38,9 +38,9 @@ namespace Keyner_v1.View
             MoneyImage.Source = new BitmapImage(new Uri("/Pictures/money_im.png", UriKind.Relative));
         }
 
-        private Controller.UserFormController getUserFormController()
+        private Controller.UserFormController getUserFormController(int id)
         {
-           return new Controller.UserFormController(1);
+           return new Controller.UserFormController(id);
         }
 
         private void fillGrid()
@@ -98,7 +98,9 @@ namespace Keyner_v1.View
             sw.ShowDialog();
             this.Show();
 
+            usercon.CurrentUser = sw.shopcon.CurrentUser;
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+            fillImage();
             fillGrid();
         }
 
@@ -108,6 +110,7 @@ namespace Keyner_v1.View
             Test test = new Test();
             this.Hide();
             test.ShowDialog();
+
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
             fillGrid();
             this.Show();
