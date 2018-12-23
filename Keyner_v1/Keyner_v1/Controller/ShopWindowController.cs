@@ -112,6 +112,17 @@ namespace Keyner_v1.Controller
             }
             catch { return false; }
         }
+
+        public void SetMainMonster(int idMon)
+        {
+            using (context = new Model.KeynerContext())
+            {
+                Model.User user = context.UserSet.Find(CurrentUser.Id);
+                user.Id_Monster = idMon;
+                CurrentUser = user;
+                context.SaveChanges();
+            }
+        }
     }
 
     public class MonsterItem : IEquatable<MonsterItem>

@@ -13,18 +13,11 @@
             <Setter Property="TextBlock.FontWeight" Value="Bold" />
         </Style>
 
-        <Style x:Key="StackPanelTrigger" TargetType="StackPanel">
+        <Style x:Key = "TriggerStyle" TargetType = "Button">
+            <Setter Property = "Foreground" Value = "Black" />
             <Style.Triggers>
-                <Trigger Property="StackPanel.IsFocused" Value="True">
-                   <Setter Property="StackPanel.Background" Value="Green" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="ButtonTrigger" TargetType="Button">
-            <Style.Triggers>
-                <Trigger Property="Button.IsMouseOver" Value="True">
-                    <Setter Property="Control.Background" Value="Green" />
+                <Trigger Property = "IsMouseOver" Value = "True">
+                    <Setter Property = "Foreground" Value = "Red" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -44,7 +37,7 @@
         </Grid.ColumnDefinitions>
 
         <DockPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left">
-            <Button Name="backButton" Content="Back" Margin="5" Width="50" Click="backButton_Click"></Button>
+            <Button Name="backButton" Content="Back" Margin="5" Width="50" Style="{StaticResource TriggerStyle}" Click="backButton_Click"></Button>
         </DockPanel>
         <TextBlock Name="txt1" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" FontSize="25" FontWeight="UltraBold" Margin="5"></TextBlock>
 
@@ -53,25 +46,25 @@
             <TextBlock Name="txt2" VerticalAlignment="Center" FontSize="20"></TextBlock>
         </DockPanel>
 
-        <StackPanel Name="stackpanel1" Grid.Column="0" Grid.Row="1" Margin="20" Background="MistyRose" Style="{StaticResource StackPanelTrigger}">
+        <StackPanel Name="stackpanel1" Grid.Column="0" Grid.Row="1" Margin="20" Background="MistyRose" >
             <TextBlock Name="txtname1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Style="{StaticResource TextBlockStyle}"/>
             <Image Name="monsterIm1" Height="250" Margin="5"/>
-            <Button Name="MonsterButton1" Width="200" Height="50" Background="PeachPuff" FontSize="20" Style="{StaticResource ButtonTrigger}" Click="buybutton_Click" />
-            <Button Content="Головний монстр"  Width="200" Height="50" Background="PeachPuff" Margin="5" FontSize="20" />
+            <Button Name="MonsterButton1" Width="200" Height="50" Background="PeachPuff" FontSize="20" />
         </StackPanel>
-
-        <StackPanel Name="stackpanel2" Grid.Column="1" Grid.Row="1" Margin="20" Background="MistyRose" Style="{StaticResource StackPanelTrigger}">
-            <TextBlock Name="txtname2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Style="{StaticResource TextBlockStyle}"/>
-            <Image Name="monsterIm2" Height="250" Margin="5"/>
-            <Button Name="MonsterButton2" Width="200" Height="50" Background="PeachPuff" FontSize="20" Style="{StaticResource ButtonTrigger}" Click="buybutton_Click"/>
-            <Button Content="Головний монстр"  Width="200" Height="50" Background="PeachPuff" Margin="5" FontSize="20" />
-        </StackPanel>
-
-        <StackPanel Name="stackpanel3" Grid.Column="2" Grid.Row="1" Margin="20" Background="MistyRose" Style="{StaticResource StackPanelTrigger}">
+        
+        <Border Grid.Column="1" Grid.Row="1" BorderBrush="Maroon" BorderThickness="5" CornerRadius="5"  VerticalAlignment="Top">
+            <StackPanel Name="stackpanel2" Grid.Column="1" Grid.Row="1" Margin="20" Background="MistyRose" >
+                <TextBlock Name="txtname2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Style="{StaticResource TextBlockStyle}"/>
+                <Image Name="monsterIm2" Height="250" Margin="5"/>
+                <Button Name="MonsterButton2" Width="200" Height="50" Background="PeachPuff" FontSize="20" Style="{StaticResource TriggerStyle}"/>
+                <Button Name ="mainMonsterButton" Content="Головний монстр"  Width="200" Height="50" Background="PeachPuff" Margin="5" FontSize="20" Style="{StaticResource TriggerStyle}" Click="MainMonsterButton_Click"/>
+            </StackPanel>
+        </Border>
+        
+        <StackPanel Name="stackpanel3" Grid.Column="2" Grid.Row="1" Margin="20" Background="MistyRose">
             <TextBlock Name="txtname3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Style="{StaticResource TextBlockStyle}"/>
             <Image Name="monsterIm3" Height="250" Margin="5"/>
-            <Button Name="MonsterButton3" Width="200" Height="50" Background="PeachPuff" FontSize="20" Style="{StaticResource ButtonTrigger}" Click="buybutton_Click"/>
-            <Button Content="Головний монстр"  Width="200" Height="50" Background="PeachPuff" Margin="5" FontSize="20" />
+            <Button Name="MonsterButton3" Width="200" Height="50" Background="PeachPuff" FontSize="20"/>
         </StackPanel>
 
         <DockPanel Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
@@ -80,14 +73,14 @@
                     <ImageBrush ImageSource="../Pictures/arrow_prev.png"></ImageBrush>
                 </Button.Background>
             </Button>
+            <Button Name="buyButton" Content="Buy" Width="70" Background="DarkViolet" FontSize="23" Click="buybutton_Click"></Button>
             <Button Name="nextButton" Height="50" Width="50" Margin="20,0" BorderThickness="0" Click="nextButton_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="../Pictures/arrow_next.png"></ImageBrush>
                 </Button.Background>
             </Button>
         </DockPanel>
-            
-            <!--DataGrid Name="datagrid" Grid.Column="0" Grid.Row="1" Background="AntiqueWhite" IsReadOnly="True" AutoGenerateColumns="False" SelectionUnit="FullRow" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" SelectionChanged="datagrid_SelectionChanged"  >
+        <!--DataGrid Name="datagrid" Grid.Column="0" Grid.Row="1" Background="AntiqueWhite" IsReadOnly="True" AutoGenerateColumns="False" SelectionUnit="FullRow" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" SelectionChanged="datagrid_SelectionChanged"  >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Монстр" Width="100"  Binding="{Binding Name}" CellStyle="{StaticResource GridTextCellStyle}" />
                 <DataGridTemplateColumn Header="">
