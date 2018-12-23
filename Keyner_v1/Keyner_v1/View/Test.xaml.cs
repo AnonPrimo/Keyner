@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Keyner_v1.Controller;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace Keyner_v1.View
 {
@@ -39,68 +40,57 @@ namespace Keyner_v1.View
             return s == charKey;
         }
     }
-    
-    class SpeedText
-    {
-        float  maxCount;
-        float  prevCount;
-        float  currCount;
-        float speed;
-        float timeInterval = 0.1F;
-        public SpeedText(int max)
-        {
-            maxCount = max;
-            prevCount = 0;
-            currCount = 0;
-            speed = 0;
-        }
-
-        public float CountSpeed(float left)
-        {
-            prevCount = currCount;
-            currCount = maxCount - left;
-            speed = ((currCount - prevCount) / timeInterval) * 60;
-            return speed;
-        }
-    }
 
     /// <summary>
     /// Логика взаимодействия для Test.xaml
     /// </summary>
     public partial class Test : Window
     {
+        Stopwatch startTime;
+        DispatcherTimer updateTime;
         List<KeyboardKey> dictionaryKeys;
         TestController controller;
         TextPointer position;
         string current;
+        int mistakes = 0;
         bool isTestCompleted = false;
-        DispatcherTimer dt;
-        SpeedText st;
         TextRange textRange;
         public Test()
         {
             InitializeComponent();
-            dt = new DispatcherTimer();
-            dt.Interval = new TimeSpan(0, 0, 0, 0, 100);
-            st = new SpeedText(TestController.collection.Count);
-            dt.Tick += new EventHandler(Dt_Tick);
-            dt.Start();
+            FillForm();
+            FillText();
+            ClearColors();
+            label_error.Visibility = Visibility.Collapsed;
+        }
+
+        public Test(int user_id, int test_id)
+        {
+            FillForm();
+            FillTextFromDatabase(test_id);
+            ClearColors();
+            label_error.Visibility = Visibility.Collapsed;
+        }
+
+        private void FillForm()
+        {
+            startTime = new Stopwatch();
             dictionaryKeys = new List<KeyboardKey>();
             FillKeys();
             controller = new TestController();
             TextToWrite.IsReadOnly = true;
             TextToWrite.FontFamily = new FontFamily("Courier New, monospace");
             InputText.FontFamily = new FontFamily("Courier New, monospace");
-            FillText();
-            ClearColors();
-            label_error.Visibility = Visibility.Collapsed;
+            updateTime = new DispatcherTimer();
+            updateTime.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            updateTime.Tick += timer_tick;
         }
 
-        private void Dt_Tick(object sender, EventArgs e)
+        private void timer_tick(object sender, EventArgs e)
         {
-            label_speed.Content = "Швидкість набору: " + st.CountSpeed(TestController.collection.Count).ToString();
+            TimeSpentLabel.Content = "Час: " + TimeSpent();
         }
-        
+
         /// <summary>
         /// test method will be replaced
         /// </summary>
@@ -116,6 +106,16 @@ namespace Keyner_v1.View
                 addText--;
             }
             TextToWrite.Document = flowDoc;
+            position = TextToWrite.Document.ContentStart.GetPositionAtOffset(0);
+        }
+
+        /// <summary>
+        /// Gets the text to write from database
+        /// </summary>
+        private void FillTextFromDatabase(int id_test)
+        {
+            string str = controller.GetText(id_test);
+            TextToWrite.Document.Blocks.Add(new Paragraph(new Run(str)));
             position = TextToWrite.Document.ContentStart.GetPositionAtOffset(0);
         }
         /// <summary>
@@ -178,6 +178,12 @@ namespace Keyner_v1.View
         /// </summary>
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!updateTime.IsEnabled)
+            {
+                startTime.Start();
+                updateTime.Start();
+                
+            }
             if (!isTestCompleted)
             {
                 label_error.Visibility = Visibility.Collapsed;
@@ -196,13 +202,43 @@ namespace Keyner_v1.View
                     if (i >= 0)
                         dictionaryKeys[i].txt.Background = Brushes.Red;
                     label_error.Visibility = Visibility.Visible;
+                    mistakes++;
+                    MistakesLabel.Content = "Кількість помилок: " + mistakes;
+                    if (mistakes > 3) EndTest();
                 }
             }
             else
             {
-                MessageBox.Show("Ви успішно пройшли тест!\nЧасу витрачено: \nЗароблено монет: \nСередня швидкість: \nКількість помилок: ");
+                updateTime.Stop();
+                string avgSpeed = Math.Round(InputText.Text.Length / (TimeSpentMinutes()), 2).ToString();
+                string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)((InputText.Text.Length + mistakes))) * 100), 2).ToString();
+                string toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: \nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+                MessageBox.Show(toShow);
                 this.Close();
             }
+        }
+
+        private void EndTest()
+        {
+            updateTime.Stop();
+            string avgSpeed = Math.Round(InputText.Text.Length / (TimeSpentMinutes()), 2).ToString();
+            string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)((InputText.Text.Length + mistakes))) * 100), 2).ToString();
+            string toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: \nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+            MessageBox.Show(toShow);
+            this.Close();
+        }
+
+        private string TimeSpent()
+        {
+            string timeSpent = startTime.Elapsed.Minutes + ":" + startTime.Elapsed.Seconds + ":" + startTime.Elapsed.Milliseconds / 10;
+            return timeSpent;
+        }
+
+        private double TimeSpentMinutes()
+        {
+            
+            double timeSpentMinutes = startTime.Elapsed.Minutes + (startTime.Elapsed.Seconds + startTime.Elapsed.Milliseconds / 1000) / 60;
+            return timeSpentMinutes;
         }
 
         /// <summary>
@@ -287,4 +323,8 @@ namespace Keyner_v1.View
             return -1;
         }
     }
+
+    
+
+
 }

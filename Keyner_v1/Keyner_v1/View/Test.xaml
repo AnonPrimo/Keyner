@@ -140,15 +140,13 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="2" Background="Wheat">
-            <Label Content="Кількість помилок: " Style="{StaticResource InfoLabel_style}"/>
-            <Label Content="Час: " Style="{StaticResource InfoLabel_style}"/>
-            <Label Content="Ваш рекорд: " Style="{StaticResource InfoLabel_style}"/>
-            <Label Content="Загальний рекорд: " Style="{StaticResource InfoLabel_style}"/>
-            <Label Content="Швидкість набору: " Style="{StaticResource InfoLabel_style}" Name="label_speed"/>
+            <Label Name="MistakesLabel" Content="Кількість помилок: 0" Style="{StaticResource InfoLabel_style}"/>
+            <Label Name ="TimeSpentLabel" Content="Час: 0:0.0" Style="{StaticResource InfoLabel_style}"/>
+            <Label Name="BestTimeLabel" Content="Рекорд: " Style="{StaticResource InfoLabel_style}"/>
             <Separator/>
             <Image gif:ImageBehavior.AnimatedSource="/Monster/base.gif" Margin="5"/>
             <Separator/>
-            <TextBlock Name="label_error" Foreground="Red" FontSize="170" Text="!" FontWeight="Bold" TextAlignment="Center"/>
+            <TextBlock Name="label_error" Foreground="Red" FontSize="230" Text="!" FontWeight="Bold" TextAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Window>

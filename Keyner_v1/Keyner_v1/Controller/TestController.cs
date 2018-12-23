@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Keyner_v1.Model;
 
 namespace Keyner_v1.Controller
 {
@@ -12,11 +13,23 @@ namespace Keyner_v1.Controller
     {
         public string CurrentStr { get; set; }
         public int RepeatCount { get; set; }
-       public static List<Char> collection = new List<Char>();
+        public static List<Char> collection = new List<Char>();
+
+        KeynerContext context;
+        string text;
 
         public TestController()
         {
             myMethod();
+            context = new KeynerContext();
+
+        }
+
+        public string GetText(int test_id)
+        {
+            Model.Test test = context.TestSet.Where(x => test_id == x.Id).ToList()[0];
+            text = test.Text;
+            return text;
         }
 
         public void myMethod()
