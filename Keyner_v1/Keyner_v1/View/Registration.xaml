@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Registration" Height="400" Width="600"
+        Title="Registration" Height="431.373" Width="633.613"
         WindowStartupLocation="CenterScreen"
         Background="CadetBlue">
 
@@ -37,7 +37,7 @@
             <Setter Property="TextBlock.FontWeight" Value="Thin"/>
             <Setter Property="TextBlock.Foreground" Value="LightGray"/>
         </Style>
-        
+
         <Style x:Key="TBstyle1">
             <Setter Property="TextBox.FontFamily" Value="Comic Sans MS"/>
             <Setter Property="TextBox.FontSize" Value="16" />
@@ -58,7 +58,7 @@
             <Setter Property="PasswordBox.FontWeight" Value="Thin"/>
             <Setter Property="PasswordBox.Foreground" Value="DarkCyan"/>
         </Style>
-        
+
     </Window.Resources>
 
     <Grid>
