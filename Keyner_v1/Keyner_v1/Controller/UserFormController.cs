@@ -42,7 +42,7 @@ namespace Keyner_v1.Controller
             //list of all tests
             foreach(var item in db.TestSet)
             {
-                UserTest.Add(new UserTests() { TestName = "Тест №"+item.Id, BestTime = item.BestTime, Mark=SetMarkStar(0)});
+                UserTest.Add(new UserTests() { IdTest = item.Id, TestName = "Тест №"+item.Id, BestTime = item.BestTime, Mark=SetMarkStar(0)});
             }
 
             List<Model.Statistic> tmp = getUserTests();
@@ -148,6 +148,7 @@ namespace Keyner_v1.Controller
 
     class UserTests
     {
+        public int IdTest { get; set; }
         public string TestName { get; set; }
         public int BestTime { get; set; }
         public BitmapImage Mark { get; set; }
