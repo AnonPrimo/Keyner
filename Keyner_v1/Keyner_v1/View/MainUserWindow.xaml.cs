@@ -19,12 +19,12 @@ namespace Keyner_v1.View
             gamebutton.IsEnabled = false;
 
             //test
-            fillWindowFields(1);
+            //fillWindowFields(1);
         }
 
         public MainUserWindow(int id) : this()
         {
-            //fillWindowFields(id);
+            fillWindowFields(id);
         }
 
         private void fillWindowFields(int id)
@@ -131,9 +131,16 @@ namespace Keyner_v1.View
         private void settingbutton_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow sw = new SettingsWindow();
+            sw.IdUser = usercon.CurrentUser.Id;
             this.Hide();
             sw.ShowDialog();
             this.Show();
+        }
+
+        private void exitbutton_Click(object sender, RoutedEventArgs e)
+        {
+            usercon.CurrentUser = null;
+            this.Close();
         }
     }
 }

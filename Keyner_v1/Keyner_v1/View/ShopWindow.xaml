@@ -56,7 +56,7 @@
             <StackPanel Name="stackpanel2" Grid.Column="1" Grid.Row="1" Margin="20" Background="MistyRose" >
                 <TextBlock Name="txtname2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Style="{StaticResource TextBlockStyle}"/>
                 <Image Name="monsterIm2" Height="250" Margin="5"/>
-                <Button Name="MonsterButton2" Width="200" Height="50" Background="PeachPuff" FontSize="20" Style="{StaticResource TriggerStyle}"/>
+                <Button Name="MonsterButton2" Width="200" Height="50" Background="PeachPuff" FontSize="20" Style="{StaticResource TriggerStyle}" Click="buybutton_Click"/>
                 <Button Name ="mainMonsterButton" Content="Головний монстр"  Width="200" Height="50" Background="PeachPuff" Margin="5" FontSize="20" Style="{StaticResource TriggerStyle}" Click="MainMonsterButton_Click"/>
             </StackPanel>
         </Border>
@@ -80,27 +80,5 @@
                 </Button.Background>
             </Button>
         </DockPanel>
-        <!--DataGrid Name="datagrid" Grid.Column="0" Grid.Row="1" Background="AntiqueWhite" IsReadOnly="True" AutoGenerateColumns="False" SelectionUnit="FullRow" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" SelectionChanged="datagrid_SelectionChanged"  >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Монстр" Width="100"  Binding="{Binding Name}" CellStyle="{StaticResource GridTextCellStyle}" />
-                <DataGridTemplateColumn Header="">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Image}" Width="200" Height="150" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Ціна" Width="70" Binding="{Binding Price}" CellStyle="{StaticResource GridTextCellStyle}" />
-                <DataGridCheckBoxColumn Header="Куплено" Binding="{Binding IsBought}"  />
-                <DataGridTemplateColumn Header="">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Width="100" Background="Plum" Click="buybutton_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid-->
-        
     </Grid>
 </Window>

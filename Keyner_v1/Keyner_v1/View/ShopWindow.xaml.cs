@@ -14,8 +14,8 @@ namespace Keyner_v1.View
     public partial class ShopWindow : Window
     {
         public Controller.ShopWindowController shopcon;
-        int index;                                  //index of first image of monster on window
-        List<Controller.MonsterItem> monList;       //list of monsters (image, name, price etc)
+        int index;                                  //index of current monster item on window
+        List<Controller.MonsterItem> monList;       //list of monsters (monster items:image, name, price etc)
 
         public ShopWindow()
         {
@@ -108,10 +108,15 @@ namespace Keyner_v1.View
         private void fillUserInfo(string name, int money)
         {
             txt1.Text = name;
-            txt2.Text = money.ToString();
+            FillUserMoney(money);
             moneyImage.Source = new BitmapImage(new Uri("/Pictures/money_im.png", UriKind.Relative));
         }
+        private void FillUserMoney(int money)
+        {
+            txt2.Text = money.ToString();
+        }
 
+        //setting main monster (if user has few monsters available)
         private void SetMainMonsterButton()
         {
             if (monList[index].IsBought)
@@ -120,11 +125,17 @@ namespace Keyner_v1.View
                 mainMonsterButton.IsEnabled = false;
 
         }
+        private void MainMonsterButton_Click(object sender, RoutedEventArgs e)
+        {
+            shopcon.SetMainMonster(monList[index].Id_Monster);
+        }
 
         //buy monster
         private void buybutton_Click(object sender, RoutedEventArgs e)
         {
-            //int price = Int32.Parse((e.Source as Button).Content.ToString());
+            if (!MonsterButton2.IsEnabled)
+                return;
+
             int price = monList[index].Price;
             if (price > shopcon.CurrentUser.Money)
             {
@@ -136,7 +147,7 @@ namespace Keyner_v1.View
             shopcon.payForMonster(price);
             MessageBox.Show("Дякуємо за покупку!", "Thank you!", MessageBoxButton.OK, MessageBoxImage.Information);
             mainMonsterButton.IsEnabled = true;
-
+            FillUserMoney(shopcon.CurrentUser.Money);
         }
 
         //return to previous form
@@ -161,9 +172,6 @@ namespace Keyner_v1.View
             fillMosterFields();
         }
 
-        private void MainMonsterButton_Click(object sender, RoutedEventArgs e)
-        {
-            shopcon.SetMainMonster(monList[index].Id_Monster);
-        }
+        
     }
 }

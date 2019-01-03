@@ -69,6 +69,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\AutorizAndRegistr.cs" />
+    <Compile Include="Controller\SettingWinController.cs" />
     <Compile Include="Controller\ShopWindowController.cs" />
     <Compile Include="Controller\TestController.cs" />
     <Compile Include="Controller\UserFormController.cs" />

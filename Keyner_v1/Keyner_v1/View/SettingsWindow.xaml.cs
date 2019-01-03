@@ -19,22 +19,61 @@ namespace Keyner_v1.View
     /// </summary>
     public partial class SettingsWindow : Window
     {
-       
+        public int IdUser;
+        Controller.SettingWinController setcon;
+
         public SettingsWindow()
         {
             InitializeComponent();
-            panel1.Visibility = Visibility.Hidden;
+            setcon = new Controller.SettingWinController();
         }
 
-        private void passwordchange_Click(object sender, RoutedEventArgs e)
+        //confirm password change
+        private void passwordButton_Click(object sender, RoutedEventArgs e)
         {
-            passwordchange.Visibility = Visibility.Hidden;
-            panel1.Visibility = Visibility.Visible;
+            if (pass1.Password.Length == 0)
+                return;
+
+            if (!setcon.CurrentPassCheck(IdUser, pass1.Password))
+            {
+                MessageBox.Show("Старий пароль введено неправильно!");
+                Clear();
+                return;
+            }
+
+            if (pass2.Password.Length == 0 || pass3.Password.Length == 0)
+            {
+                MessageBox.Show("Новий пароль не введено!");
+                Clear();
+                return;
+            }
+
+            if(pass2.Password != pass3.Password)
+            {
+                MessageBox.Show("Паролі не співпадають!");
+                Clear();
+                return;
+            }
+            else
+            {
+                setcon.PasswordChange(IdUser, pass3.Password);
+                MessageBox.Show("Пароль був змінений.");
+                Clear();
+            }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Clear()
         {
-            
+            pass1.Password = string.Empty;
+            pass2.Password = string.Empty;
+            pass3.Password = string.Empty;
+
+        }
+
+        //return to main user window
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
         Title="MainUserWindow" Height="450" Width="800" Background="LightCyan" WindowStartupLocation="CenterScreen">
-
+    <Window.Resources>
+        <Style x:Key = "ButtonStyle" TargetType = "Button">
+            <Setter Property = "Foreground" Value = "Black" />
+            <Style.Triggers>
+                <Trigger Property = "IsMouseOver" Value = "True">
+                    <Setter Property="FontSize" Value="30"/>
+                    <Setter Property = "Foreground" Value = "Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
@@ -48,13 +59,14 @@
         <Image Name="monster" Grid.Column="1" Grid.Row="1" Margin="20"></Image>
         
         <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" >
-            <Button Name="gamebutton" Content="Go" FontSize="30" FontWeight="Bold" Width="70" Margin="5"  Background="LightGreen" HorizontalAlignment="Left" Click="gamebutton_Click"></Button>
-            <Button Name="shopbutton" Content="Shop"  Margin="40,10" Width="60" Background="Cyan" Click="shopbutton_Click"></Button>
+            <Button Name="gamebutton" Content="Go" FontSize="25" FontWeight="Bold" Width="70" Margin="5"  Background="LightGreen" HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" Click="gamebutton_Click"></Button>
+            <Button Name="shopbutton" Content="Shop"  Margin="5" Width="60" Background="Cyan" Click="shopbutton_Click"></Button>
             <Button Name="settingbutton" Margin="10" Width="50" Height="50" Click="settingbutton_Click" >
                 <Button.Background>
                     <ImageBrush ImageSource="../Pictures/setting-icon.png"></ImageBrush>
                 </Button.Background>
             </Button>
+            <Button Name="exitbutton" Content="Exit"  Margin="5,10" Width="50" Background="Teal" Click="exitbutton_Click"></Button>
         </DockPanel>
         
     </Grid>
