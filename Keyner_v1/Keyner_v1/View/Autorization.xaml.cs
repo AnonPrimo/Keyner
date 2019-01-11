@@ -57,7 +57,10 @@ namespace Keyner_v1.View
                     MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as Model.User).Id);
                     this.Hide();
                     mw.ShowDialog();
-                    this.Close();
+
+                    passBox.Clear();
+                    comboBoxGroup.SelectedItem = 0;
+                    this.Show();
                 }
         }
 
