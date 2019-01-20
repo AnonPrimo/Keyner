@@ -59,6 +59,7 @@ namespace Keyner_v1.View
         int mistakes = 0;
         bool isTestCompleted = false;
         TextRange textRange;
+
         public Test()
         {
             InitializeComponent();
@@ -70,6 +71,7 @@ namespace Keyner_v1.View
 
         public Test(int user_id, int test_id)
         {
+            InitializeComponent();
             FillForm();
             FillTextFromDatabase(test_id);
             ClearColors();
@@ -78,10 +80,10 @@ namespace Keyner_v1.View
 
         private void FillForm()
         {
+            controller = new TestController();
             startTime = new Stopwatch();
             dictionaryKeys = new List<KeyboardKey>();
             FillKeys();
-            controller = new TestController();
             TextToWrite.IsReadOnly = true;
             TextToWrite.FontFamily = new FontFamily("Courier New, monospace");
             InputText.FontFamily = new FontFamily("Courier New, monospace");
