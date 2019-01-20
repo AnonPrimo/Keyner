@@ -24,6 +24,7 @@ namespace Keyner_v1.View
         public Key key;
         string charKey;
         public Brush background;
+
         public KeyboardKey(TextBlock txt, Key k, string ch)
         {
             this.txt = txt;
@@ -31,10 +32,12 @@ namespace Keyner_v1.View
             charKey = ch;
             background = txt.Background;
         }
+
         public bool EqualsKey(Key k)
         {
             return k == key;
         }
+
         public bool EqualsString(string s)
         {
             return s == charKey;
@@ -44,6 +47,7 @@ namespace Keyner_v1.View
     /// <summary>
     /// Логика взаимодействия для Test.xaml
     /// </summary>
+
     public partial class Test : Window
     {
         Stopwatch startTime;
@@ -323,8 +327,4 @@ namespace Keyner_v1.View
             return -1;
         }
     }
-
-    
-
-
 }
