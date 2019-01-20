@@ -96,7 +96,7 @@ namespace Keyner_v1.View
             sw.shopcon.CurrentUser = usercon.CurrentUser;
             this.Hide();
             sw.ShowDialog();
-            this.Show();
+            this.ShowDialog();
 
             usercon.CurrentUser = sw.shopcon.CurrentUser;
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
@@ -115,7 +115,7 @@ namespace Keyner_v1.View
 
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
             fillGrid();
-            this.Show();
+            this.ShowDialog();
             
         }
 
@@ -138,8 +138,7 @@ namespace Keyner_v1.View
             sw.IdUser = usercon.CurrentUser.Id;
             this.Hide();
             sw.ShowDialog();
-            this.Show();
-            //usercon.CurrentUser = usercon.getUser(usercon.CurrentUser.Id);
+            this.ShowDialog();
         }
 
         private void exitbutton_Click(object sender, RoutedEventArgs e)
@@ -148,7 +147,6 @@ namespace Keyner_v1.View
                 usercon.CurrentUser = null;
 
             this.DialogResult = true;
-            //this.Close();
         }
     }
 }

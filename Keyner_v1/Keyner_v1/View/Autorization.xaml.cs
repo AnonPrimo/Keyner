@@ -37,7 +37,7 @@ namespace Keyner_v1.View
         private void Con()
         {
             keynerContext = new Model.KeynerContext();
-            //aar = new Controller.AutorizAndRegistr();
+            aar = new Controller.AutorizAndRegistr();
 
             comboBoxGroup.DisplayMemberPath = "Name";
             comboBoxGroup.SelectedValue = "Id";
@@ -52,7 +52,7 @@ namespace Keyner_v1.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (comboBoxUser.SelectedValue is Model.User)
-                if (GetPassTest())
+                if (aar.GetPass((comboBoxUser.SelectedValue as Model.User).Id, passBox.Password))
                 {
                     MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as Model.User).Id);
                     this.Hide();

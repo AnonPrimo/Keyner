@@ -10,25 +10,24 @@ namespace Keyner_v1.Controller
     class AutorizAndRegistr
     {
         KeynerContext keyCont;
-        View.Autorization autor;
+        //View.Autorization autor;
 
         public AutorizAndRegistr()
         {
-            keyCont = new KeynerContext();
-            autor = new View.Autorization();
+            //keyCont = new KeynerContext();
+            //autor = new View.Autorization();
         }
 
         public bool GetPass(int id, string p)
         {
-            foreach (var item in keyCont.UserSet)
+            using(keyCont = new KeynerContext())
             {
-                if (item.Id == id)
-                {
-                    if (item.Password == p)
-                        return true;
-                }
+                Model.User user = keyCont.UserSet.Find(id);
+                if (user.Password == p)
+                    return true;
+                else
+                    return false;
             }
-            return false;
         }
 
         public int GetIdUserTest(string name, string pass, View.Autorization viv)

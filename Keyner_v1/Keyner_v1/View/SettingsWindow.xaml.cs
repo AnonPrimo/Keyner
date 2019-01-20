@@ -60,8 +60,6 @@ namespace Keyner_v1.View
                 MessageBox.Show("Пароль був змінений.");
                 Clear();
             }
-
-            System.Diagnostics.Debug.WriteLine(setcon.GetPass(IdUser));
         }
 
         private void Clear()
