@@ -51,16 +51,19 @@ namespace Keyner_v1.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-                if (comboBoxUser.SelectedValue is Model.User)
+            if (comboBoxUser.SelectedValue is Model.User)
                 if (GetPassTest())
                 {
                     MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as Model.User).Id);
                     this.Hide();
-                    mw.ShowDialog();
-
-                    passBox.Clear();
-                    comboBoxGroup.SelectedItem = 0;
-                    this.Show();
+                    if (mw.ShowDialog() == true)
+                    {
+                        passBox.Clear();
+                        comboBoxGroup.SelectedItem = 0;
+                        this.Show();
+                    }
+                    else
+                        this.Close();
                 }
         }
 

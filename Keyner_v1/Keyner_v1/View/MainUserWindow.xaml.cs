@@ -94,11 +94,9 @@ namespace Keyner_v1.View
         {
             ShopWindow sw = new ShopWindow();
             sw.shopcon.CurrentUser = usercon.CurrentUser;
-            //this.Hide();
-            this.Visibility = Visibility.Hidden;
+            this.Hide();
             sw.ShowDialog();
-            this.Visibility = Visibility.Visible;
-            //this.Show();
+            this.Show();
 
             usercon.CurrentUser = sw.shopcon.CurrentUser;
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
@@ -109,16 +107,16 @@ namespace Keyner_v1.View
         //game window
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
-            Test test = new Test();
-            //this.Hide();
-            this.Visibility = Visibility.Hidden;
+            int id = ((Controller.UserTests)datagrid1.SelectedItem).IdTest;           
+            Test test = new Test(usercon.CurrentUser.Id, id);
+
+            this.Hide();        
             test.ShowDialog();
 
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
             fillGrid();
-            //this.Show();
-            this.Visibility = Visibility.Visible;
-
+            this.Show();
+            
         }
 
         private void datagrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -148,7 +146,9 @@ namespace Keyner_v1.View
         {
             if (usercon.CurrentUser != null)
                 usercon.CurrentUser = null;
-            this.Close();
+
+            this.DialogResult = true;
+            //this.Close();
         }
     }
 }
