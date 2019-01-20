@@ -27,6 +27,7 @@ namespace Keyner_v1.View
             fillWindowFields(id);
         }
 
+        //fill all user info
         private void fillWindowFields(int id)
         {
             usercon = getUserFormController(id);
@@ -63,6 +64,7 @@ namespace Keyner_v1.View
             }
         }
 
+        //fill user name and money
         private void fillUserInfo(string name, string money)
         {
             txt1.Text = name;
@@ -96,12 +98,12 @@ namespace Keyner_v1.View
             sw.shopcon.CurrentUser = usercon.CurrentUser;
             this.Hide();
             sw.ShowDialog();
-            this.Show();
-
+            
             usercon.CurrentUser = sw.shopcon.CurrentUser;
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
             fillImage();
             fillGrid();
+            this.ShowDialog();
         }
 
         //game window
@@ -115,7 +117,7 @@ namespace Keyner_v1.View
 
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
             fillGrid();
-            this.Show();
+            this.ShowDialog();
             
         }
 
@@ -138,8 +140,7 @@ namespace Keyner_v1.View
             sw.IdUser = usercon.CurrentUser.Id;
             this.Hide();
             sw.ShowDialog();
-            this.Show();
-            //usercon.CurrentUser = usercon.getUser(usercon.CurrentUser.Id);
+            this.ShowDialog();
         }
 
         private void exitbutton_Click(object sender, RoutedEventArgs e)
@@ -148,7 +149,6 @@ namespace Keyner_v1.View
                 usercon.CurrentUser = null;
 
             this.DialogResult = true;
-            //this.Close();
         }
     }
 }

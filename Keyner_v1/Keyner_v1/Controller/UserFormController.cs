@@ -46,6 +46,7 @@ namespace Keyner_v1.Controller
             }
 
             List<Model.Statistic> tmp = getUserTests();
+            //filling list of user tests
             for(int i = 0; i < tmp.Count; i++)
             {
                 UserTest[i].Mark = SetMarkStar(tmp[i].Mark);
@@ -55,6 +56,7 @@ namespace Keyner_v1.Controller
            }
         }
 
+        //number of all tests in db
         public int getTestCount()
         {
             return db.TestSet.Count();
@@ -102,7 +104,9 @@ namespace Keyner_v1.Controller
         private byte[] getMonsterImageByteArray()
         {
             var list = db.MonsterLevelSet.Where(l=>l.Id_Monster == CurrentUser.Id_Monster).ToList();
-            return list[0].NeutralImage;
+            if(list.Count > 0)
+                return list[0].NeutralImage;
+            return null;
         }
 
         //test
@@ -125,7 +129,7 @@ namespace Keyner_v1.Controller
             return true;
         }
 
-        public class ImageConvert
+        /*public class ImageConvert
         {
             public static BitmapImage Convert(byte[] array)
             {
@@ -143,6 +147,26 @@ namespace Keyner_v1.Controller
                 image.Freeze();
                 return image;
             }
+        }*/
+    }
+
+    public class ImageConvert
+    {
+        public static BitmapImage Convert(byte[] array)
+        {
+            BitmapImage image = new BitmapImage();
+            using (var mem = new MemoryStream(array))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
         }
     }
 

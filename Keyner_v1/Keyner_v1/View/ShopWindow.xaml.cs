@@ -77,7 +77,7 @@ namespace Keyner_v1.View
         private void fillMonsterStackpnl(Controller.MonsterItem monster, StackPanel s)
         {
             BitmapImage bitIm = new BitmapImage();
-            bitIm = Controller.UserFormController.ImageConvert.Convert(monster.Image);
+            bitIm = Controller.ImageConvert.Convert(monster.Image);
             SetMainMonsterButton();
             foreach (var uielement in s.Children)
             {
