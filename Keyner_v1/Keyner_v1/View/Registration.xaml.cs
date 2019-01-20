@@ -20,19 +20,15 @@ namespace Keyner_v1.View
     public partial class Registration : Window
     {
         Controller.AutorizAndRegistr aar;
-        Autorization autor;
-
-        public Registration(Autorization a)
+      
+        public Registration()
         {
             InitializeComponent();
             aar = new Controller.AutorizAndRegistr();
 
-            autor = new Autorization();
-            autor = a;
-
             comboBoxGroup.DisplayMemberPath = "Name";
             comboBoxGroup.SelectedValue = "Id";
-            comboBoxGroup.ItemsSource = autor.keynerContext.GroupSet.ToList();
+            comboBoxGroup.ItemsSource = aar.GetGroupList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

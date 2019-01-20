@@ -27,6 +27,7 @@ namespace Keyner_v1.View
             fillWindowFields(id);
         }
 
+        //fill all user info
         private void fillWindowFields(int id)
         {
             usercon = getUserFormController(id);
@@ -63,6 +64,7 @@ namespace Keyner_v1.View
             }
         }
 
+        //fill user name and money
         private void fillUserInfo(string name, string money)
         {
             txt1.Text = name;
@@ -96,12 +98,12 @@ namespace Keyner_v1.View
             sw.shopcon.CurrentUser = usercon.CurrentUser;
             this.Hide();
             sw.ShowDialog();
-            this.ShowDialog();
-
+            
             usercon.CurrentUser = sw.shopcon.CurrentUser;
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
             fillImage();
             fillGrid();
+            this.ShowDialog();
         }
 
         //game window

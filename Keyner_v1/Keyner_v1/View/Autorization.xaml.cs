@@ -41,7 +41,7 @@ namespace Keyner_v1.View
 
             comboBoxGroup.DisplayMemberPath = "Name";
             comboBoxGroup.SelectedValue = "Id";
-            comboBoxGroup.ItemsSource = keynerContext.GroupSet.ToList();
+            comboBoxGroup.ItemsSource = aar.GetGroupList();
             
 
             //comboBoxUser.DataContext = keynerContext.UserSet.ToList();
@@ -69,10 +69,10 @@ namespace Keyner_v1.View
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Registration r = new Registration(this);
+            Registration r = new Registration();
             this.Hide();
             r.ShowDialog();
-            this.Close();
+            this.Show();
         }
 
         public void ConTest()
