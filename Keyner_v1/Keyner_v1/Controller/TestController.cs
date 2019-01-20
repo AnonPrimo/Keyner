@@ -42,7 +42,7 @@ namespace Keyner_v1.Controller
             {
 
                 CurrentStr = item.Text.ToString();
-                //RepeatCount = 3;
+                RepeatCount = 3;
                 break;
             }
 
@@ -54,13 +54,13 @@ namespace Keyner_v1.Controller
                 }
             }*/
 
-            //for (int i = 0; i < RepeatCount; i++)
-            //{
+            for (int i = 0; i < RepeatCount; i++)
+            {
                 for (int j = 0; j < CurrentStr.Length; j++)
                 {
                     collection.Add(CurrentStr[j]);
                 }
-            //}
+            }
         }
 
         //public List<Char> GetCollection()
