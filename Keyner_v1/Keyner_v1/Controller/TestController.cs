@@ -31,6 +31,13 @@ namespace Keyner_v1.Controller
         {
             Model.Test test = context.TestSet.Where(x => test_id == x.Id).ToList()[0];
             text = test.Text;
+            //for (int i = 0; i < RepeatCount; i++)
+            //{
+                for (int j = 0; j < text.Length; j++)
+                {
+                    collection.Add(CurrentStr[j]);
+                }
+            //}
             return text;
         }
 

@@ -60,6 +60,8 @@ namespace Keyner_v1.View
         bool isTestCompleted = false;
         TextRange textRange;
 
+        string str;
+
         public Test()
         {
             InitializeComponent();
@@ -104,7 +106,7 @@ namespace Keyner_v1.View
         {
             int addText = controller.RepeatCount;
 
-            string str = controller.CurrentStr;
+            str = controller.CurrentStr;
             FlowDocument flowDoc = new FlowDocument();
             while (addText > 0)
             {
@@ -118,15 +120,25 @@ namespace Keyner_v1.View
         /// <summary>
         /// Gets the text to write from database
         /// </summary>
+        /// 
         private void FillTextFromDatabase(int id_test)
         {
-            string str = controller.GetText(id_test);
-            TextToWrite.Document.Blocks.Add(new Paragraph(new Run(str)));
+            //string str = controller.GetText(id_test);
+            //TextToWrite.Document.Blocks.Add(new Paragraph(new Run(str)));
+            //position = TextToWrite.Document.ContentStart.GetPositionAtOffset(0);
+
+
+            str = controller.GetText(id_test);
+            FlowDocument flowDoc = new FlowDocument();
+            flowDoc.Blocks.Add(new Paragraph(new Run(str)));
+            TextToWrite.Document = flowDoc;
             position = TextToWrite.Document.ContentStart.GetPositionAtOffset(0);
         }
+
         /// <summary>
         /// fills keys dictionary
         /// </summary>
+        /// 
         private void FillKeys()
         {
             dictionaryKeys.Add(new KeyboardKey(txt_a, Key.A, "ф"));
@@ -229,7 +241,7 @@ namespace Keyner_v1.View
             updateTime.Stop();
             string avgSpeed = Math.Round(InputText.Text.Length / (TimeSpentMinutes()), 2).ToString();
             string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)((InputText.Text.Length + mistakes))) * 100), 2).ToString();
-            string toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: \nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+            string toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
             MessageBox.Show(toShow);
             this.Close();
         }
@@ -287,9 +299,14 @@ namespace Keyner_v1.View
             foreach (KeyboardKey k in dictionaryKeys)
             {
                 k.txt.Background = k.background;
+
+
+                if (TestController.collection.Count != 0)
+                    dictionaryKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
             }
-            if (TestController.collection.Count != 0)
-                dictionaryKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+
+            //if (TestController.collection.Count != 0)
+            //    dictionaryKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
 
         }
         /// <summary>
