@@ -7,7 +7,7 @@ using Keyner_v1.Model;
 
 namespace Keyner_v1.Controller
 {
-    
+
 
     class TestController
     {
@@ -16,12 +16,14 @@ namespace Keyner_v1.Controller
         public static List<Char> collection = new List<Char>();
 
         KeynerContext context;
+
         string text;
 
         public TestController()
         {
-            myMethod();
+
             context = new KeynerContext();
+            myMethod();
 
         }
 
@@ -34,16 +36,31 @@ namespace Keyner_v1.Controller
 
         public void myMethod()
         {
-            CurrentStr = "а а а о о";
-            RepeatCount = 3;
+            //CurrentStr = "а а а о о";
+            //RepeatCount = 3;
+            foreach (var item in context.TestSet)
+            {
 
-            for (int i = 0; i < RepeatCount; i++)
+                CurrentStr = item.Text.ToString();
+                //RepeatCount = 3;
+                break;
+            }
+
+            /*for (int i = 0; i < RepeatCount; i++)
             {
                 for (int j = 0; j < CurrentStr.Length; j++)
                 {
                     collection.Add(CurrentStr[j]);
                 }
-            }
+            }*/
+
+            //for (int i = 0; i < RepeatCount; i++)
+            //{
+                for (int j = 0; j < CurrentStr.Length; j++)
+                {
+                    collection.Add(CurrentStr[j]);
+                }
+            //}
         }
 
         //public List<Char> GetCollection()
