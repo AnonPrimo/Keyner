@@ -147,6 +147,8 @@ namespace Keyner_v1.View
             shopcon.payForMonster(price);
             MessageBox.Show("Дякуємо за покупку!", "Thank you!", MessageBoxButton.OK, MessageBoxImage.Information);
             mainMonsterButton.IsEnabled = true;
+            MonsterButton2.Content = "Куплено!";
+            MonsterButton2.IsEnabled = false;
             FillUserMoney(shopcon.CurrentUser.Money);
         }
 

@@ -22,6 +22,15 @@ namespace Keyner_v1.Controller
             }
         }
 
+        public string GetPass(int id)
+        {
+            using (context = new Model.KeynerContext())
+            {
+                Model.User user = context.UserSet.Find(id);
+                return user.Password;
+            }
+        }
+
         public void PasswordChange(int idUser, string newpass)
         {
             using (context = new Model.KeynerContext())

@@ -40,7 +40,7 @@ namespace Keyner_v1.View
 
         private Controller.UserFormController getUserFormController(int id)
         {
-           return new Controller.UserFormController(id);
+            return new Controller.UserFormController(id);
         }
 
         private void fillGrid()
@@ -53,7 +53,7 @@ namespace Keyner_v1.View
         //index of current test
         private void CurrentTest()
         {
-            for(int i = 0; i < usercon.UserTest.Count;i++)
+            for (int i = 0; i < usercon.UserTest.Count; i++)
             {
                 if (!usercon.UserTest[i].IsPassed)
                 {
@@ -76,7 +76,7 @@ namespace Keyner_v1.View
         {
             txt3.FontSize = 15;
             if (indexOfCurrentTest <= count)
-                txt3.Text = "Наступний тест №: " + (indexOfCurrentTest+1);
+                txt3.Text = "Наступний тест №: " + (indexOfCurrentTest + 1);
             else
                 txt3.Text = "Ви пройшли всі тести!!!";
         }
@@ -94,9 +94,11 @@ namespace Keyner_v1.View
         {
             ShopWindow sw = new ShopWindow();
             sw.shopcon.CurrentUser = usercon.CurrentUser;
-            this.Hide();
+            //this.Hide();
+            this.Visibility = Visibility.Hidden;
             sw.ShowDialog();
-            this.Show();
+            this.Visibility = Visibility.Visible;
+            //this.Show();
 
             usercon.CurrentUser = sw.shopcon.CurrentUser;
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
@@ -108,12 +110,15 @@ namespace Keyner_v1.View
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
             Test test = new Test();
-            this.Hide();
+            //this.Hide();
+            this.Visibility = Visibility.Hidden;
             test.ShowDialog();
 
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
             fillGrid();
-            this.Show();
+            //this.Show();
+            this.Visibility = Visibility.Visible;
+
         }
 
         private void datagrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -121,13 +126,14 @@ namespace Keyner_v1.View
             try
             {
                 if (((Controller.UserTests)datagrid1.SelectedItem).IsPassed || (Controller.UserTests)datagrid1.SelectedItem == usercon.UserTest[indexOfCurrentTest])
-                gamebutton.IsEnabled = true;
-            else
-                gamebutton.IsEnabled = false;
+                    gamebutton.IsEnabled = true;
+                else
+                    gamebutton.IsEnabled = false;
             }
             catch { }
         }
 
+        //setting window
         private void settingbutton_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow sw = new SettingsWindow();
@@ -135,11 +141,13 @@ namespace Keyner_v1.View
             this.Hide();
             sw.ShowDialog();
             this.Show();
+            //usercon.CurrentUser = usercon.getUser(usercon.CurrentUser.Id);
         }
 
         private void exitbutton_Click(object sender, RoutedEventArgs e)
         {
-            usercon.CurrentUser = null;
+            if (usercon.CurrentUser != null)
+                usercon.CurrentUser = null;
             this.Close();
         }
     }
