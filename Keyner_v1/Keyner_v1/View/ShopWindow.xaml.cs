@@ -24,11 +24,25 @@ namespace Keyner_v1.View
             index = 0;
         }
 
+        //async filling the window
+        private async void FillMonsterList()
+        {
+            Task t = Task.Run(() =>
+            monList = shopcon.getMonsterItems());
+            t.Wait();
+            await Task.Run(() => fillMosterFields());
+             
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            monList = shopcon.getMonsterItems();
             fillUserInfo(shopcon.CurrentUser.Name, shopcon.CurrentUser.Money);
-            fillMosterFields();
+
+            //monList = shopcon.getMonsterItems();
+            //async method
+            FillMonsterList();
+
+            //fillMosterFields();
         }
 
         //filling monster data
@@ -60,48 +74,53 @@ namespace Keyner_v1.View
 
         private void ClearStackpnl(StackPanel stk)
         {
-            foreach (var uielement in stk.Children)
+            this.Dispatcher.Invoke(new Action(() =>
             {
-                if (uielement is TextBlock)
-                    (uielement as TextBlock).Text = string.Empty;
-                if (uielement is Image)
-                    (uielement as Image).Source = null;
-                if (uielement is Button)
+                foreach (var uielement in stk.Children)
                 {
-                      (uielement as Button).Content = null;
+                    if (uielement is TextBlock)
+                        (uielement as TextBlock).Text = string.Empty;
+                    if (uielement is Image)
+                        (uielement as Image).Source = null;
+                    if (uielement is Button)
+                    {
+                        (uielement as Button).Content = null;
+                    }
                 }
-            }
+            }));
         }
 
         //filling monster shop
         private void fillMonsterStackpnl(Controller.MonsterItem monster, StackPanel s)
         {
-            BitmapImage bitIm = new BitmapImage();
-            bitIm = Controller.ImageConvert.Convert(monster.Image);
-            SetMainMonsterButton();
-            foreach (var uielement in s.Children)
+            this.Dispatcher.Invoke(new Action(() =>
             {
-                if(uielement is TextBlock)
-                    (uielement as TextBlock).Text = monster.Name;
-                if (uielement is Image)
-                    (uielement as Image).Source = bitIm;
-                if (uielement is Button)
+                BitmapImage bitIm = new BitmapImage();
+                bitIm = Controller.ImageConvert.Convert(monster.Image);
+                SetMainMonsterButton();
+                foreach (var uielement in s.Children)
                 {
-                    if (monster.IsBought)
+                    if (uielement is TextBlock)
+                        (uielement as TextBlock).Text = monster.Name;
+                    if (uielement is Image)
+                        (uielement as Image).Source = bitIm;
+                    if (uielement is Button)
                     {
-                        (uielement as Button).Content = "Куплено!";
-                        (uielement as Button).IsEnabled = false;
-                        return;
-                    }
-                    else
-                    {
-                        (uielement as Button).Content = monster.Price;
-                        (uielement as Button).IsEnabled = true;
-                        return;
+                        if (monster.IsBought)
+                        {
+                            (uielement as Button).Content = "Куплено!";
+                            (uielement as Button).IsEnabled = false;
+                            return;
+                        }
+                        else
+                        {
+                            (uielement as Button).Content = monster.Price;
+                            (uielement as Button).IsEnabled = true;
+                            return;
+                        }
                     }
                 }
-            }
-
+            }));
         }
 
         //filling user data
@@ -119,11 +138,13 @@ namespace Keyner_v1.View
         //setting main monster (if user has few monsters available)
         private void SetMainMonsterButton()
         {
-            if (monList[index].IsBought)
-                mainMonsterButton.IsEnabled = true;
-            else
-                mainMonsterButton.IsEnabled = false;
-
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                if (monList[index].IsBought)
+                    mainMonsterButton.IsEnabled = true;
+                else
+                    mainMonsterButton.IsEnabled = false;
+            }));
         }
         private void MainMonsterButton_Click(object sender, RoutedEventArgs e)
         {

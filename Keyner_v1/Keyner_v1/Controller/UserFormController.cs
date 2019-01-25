@@ -56,6 +56,11 @@ namespace Keyner_v1.Controller
            }
         }
 
+        public void UpdateUserTests()
+        {
+            fillUserTests();
+        }
+
         //number of all tests in db
         public int getTestCount()
         {
@@ -128,26 +133,6 @@ namespace Keyner_v1.Controller
             image = ImageConvert.Convert(imageData);
             return true;
         }
-
-        /*public class ImageConvert
-        {
-            public static BitmapImage Convert(byte[] array)
-            {
-                BitmapImage image = new BitmapImage();
-                using (var mem = new MemoryStream(array))
-                {
-                    mem.Position = 0;
-                    image.BeginInit();
-                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.UriSource = null;
-                    image.StreamSource = mem;
-                    image.EndInit();
-                }
-                image.Freeze();
-                return image;
-            }
-        }*/
     }
 
     public class ImageConvert
