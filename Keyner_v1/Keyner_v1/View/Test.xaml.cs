@@ -52,20 +52,22 @@ namespace Keyner_v1.View
     {
         Stopwatch startTime;
         DispatcherTimer updateTime;
-        List<KeyboardKey> dictionaryKeys;
+        List<KeyboardKey> listKeys;
         TestController controller;
         TextPointer position;
         string current;
         int mistakes = 0;
         bool isTestCompleted = false;
         TextRange textRange;
+        int IdUser;
 
         string str;
+        bool IsTestNew = false;
 
         public Test()
         {
             InitializeComponent();
-            FillForm();
+            FillForm(1);
             FillText();
             ClearColors();
             label_error.Visibility = Visibility.Collapsed;
@@ -74,17 +76,21 @@ namespace Keyner_v1.View
         public Test(int user_id, int test_id)
         {
             InitializeComponent();
-            FillForm();
-            FillTextFromDatabase(test_id);
+            FillForm(test_id);
+            FillTextFromDatabase();
             ClearColors();
             label_error.Visibility = Visibility.Collapsed;
+            IdUser = user_id;
+
+            //IsTestNew = newTest;
+            IsTestNew = false;
         }
 
-        private void FillForm()
+        private void FillForm(int test_id)
         {
-            controller = new TestController();
+            controller = new TestController(test_id);
             startTime = new Stopwatch();
-            dictionaryKeys = new List<KeyboardKey>();
+            listKeys = new List<KeyboardKey>();
             FillKeys();
             TextToWrite.IsReadOnly = true;
             TextToWrite.FontFamily = new FontFamily("Courier New, monospace");
@@ -121,14 +127,14 @@ namespace Keyner_v1.View
         /// Gets the text to write from database
         /// </summary>
         /// 
-        private void FillTextFromDatabase(int id_test)
+        private void FillTextFromDatabase()
         {
             //string str = controller.GetText(id_test);
             //TextToWrite.Document.Blocks.Add(new Paragraph(new Run(str)));
             //position = TextToWrite.Document.ContentStart.GetPositionAtOffset(0);
 
 
-            str = controller.GetText(id_test);
+            str = controller.GetText();
             FlowDocument flowDoc = new FlowDocument();
             flowDoc.Blocks.Add(new Paragraph(new Run(str)));
             TextToWrite.Document = flowDoc;
@@ -141,54 +147,54 @@ namespace Keyner_v1.View
         /// 
         private void FillKeys()
         {
-            dictionaryKeys.Add(new KeyboardKey(txt_a, Key.A, "ф"));
-            dictionaryKeys.Add(new KeyboardKey(txt_b, Key.B, "и"));
-            dictionaryKeys.Add(new KeyboardKey(txt_c, Key.C, "с"));
-            dictionaryKeys.Add(new KeyboardKey(txt_d, Key.D, "в"));
-            dictionaryKeys.Add(new KeyboardKey(txt_e, Key.E, "у"));
-            dictionaryKeys.Add(new KeyboardKey(txt_f, Key.F, "а"));
-            dictionaryKeys.Add(new KeyboardKey(txt_g, Key.G, "п"));
-            dictionaryKeys.Add(new KeyboardKey(txt_h, Key.H, "р"));
-            dictionaryKeys.Add(new KeyboardKey(txt_i, Key.I, "ш"));
-            dictionaryKeys.Add(new KeyboardKey(txt_j, Key.J, "о"));
-            dictionaryKeys.Add(new KeyboardKey(txt_k, Key.K, "л"));
-            dictionaryKeys.Add(new KeyboardKey(txt_l, Key.L, "д"));
-            dictionaryKeys.Add(new KeyboardKey(txt_m, Key.M, "ь"));
-            dictionaryKeys.Add(new KeyboardKey(txt_n, Key.N, "т"));
-            dictionaryKeys.Add(new KeyboardKey(txt_o, Key.O, "щ"));
-            dictionaryKeys.Add(new KeyboardKey(txt_p, Key.P, "з"));
-            dictionaryKeys.Add(new KeyboardKey(txt_q, Key.Q, "й"));
-            dictionaryKeys.Add(new KeyboardKey(txt_r, Key.R, "к"));
-            dictionaryKeys.Add(new KeyboardKey(txt_s, Key.S, "і"));
-            dictionaryKeys.Add(new KeyboardKey(txt_t, Key.T, "е"));
-            dictionaryKeys.Add(new KeyboardKey(txt_u, Key.U, "г"));
-            dictionaryKeys.Add(new KeyboardKey(txt_v, Key.V, "м"));
-            dictionaryKeys.Add(new KeyboardKey(txt_w, Key.W, "ц"));
-            dictionaryKeys.Add(new KeyboardKey(txt_x, Key.X, "ч"));
-            dictionaryKeys.Add(new KeyboardKey(txt_y, Key.Y, "н"));
-            dictionaryKeys.Add(new KeyboardKey(txt_z, Key.Z, "я"));
-            dictionaryKeys.Add(new KeyboardKey(txt_apostrof, Key.Oem3, "'"));
-            dictionaryKeys.Add(new KeyboardKey(txt_minus, Key.OemMinus, "-"));
-            dictionaryKeys.Add(new KeyboardKey(txt_eql, Key.OemPlus, "="));
-            dictionaryKeys.Add(new KeyboardKey(txt_backspace, Key.Back, "bcksp"));
-            dictionaryKeys.Add(new KeyboardKey(txt_tab, Key.Tab, "tab"));
-            dictionaryKeys.Add(new KeyboardKey(txt_sqrBracketLeft, Key.OemOpenBrackets, "х"));
-            dictionaryKeys.Add(new KeyboardKey(txt_sqrBracketRight, Key.Oem6, "ї"));
-            dictionaryKeys.Add(new KeyboardKey(txt_caps, Key.Capital, "caps"));
-            dictionaryKeys.Add(new KeyboardKey(txt_semikolon, Key.Oem1, "ж"));
-            dictionaryKeys.Add(new KeyboardKey(txt_quotes, Key.OemQuotes, "є"));
-            dictionaryKeys.Add(new KeyboardKey(txt_enter, Key.Return, "enter"));
-            dictionaryKeys.Add(new KeyboardKey(txt_shift, Key.LeftShift, "lShift"));
-            dictionaryKeys.Add(new KeyboardKey(txt_coma, Key.OemComma, "б"));
-            dictionaryKeys.Add(new KeyboardKey(txt_slash, Key.OemQuestion, "."));
-            dictionaryKeys.Add(new KeyboardKey(txt_dot, Key.OemPeriod, "ю"));
-            dictionaryKeys.Add(new KeyboardKey(txt_rightShift, Key.RightShift, "rShift"));
-            dictionaryKeys.Add(new KeyboardKey(txt_leftCtrl, Key.LeftCtrl, "lCtrl"));
-            dictionaryKeys.Add(new KeyboardKey(txt_leftAlt, Key.LeftAlt, "lAlt"));
-            dictionaryKeys.Add(new KeyboardKey(txt_Space, Key.Space, " "));
-            dictionaryKeys.Add(new KeyboardKey(txt_rightAlt, Key.RightAlt, "rAlt"));
-            dictionaryKeys.Add(new KeyboardKey(txt_rightPKM, Key.Apps, "apps"));
-            dictionaryKeys.Add(new KeyboardKey(txt_rightCtrl, Key.RightCtrl, "rCtrl"));
+            listKeys.Add(new KeyboardKey(txt_a, Key.A, "ф"));
+            listKeys.Add(new KeyboardKey(txt_b, Key.B, "и"));
+            listKeys.Add(new KeyboardKey(txt_c, Key.C, "с"));
+            listKeys.Add(new KeyboardKey(txt_d, Key.D, "в"));
+            listKeys.Add(new KeyboardKey(txt_e, Key.E, "у"));
+            listKeys.Add(new KeyboardKey(txt_f, Key.F, "а"));
+            listKeys.Add(new KeyboardKey(txt_g, Key.G, "п"));
+            listKeys.Add(new KeyboardKey(txt_h, Key.H, "р"));
+            listKeys.Add(new KeyboardKey(txt_i, Key.I, "ш"));
+            listKeys.Add(new KeyboardKey(txt_j, Key.J, "о"));
+            listKeys.Add(new KeyboardKey(txt_k, Key.K, "л"));
+            listKeys.Add(new KeyboardKey(txt_l, Key.L, "д"));
+            listKeys.Add(new KeyboardKey(txt_m, Key.M, "ь"));
+            listKeys.Add(new KeyboardKey(txt_n, Key.N, "т"));
+            listKeys.Add(new KeyboardKey(txt_o, Key.O, "щ"));
+            listKeys.Add(new KeyboardKey(txt_p, Key.P, "з"));
+            listKeys.Add(new KeyboardKey(txt_q, Key.Q, "й"));
+            listKeys.Add(new KeyboardKey(txt_r, Key.R, "к"));
+            listKeys.Add(new KeyboardKey(txt_s, Key.S, "і"));
+            listKeys.Add(new KeyboardKey(txt_t, Key.T, "е"));
+            listKeys.Add(new KeyboardKey(txt_u, Key.U, "г"));
+            listKeys.Add(new KeyboardKey(txt_v, Key.V, "м"));
+            listKeys.Add(new KeyboardKey(txt_w, Key.W, "ц"));
+            listKeys.Add(new KeyboardKey(txt_x, Key.X, "ч"));
+            listKeys.Add(new KeyboardKey(txt_y, Key.Y, "н"));
+            listKeys.Add(new KeyboardKey(txt_z, Key.Z, "я"));
+            listKeys.Add(new KeyboardKey(txt_apostrof, Key.Oem3, "'"));
+            listKeys.Add(new KeyboardKey(txt_minus, Key.OemMinus, "-"));
+            listKeys.Add(new KeyboardKey(txt_eql, Key.OemPlus, "="));
+            listKeys.Add(new KeyboardKey(txt_backspace, Key.Back, "bcksp"));
+            listKeys.Add(new KeyboardKey(txt_tab, Key.Tab, "tab"));
+            listKeys.Add(new KeyboardKey(txt_sqrBracketLeft, Key.OemOpenBrackets, "х"));
+            listKeys.Add(new KeyboardKey(txt_sqrBracketRight, Key.Oem6, "ї"));
+            listKeys.Add(new KeyboardKey(txt_caps, Key.Capital, "caps"));
+            listKeys.Add(new KeyboardKey(txt_semikolon, Key.Oem1, "ж"));
+            listKeys.Add(new KeyboardKey(txt_quotes, Key.OemQuotes, "є"));
+            listKeys.Add(new KeyboardKey(txt_enter, Key.Return, "\n"));
+            listKeys.Add(new KeyboardKey(txt_shift, Key.LeftShift, "lShift"));
+            listKeys.Add(new KeyboardKey(txt_coma, Key.OemComma, "б"));
+            listKeys.Add(new KeyboardKey(txt_slash, Key.OemQuestion, "."));
+            listKeys.Add(new KeyboardKey(txt_dot, Key.OemPeriod, "ю"));
+            listKeys.Add(new KeyboardKey(txt_rightShift, Key.RightShift, "rShift"));
+            listKeys.Add(new KeyboardKey(txt_leftCtrl, Key.LeftCtrl, "lCtrl"));
+            listKeys.Add(new KeyboardKey(txt_leftAlt, Key.LeftAlt, "lAlt"));
+            listKeys.Add(new KeyboardKey(txt_Space, Key.Space, " "));
+            listKeys.Add(new KeyboardKey(txt_rightAlt, Key.RightAlt, "rAlt"));
+            listKeys.Add(new KeyboardKey(txt_rightPKM, Key.Apps, "apps"));
+            listKeys.Add(new KeyboardKey(txt_rightCtrl, Key.RightCtrl, "rCtrl"));
         }
 
         /// <summary>
@@ -207,7 +213,7 @@ namespace Keyner_v1.View
                 label_error.Visibility = Visibility.Collapsed;
                 ClearColors();
                 Key pressedKey = e.Key;
-                if (pressedKey == dictionaryKeys[FindByChar(TestController.collection[0].ToString())].key)
+                if (pressedKey == listKeys[FindByChar(TestController.collection[0].ToString())].key)
                 {
                     CorrectSymbol();
                     TestController.collection.RemoveAt(0);
@@ -218,32 +224,41 @@ namespace Keyner_v1.View
                 {
                     int i = FindByKey(pressedKey);
                     if (i >= 0)
-                        dictionaryKeys[i].txt.Background = Brushes.Red;
+                        listKeys[i].txt.Background = Brushes.Red;
                     label_error.Visibility = Visibility.Visible;
                     mistakes++;
                     MistakesLabel.Content = "Кількість помилок: " + mistakes;
-                    if (mistakes > 3) EndTest();
                 }
             }
             else
             {
                 updateTime.Stop();
+                bool is_passed = false;
                 string avgSpeed = Math.Round(InputText.Text.Length / (TimeSpentMinutes()), 2).ToString();
                 string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)((InputText.Text.Length + mistakes))) * 100), 2).ToString();
-                string toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: \nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+                string toShow;
+                if (mistakes > controller.currentTest.CountMistakes)
+                    toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+                else
+                {
+                    toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: \nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+                    is_passed = true;
+                }
                 MessageBox.Show(toShow);
+
+                if (IsTestNew)
+                    controller.FillNewStatistic(IdUser, 56, is_passed, mistakes, GetMark(is_passed)); ///time!!!!! in controller!!!!
+                else
+                    controller.UpdateStatisctic(56, mistakes, GetMark(is_passed));
                 this.Close();
             }
         }
 
-        private void EndTest()
+        private int GetMark(bool is_passed)
         {
-            updateTime.Stop();
-            string avgSpeed = Math.Round(InputText.Text.Length / (TimeSpentMinutes()), 2).ToString();
-            string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)((InputText.Text.Length + mistakes))) * 100), 2).ToString();
-            string toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
-            MessageBox.Show(toShow);
-            this.Close();
+            if (is_passed)
+                return 2;
+            return 0;
         }
 
         private string TimeSpent()
@@ -296,17 +311,17 @@ namespace Keyner_v1.View
 
         private void ClearColors()
         {
-            foreach (KeyboardKey k in dictionaryKeys)
+            foreach (KeyboardKey k in listKeys)
             {
                 k.txt.Background = k.background;
 
-
+                
                 if (TestController.collection.Count != 0)
-                    dictionaryKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+                    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
             }
 
             //if (TestController.collection.Count != 0)
-            //    dictionaryKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+            //    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
 
         }
         /// <summary>
@@ -325,23 +340,23 @@ namespace Keyner_v1.View
 
 
         /// <summary>
-        /// finds a needed dictionaryKeys index by Key
+        /// finds a needed listKeys index by Key
         /// </summary>
         /// <param name="k"></param>
         private int FindByKey(Key k)
         {
-            for (int i = 0; i < dictionaryKeys.Count; i++)
+            for (int i = 0; i < listKeys.Count; i++)
             {
-                if (dictionaryKeys[i].EqualsKey(k)) return i;
+                if (listKeys[i].EqualsKey(k)) return i;
             }
             return -1;
         }
 
         private int FindByChar(string k)
         {
-            for (int i = 0; i < dictionaryKeys.Count; i++)
+            for (int i = 0; i < listKeys.Count; i++)
             {
-                if (dictionaryKeys[i].EqualsString(k.ToLower())) return i;
+                if (listKeys[i].EqualsString(k.ToLower())) return i;
             }
             return -1;
         }
