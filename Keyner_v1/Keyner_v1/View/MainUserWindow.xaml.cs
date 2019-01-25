@@ -46,9 +46,9 @@ namespace Keyner_v1.View
 
         private void fillGrid()
         {
+            usercon.UpdateUserTests();
             datagrid1.ItemsSource = usercon.UserTest;
             datagrid1.FontSize = 15;
-
         }
 
         //index of current test
