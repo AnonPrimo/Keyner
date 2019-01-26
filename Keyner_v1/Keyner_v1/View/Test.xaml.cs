@@ -62,7 +62,7 @@ namespace Keyner_v1.View
         int IdUser;
 
         string str;
-        bool IsTestOld;
+        bool IsTestNew = false;
 
         public Test()
         {
@@ -73,7 +73,7 @@ namespace Keyner_v1.View
             label_error.Visibility = Visibility.Collapsed;
         }
 
-        public Test(int user_id, int test_id, bool oldTest)
+        public Test(int user_id, int test_id, bool newTest)
         {
             InitializeComponent();
             FillForm(test_id);
@@ -82,7 +82,7 @@ namespace Keyner_v1.View
             label_error.Visibility = Visibility.Collapsed;
             IdUser = user_id;
 
-            IsTestOld = oldTest;
+            IsTestNew = newTest;
         }
 
         private void FillForm(int test_id)
@@ -200,7 +200,7 @@ namespace Keyner_v1.View
         /// checks is pressed the correct button
         /// </summary>
         private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
+         {
             if (!updateTime.IsEnabled)
             {
                 startTime.Start();
@@ -245,7 +245,7 @@ namespace Keyner_v1.View
                 }
                 MessageBox.Show(toShow);
                 int time = startTime.Elapsed.Seconds;
-                if (!IsTestOld)
+                if (!IsTestNew)
                     controller.FillNewStatistic(IdUser, time, is_passed, mistakes, GetMark(is_passed)); ///time!!!!! in controller!!!! + mark
                 else
                     controller.UpdateStatisctic(IdUser, time, mistakes, GetMark(is_passed));

@@ -110,8 +110,8 @@ namespace Keyner_v1.View
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
             int id = ((Controller.UserTests)datagrid1.SelectedItem).IdTest;
-            bool isOld = ((Controller.UserTests)datagrid1.SelectedItem).IsPassed;
-            Test test = new Test(usercon.CurrentUser.Id, id, isOld);
+            bool isNew = ((Controller.UserTests)datagrid1.SelectedItem).IsPassed;
+            Test test = new Test(usercon.CurrentUser.Id, id, isNew);
 
             this.Hide();        
             test.ShowDialog();
