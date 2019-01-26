@@ -232,6 +232,8 @@ namespace Keyner_v1.View
             else
             {
                 updateTime.Stop();
+                startTime.Stop();
+
                 bool is_passed = false;
                 string avgSpeed = Math.Round(InputText.Text.Length / (TimeSpentMinutes()), 2).ToString();
                 string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)((InputText.Text.Length + mistakes))) * 100), 2).ToString();
@@ -244,11 +246,11 @@ namespace Keyner_v1.View
                     is_passed = true;
                 }
                 MessageBox.Show(toShow);
-                int time = startTime.Elapsed.Seconds;
+                int time = startTime.Elapsed.Minutes*60 + startTime.Elapsed.Seconds;
                 if (!IsTestNew)
                     controller.FillNewStatistic(IdUser, time, is_passed, mistakes, GetMark(is_passed)); ///time!!!!! in controller!!!! + mark
                 else
-                    controller.UpdateStatisctic(IdUser, 56, mistakes, GetMark(is_passed), is_passed);
+                    controller.UpdateStatisctic(IdUser, time, mistakes, GetMark(is_passed), is_passed);
                 this.Close();
             }
         }
@@ -257,7 +259,10 @@ namespace Keyner_v1.View
         private int GetMark(bool is_passed)
         {
             if (is_passed)
+            {
+               
                 return 2;
+            }
             return 0;
         }
 
