@@ -62,7 +62,7 @@ namespace Keyner_v1.View
         int IdUser;
 
         string str;
-        bool IsTestOld = false;
+        bool IsTestOld;
 
         public Test()
         {
@@ -244,11 +244,11 @@ namespace Keyner_v1.View
                     is_passed = true;
                 }
                 MessageBox.Show(toShow);
-
+                int time = startTime.Elapsed.Minutes * 60 + startTime.Elapsed.Seconds;
                 if (!IsTestOld)
-                    controller.FillNewStatistic(IdUser, 56, is_passed, mistakes, GetMark(is_passed)); ///time!!!!! in controller!!!! + mark
+                    controller.FillNewStatistic(IdUser, time, is_passed, mistakes, GetMark(is_passed)); ///time!!!!! in controller!!!! + mark
                 else
-                    controller.UpdateStatisctic(56, mistakes, GetMark(is_passed));
+                    controller.UpdateStatisctic(time, mistakes, GetMark(is_passed));
                 this.Close();
             }
         }
