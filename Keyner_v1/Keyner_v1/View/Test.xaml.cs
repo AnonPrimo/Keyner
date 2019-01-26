@@ -62,7 +62,7 @@ namespace Keyner_v1.View
         int IdUser;
 
         string str;
-        bool IsTestNew = false;
+        bool IsTestOld = false;
 
         public Test()
         {
@@ -73,7 +73,7 @@ namespace Keyner_v1.View
             label_error.Visibility = Visibility.Collapsed;
         }
 
-        public Test(int user_id, int test_id)
+        public Test(int user_id, int test_id, bool oldTest)
         {
             InitializeComponent();
             FillForm(test_id);
@@ -82,8 +82,7 @@ namespace Keyner_v1.View
             label_error.Visibility = Visibility.Collapsed;
             IdUser = user_id;
 
-            //IsTestNew = newTest;
-            IsTestNew = false;
+            IsTestOld = oldTest;
         }
 
         private void FillForm(int test_id)
@@ -246,14 +245,15 @@ namespace Keyner_v1.View
                 }
                 MessageBox.Show(toShow);
 
-                if (IsTestNew)
-                    controller.FillNewStatistic(IdUser, 56, is_passed, mistakes, GetMark(is_passed)); ///time!!!!! in controller!!!!
+                if (IsTestOld)
+                    controller.FillNewStatistic(IdUser, 56, is_passed, mistakes, GetMark(is_passed)); ///time!!!!! in controller!!!! + mark
                 else
                     controller.UpdateStatisctic(56, mistakes, GetMark(is_passed));
                 this.Close();
             }
         }
 
+        ///  to do
         private int GetMark(bool is_passed)
         {
             if (is_passed)
