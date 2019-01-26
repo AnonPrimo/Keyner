@@ -130,23 +130,25 @@ namespace Keyner_v1.Controller
             }
         }
 
-        private void SetUserMoney(int id_us, int mark)
+        public int GetMoney(int mark)
         {
-            User user = context.UserSet.Find(id_us);
             switch (mark)
             {
                 case 1:
-                    user.Money += 100;
-                    break;
+                    return 100;
                 case 2:
-                    user.Money += 200;
-                    break;
+                    return 200;
                 case 3:
-                    user.Money += 300;
-                    break;
+                    return 300;
                 default:
-                    break;
+                    return 0;
             }
+        }
+
+        private void SetUserMoney(int id_us, int mark)
+        {
+            User user = context.UserSet.Find(id_us);
+            user.Money += GetMoney(mark);
 
             context.SaveChanges();
         }

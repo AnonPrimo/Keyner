@@ -242,8 +242,8 @@ namespace Keyner_v1.View
                     toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
                 else
                 {
-                    toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: \nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
                     is_passed = true;
+                    toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: "+ controller.GetMoney(GetMark(is_passed))+"\nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
                 }
                 MessageBox.Show(toShow);
                 int time = startTime.Elapsed.Minutes*60 + startTime.Elapsed.Seconds;
