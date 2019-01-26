@@ -87,9 +87,9 @@ namespace Keyner_v1.Controller
         }
 
         ///якщо тест вже існує апдейтимо його статистику 
-        public void UpdateStatisctic(int time, int mistakes, int mark)
+        public void UpdateStatisctic(int id_user, int time, int mistakes, int mark)
         {
-            Statistic statistic = context.StatisticSet.Find(currentTest.Id);
+            Statistic statistic = context.StatisticSet.Where(s=>s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList()[0];
 
             if(time <= statistic.Time && mistakes <= statistic.CountMistakes && mark >= statistic.Mark)
             {
