@@ -40,10 +40,16 @@ namespace Keyner_v1.Controller
         private void fillUserTests()
         {
             UserTest.Clear();
+
             //list of all tests
-            foreach(var item in db.TestSet)
+            //foreach(var item in db.TestSet)
+            //{
+            //    UserTest.Add(new UserTests() { IdTest = item.Id, TestName = "Тест №"+item.Id, BestTime = item.BestTime, Mark=SetMarkStar(0)});
+            //}
+            for(int i = 0; i < db.TestSet.ToList().Count; i++)
             {
-                UserTest.Add(new UserTests() { IdTest = item.Id, TestName = "Тест №"+item.Id, BestTime = item.BestTime, Mark=SetMarkStar(0)});
+                Model.Test item = db.TestSet.ToList()[i];
+                UserTest.Add(new UserTests() { IdTest = item.Id, TestName = "Тест №" + (i+1), BestTime = item.BestTime, Mark = SetMarkStar(0) });
             }
 
             List<Model.Statistic> tmp = getUserTests();
