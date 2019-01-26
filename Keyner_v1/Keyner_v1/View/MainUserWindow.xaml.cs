@@ -107,7 +107,7 @@ namespace Keyner_v1.View
             this.ShowDialog();
         }
 
-        //game window
+        //test window
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
             int id = ((Controller.UserTests)datagrid1.SelectedItem).IdTest;
@@ -118,11 +118,14 @@ namespace Keyner_v1.View
             test.ShowDialog();
 
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
-            //TODO!!!
             fillGrid();
+            CurrentTest();
+            fillNextTest(usercon.getTestCount());
+            
             this.ShowDialog();
         }
 
+        //check if test is available
         private void datagrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try

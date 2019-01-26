@@ -320,13 +320,13 @@ namespace Keyner_v1.View
             {
                 k.txt.Background = k.background;
 
-                
-                if (TestController.collection.Count != 0)
-                    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+
+                //if (TestController.collection.Count != 0)
+                //    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
             }
 
-            //if (TestController.collection.Count != 0)
-            //    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+            if (TestController.collection.Count != 0)
+                listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
 
         }
         /// <summary>
