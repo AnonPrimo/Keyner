@@ -39,6 +39,7 @@ namespace Keyner_v1.Controller
 
         private void fillUserTests()
         {
+            UserTest.Clear();
             //list of all tests
             foreach(var item in db.TestSet)
             {
