@@ -78,9 +78,12 @@ namespace Keyner_v1.Controller
             statistic.Mark = mark;
             statistic.IsPassed = is_passed;
             statistic.CountMistakes = mistakes;
-            ///найкращий час в тесті
-            BesTime(time);
-
+            ///найкращий час в пройденому тесті
+            if (is_passed)
+            {
+                BesTime(time);
+                SetUserMoney(id_user, mark);
+            }
             context.StatisticSet.Add(statistic);
             context.SaveChanges();
 
@@ -90,33 +93,34 @@ namespace Keyner_v1.Controller
         public void UpdateStatisctic(int id_user, int time, int mistakes, int mark, bool is_passed)
         {
             Statistic statistic = context.StatisticSet.Where(s=>s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList()[0];
-
-            if(time <= statistic.Time && mistakes <= statistic.CountMistakes && mark >= statistic.Mark)
+            if (!statistic.IsPassed && is_passed)
             {
+                //якщо тест був не пройденний і ми його пройшли
+                statistic.IsPassed = is_passed;
                 statistic.Time = time;
                 statistic.Mark = mark;
                 statistic.CountMistakes = mistakes;
 
-                if(!statistic.IsPassed)
-                    statistic.IsPassed = is_passed;
-
-                ///найкращий час в тесті
                 BesTime(time);
+                SetUserMoney(id_user, mark);
+
+                context.SaveChanges();
+            }
+            else if (time <= statistic.Time && mistakes <= statistic.CountMistakes && mark >= statistic.Mark)
+            {
+                statistic.Time = time;
+                statistic.Mark = mark;
+                statistic.CountMistakes = mistakes;            
+
+                ///найкращий час в пройденому тесті
+                if(is_passed)
+                    BesTime(time);
 
                 context.SaveChanges();
             }
         }
-
-
-        ///фігня
-        /*
-        private bool TestCheck(int id_us, int id_test)
-        {
-            return context.StatisticSet.Where(st => st.Id_User == id_us && st.Id_Test == id_test).ToList().Count == 1;
-        }
-        */
-
-            ///найкращий час в тесті
+        
+        ///найкращий час в тесті
         private void BesTime(int time)
         {
             if (currentTest.BestTime > time || currentTest.BestTime == 0)
@@ -124,7 +128,27 @@ namespace Keyner_v1.Controller
                 context.TestSet.Where(t => t.Id == currentTest.Id).First().BestTime = time;
                 context.SaveChanges();
             }
+        }
 
+        private void SetUserMoney(int id_us, int mark)
+        {
+            User user = context.UserSet.Find(id_us);
+            switch (mark)
+            {
+                case 1:
+                    user.Money += 100;
+                    break;
+                case 2:
+                    user.Money += 200;
+                    break;
+                case 3:
+                    user.Money += 300;
+                    break;
+                default:
+                    break;
+            }
+
+            context.SaveChanges();
         }
     }
 }
