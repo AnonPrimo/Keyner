@@ -244,11 +244,11 @@ namespace Keyner_v1.View
                     is_passed = true;
                 }
                 MessageBox.Show(toShow);
-                int time = startTime.Elapsed.Minutes * 60 + startTime.Elapsed.Seconds;
+                int time = startTime.Elapsed.Seconds;
                 if (!IsTestOld)
                     controller.FillNewStatistic(IdUser, time, is_passed, mistakes, GetMark(is_passed)); ///time!!!!! in controller!!!! + mark
                 else
-                    controller.UpdateStatisctic(56, mistakes, GetMark(is_passed));
+                    controller.UpdateStatisctic(IdUser, time, mistakes, GetMark(is_passed));
                 this.Close();
             }
         }
