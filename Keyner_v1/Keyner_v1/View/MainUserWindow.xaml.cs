@@ -110,16 +110,16 @@ namespace Keyner_v1.View
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
             int id = ((Controller.UserTests)datagrid1.SelectedItem).IdTest;
-            bool isOld = ((Controller.UserTests)datagrid1.SelectedItem).IsPassed;
+            bool isOld = usercon.StatisticTestCheck(id);
             Test test = new Test(usercon.CurrentUser.Id, id, isOld);
 
             this.Hide();        
             test.ShowDialog();
 
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+            //TODO!!!
             fillGrid();
             this.ShowDialog();
-            
         }
 
         private void datagrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)

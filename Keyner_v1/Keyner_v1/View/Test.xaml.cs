@@ -248,7 +248,7 @@ namespace Keyner_v1.View
                 if (!IsTestOld)
                     controller.FillNewStatistic(IdUser, 56, is_passed, mistakes, GetMark(is_passed)); ///time!!!!! in controller!!!! + mark
                 else
-                    controller.UpdateStatisctic(IdUser, 56, mistakes, GetMark(is_passed));
+                    controller.UpdateStatisctic(IdUser, 56, mistakes, GetMark(is_passed), is_passed);
                 this.Close();
             }
         }

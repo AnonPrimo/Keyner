@@ -68,6 +68,14 @@ namespace Keyner_v1.Controller
             return db.TestSet.Count();
         }
 
+        //check if there if already statistic for test
+        public bool StatisticTestCheck(int id_test)
+        {
+            if (db.StatisticSet.Where(s => s.Id_Test == id_test && s.Id_User == CurrentUser.Id).ToList().Count == 1)
+                return true;
+            return false;
+        }
+
         //test
         private void fillUserLocal()
         {

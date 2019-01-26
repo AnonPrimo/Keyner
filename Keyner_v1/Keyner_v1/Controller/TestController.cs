@@ -87,7 +87,7 @@ namespace Keyner_v1.Controller
         }
 
         ///якщо тест вже існує апдейтимо його статистику 
-        public void UpdateStatisctic(int id_user, int time, int mistakes, int mark)
+        public void UpdateStatisctic(int id_user, int time, int mistakes, int mark, bool is_passed)
         {
             Statistic statistic = context.StatisticSet.Where(s=>s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList()[0];
 
@@ -96,6 +96,9 @@ namespace Keyner_v1.Controller
                 statistic.Time = time;
                 statistic.Mark = mark;
                 statistic.CountMistakes = mistakes;
+
+                if(!statistic.IsPassed)
+                    statistic.IsPassed = is_passed;
 
                 ///найкращий час в тесті
                 BesTime(time);
@@ -116,7 +119,7 @@ namespace Keyner_v1.Controller
             ///найкращий час в тесті
         private void BesTime(int time)
         {
-            if (currentTest.BestTime > time)
+            if (currentTest.BestTime > time || currentTest.BestTime == 0)
             {
                 context.TestSet.Where(t => t.Id == currentTest.Id).First().BestTime = time;
                 context.SaveChanges();
