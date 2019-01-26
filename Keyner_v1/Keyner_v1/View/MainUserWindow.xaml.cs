@@ -117,11 +117,8 @@ namespace Keyner_v1.View
             this.Hide();        
             test.ShowDialog();
 
-            fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
-            fillGrid();
-            CurrentTest();
-            fillNextTest(usercon.getTestCount());
-            
+            //update window after test
+            fillWindowFields(usercon.CurrentUser.Id);
             this.ShowDialog();
         }
 
@@ -148,6 +145,7 @@ namespace Keyner_v1.View
             this.ShowDialog();
         }
 
+        //exit
         private void exitbutton_Click(object sender, RoutedEventArgs e)
         {
             if (usercon.CurrentUser != null)
