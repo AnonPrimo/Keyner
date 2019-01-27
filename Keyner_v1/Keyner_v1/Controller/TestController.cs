@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Keyner_v1.Model;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Keyner_v1.Controller
 {
@@ -151,6 +153,29 @@ namespace Keyner_v1.Controller
             user.Money += GetMoney(mark);
 
             context.SaveChanges();
+        }
+
+        public BitmapImage GetMonster(int id_user, int mood)
+        {
+            BitmapImage im = new BitmapImage();
+
+            User user = context.UserSet.Find(id_user);
+
+            MonsterLevel currentMonster = context.MonsterLevelSet.Where(m => m.Id_Monster == user.Id_Monster).ToList()[0];
+
+            switch (mood)
+            {
+                case 1:
+                    return ImageConvert.Convert(currentMonster.HappyImage);
+                case 2:
+                    return ImageConvert.Convert(currentMonster.NeutralImage);
+                case 3:
+                    return ImageConvert.Convert(currentMonster.ReadyImage);
+                case 4:
+                    return ImageConvert.Convert(currentMonster.SadImage);
+                default:
+                    return ImageConvert.Convert(currentMonster.NeutralImage);
+            }
         }
     }
 }
