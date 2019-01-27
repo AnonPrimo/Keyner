@@ -8,14 +8,24 @@ namespace Keyner_v1.Controller
     public class ShopWindowController
     {
         Model.KeynerContext context;
-        public int Index { get; set; }
-        public Model.User CurrentUser { get; set; }
+        public int Index { get; set; } //index of monster image 
+        public Model.User CurrentUser { get; private set; }
 
-        public ShopWindowController()
+        public ShopWindowController(int id_user)
         {
             Index = 0;
+            SetCurrentUser(id_user);
         }
 
+        private void SetCurrentUser(int id)
+        {
+            using (context = new Model.KeynerContext())
+            {
+                CurrentUser = context.UserSet.Find(id);
+            }
+        }
+
+        //all monster bougth by user
         public List<MonsterItem> getUserMonsters()
         {
             using (context = new Model.KeynerContext())
@@ -28,6 +38,7 @@ namespace Keyner_v1.Controller
             }
         }
 
+        //all monsters in db
         public List<MonsterItem> getAllMonsters()
         {
             using (context = new Model.KeynerContext())
@@ -114,6 +125,7 @@ namespace Keyner_v1.Controller
             catch { return false; }
         }
 
+        //main monster handler
         public void SetMainMonster(int idMon)
         {
             using (context = new Model.KeynerContext())

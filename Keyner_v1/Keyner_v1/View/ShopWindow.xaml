@@ -46,7 +46,7 @@
             <TextBlock Name="txt2" VerticalAlignment="Center" FontSize="20"></TextBlock>
         </DockPanel>
 
-        <StackPanel Name="stackpanel1" Grid.Column="0" Grid.Row="1" Margin="20" Background="MistyRose" >
+        <StackPanel Name="stackpanel1" Grid.Column="0" Grid.Row="1" Margin="20, 20,20,65" Background="MistyRose" >
             <TextBlock Name="txtname1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Style="{StaticResource TextBlockStyle}"/>
             <Image Name="monsterIm1" Height="250" Margin="5"/>
             <Button Name="MonsterButton1" Width="200" Height="50" Background="PeachPuff" FontSize="20" />
@@ -60,8 +60,8 @@
                 <Button Name ="mainMonsterButton" Content="Головний монстр"  Width="200" Height="50" Background="PeachPuff" Margin="5" FontSize="20" Style="{StaticResource TriggerStyle}" Click="MainMonsterButton_Click"/>
             </StackPanel>
         </Border>
-        
-        <StackPanel Name="stackpanel3" Grid.Column="2" Grid.Row="1" Margin="20" Background="MistyRose">
+
+        <StackPanel Name="stackpanel3" Grid.Column="2" Grid.Row="1" Margin="20, 20,20,65" Background="MistyRose">
             <TextBlock Name="txtname3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Style="{StaticResource TextBlockStyle}"/>
             <Image Name="monsterIm3" Height="250" Margin="5"/>
             <Button Name="MonsterButton3" Width="200" Height="50" Background="PeachPuff" FontSize="20"/>

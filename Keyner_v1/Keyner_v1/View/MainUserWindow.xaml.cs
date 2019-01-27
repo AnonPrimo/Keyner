@@ -24,19 +24,22 @@ namespace Keyner_v1.View
 
         public MainUserWindow(int id) : this()
         {
+            usercon = getUserFormController(id);
             fillWindowFields(id);
         }
 
         //fill all user info
         private void fillWindowFields(int id)
         {
-            usercon = getUserFormController(id);
+            //usercon = getUserFormController(id);
             CurrentTest();
             fillImage();
             fillGrid();
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
             fillNextTest(usercon.getTestCount());
             MoneyImage.Source = new BitmapImage(new Uri("/Pictures/money_im.png", UriKind.Relative));
+
+            datagrid1.SelectedIndex = indexOfCurrentTest;
         }
 
         private Controller.UserFormController getUserFormController(int id)
@@ -95,8 +98,7 @@ namespace Keyner_v1.View
         //shop window
         private void shopbutton_Click(object sender, RoutedEventArgs e)
         {
-            ShopWindow sw = new ShopWindow();
-            sw.shopcon.CurrentUser = usercon.CurrentUser;
+            ShopWindow sw = new ShopWindow(usercon.CurrentUser.Id);
             this.Hide();
             sw.ShowDialog();
             
@@ -110,7 +112,13 @@ namespace Keyner_v1.View
         //test window
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
-            int id = ((Controller.UserTests)datagrid1.SelectedItem).IdTest;
+            int id;
+
+            if(datagrid1.SelectedItem != null)
+                id = ((Controller.UserTests)datagrid1.SelectedItem).IdTest; //id of selected test (if is available)
+            else
+                id = usercon.UserTest[indexOfCurrentTest].IdTest;   //id of current test
+
             bool isOld = usercon.StatisticTestCheck(id);
             Test test = new Test(usercon.CurrentUser.Id, id, isOld);
 
