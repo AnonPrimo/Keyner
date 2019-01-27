@@ -120,7 +120,7 @@ namespace Keyner_v1.View
 
             bool isOld = usercon.StatisticTestCheck(id);
             Test test = new Test(usercon.CurrentUser.Id, id, isOld);
-
+            test.Title = "Тест " + (indexOfCurrentTest+1);
             this.Hide();        
             test.ShowDialog();
 

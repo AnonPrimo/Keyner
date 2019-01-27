@@ -14,10 +14,9 @@ namespace Keyner_v1.Controller
 
         public UserFormController(int id)
         {
-            db = new Model.KeynerContext();
             CurrentUser = getUser(id);
             UserTest = new List<UserTests>();
-            fillUserTests();
+            //fillUserTests();
 
             //test
             //fillUserLocal();
@@ -25,8 +24,10 @@ namespace Keyner_v1.Controller
 
         public Model.User getUser(int id)
         {
-            return db.UserSet.Find(id);
-
+            using (db = new Model.KeynerContext())
+            {
+                return db.UserSet.Find(id);
+            }
             //test
             //return new Model.User() { Name = "Lastname Firstname"};
         }
@@ -39,7 +40,10 @@ namespace Keyner_v1.Controller
         //user tests
         public List<Model.Statistic> getUserTests()
         {
-            return db.StatisticSet.Where(s => s.Id_User == CurrentUser.Id).ToList();
+            using (db = new Model.KeynerContext())
+            {
+                return db.StatisticSet.Where(s => s.Id_User == CurrentUser.Id).ToList();
+            }
         }
 
         private void fillUserTests()
@@ -47,21 +51,27 @@ namespace Keyner_v1.Controller
             UserTest.Clear();
 
             //list of all tests
-            for(int i = 0; i < db.TestSet.ToList().Count; i++)
+            using (db = new Model.KeynerContext())
             {
-                Model.Test item = db.TestSet.ToList()[i];
-                UserTest.Add(new UserTests() { IdTest = item.Id, TestName = "Тест №" + (i+1), BestTime = item.BestTime, Mark = SetMarkStar(0) });
-            }
+                int j = 1;
+                foreach (var item in db.TestSet)
+                {
+                    if (j == 7)
+                        System.Diagnostics.Debug.WriteLine(item.BestTime);
+                    UserTest.Add(new UserTests() { IdTest = item.Id, TestName = "Тест №" + j, BestTime = item.BestTime, Mark = SetMarkStar(0) });
+                    j++;
+                }
 
-            List<Model.Statistic> tmp = getUserTests();
-            //filling list of user tests
-            for(int i = 0; i < tmp.Count; i++)
-            {
-                UserTest[i].Mark = SetMarkStar(tmp[i].Mark);
-                UserTest[i].Mistakes = tmp[i].CountMistakes;
-                UserTest[i].Time = tmp[i].Time;
-                UserTest[i].IsPassed = tmp[i].IsPassed;
-           }
+                List<Model.Statistic> tmp = getUserTests();
+                //filling list of user tests
+                for (int i = 0; i < tmp.Count; i++)
+                {
+                    UserTest[i].Mark = SetMarkStar(tmp[i].Mark);
+                    UserTest[i].Mistakes = tmp[i].CountMistakes;
+                    UserTest[i].Time = tmp[i].Time;
+                    UserTest[i].IsPassed = tmp[i].IsPassed;
+                }
+            }
         }
 
         public void UpdateUserTests()
@@ -72,15 +82,21 @@ namespace Keyner_v1.Controller
         //number of all tests in db
         public int getTestCount()
         {
-            return db.TestSet.Count();
+            using (db = new Model.KeynerContext())
+            {
+                return db.TestSet.Count();
+            }
         }
 
         //check if there if already statistic for test
         public bool StatisticTestCheck(int id_test)
         {
-            if (db.StatisticSet.Where(s => s.Id_Test == id_test && s.Id_User == CurrentUser.Id).ToList().Count == 1)
-                return true;
-            return false;
+            using (db = new Model.KeynerContext())
+            {
+                if (db.StatisticSet.Where(s => s.Id_Test == id_test && s.Id_User == CurrentUser.Id).ToList().Count == 1)
+                    return true;
+                return false;
+            }
         }
 
         //test
@@ -124,10 +140,13 @@ namespace Keyner_v1.Controller
         //get byte array from db
         private byte[] getMonsterImageByteArray()
         {
-            var list = db.MonsterLevelSet.Where(l=>l.Id_Monster == CurrentUser.Id_Monster).ToList();
-            if(list.Count > 0)
-                return list[0].NeutralImage;
-            return null;
+            using (db = new Model.KeynerContext())
+            {
+                var list = db.MonsterLevelSet.Where(l => l.Id_Monster == CurrentUser.Id_Monster).ToList();
+                if (list.Count > 0)
+                    return list[0].NeutralImage;
+                return null;
+            }
         }
 
         //test
