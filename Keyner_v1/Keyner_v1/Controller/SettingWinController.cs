@@ -40,5 +40,21 @@ namespace Keyner_v1.Controller
                 context.SaveChanges();
             }
         }
+
+        public void DeleteUserInfo(int id)
+        {
+            using (context = new Model.KeynerContext())
+            {
+                context.StatisticSet.RemoveRange(context.StatisticSet.Where(s => s.Id_User == id));
+                context.PurchaseSet.RemoveRange(context.PurchaseSet.Where(p => p.Id_User == id));
+
+                Model.User user = context.UserSet.Find(id);
+                user.Money = 500;
+                user.Id_Monster = context.MonsterSet.Where(m => m.Name == "Monster1").First().Id;
+
+                context.SaveChanges();
+            }
+        }
+
     }
 }

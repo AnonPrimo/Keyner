@@ -74,5 +74,14 @@ namespace Keyner_v1.View
         {
             this.Close();
         }
+
+        //deleting info about user and all tests
+        private void freeUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Ви впевнені, що хочете видалити всі свої данні?", "Попередження", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+            {
+                setcon.DeleteUserInfo(IdUser);
+            }
+        }
     }
 }

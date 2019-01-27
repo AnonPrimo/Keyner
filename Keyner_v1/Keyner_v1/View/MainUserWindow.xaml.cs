@@ -149,6 +149,9 @@ namespace Keyner_v1.View
             sw.IdUser = usercon.CurrentUser.Id;
             this.Hide();
             sw.ShowDialog();
+
+            //update window
+            fillWindowFields(usercon.CurrentUser.Id);
             this.ShowDialog();
         }
 
