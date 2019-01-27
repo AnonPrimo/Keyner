@@ -216,7 +216,7 @@ namespace Keyner_v1.View
                 {
                     CorrectSymbol();
                     TestController.collection.RemoveAt(0);
-                    if (TestController.collection.Count == 0) isTestCompleted = true;
+                    if (TestController.collection.Count == 1) isTestCompleted = true;
                     ClearColors();
                 }
                 else
@@ -233,6 +233,7 @@ namespace Keyner_v1.View
             {
                 updateTime.Stop();
                 startTime.Stop();
+                ClearColors();
 
                 bool is_passed = false;
                 string avgSpeed = Math.Round(InputText.Text.Length / (TimeSpentMinutes()), 2).ToString();

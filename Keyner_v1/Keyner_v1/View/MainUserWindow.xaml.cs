@@ -31,11 +31,11 @@ namespace Keyner_v1.View
         //fill all user info
         private void fillWindowFields(int id)
         {
-            //usercon = getUserFormController(id);
-            CurrentTest();
+            usercon.UpdateUser(id);
             fillImage();
             fillGrid();
             fillUserInfo(usercon.CurrentUser.Name, usercon.CurrentUser.Money.ToString());
+            CurrentTest();
             fillNextTest(usercon.getTestCount());
             MoneyImage.Source = new BitmapImage(new Uri("/Pictures/money_im.png", UriKind.Relative));
 
@@ -113,7 +113,6 @@ namespace Keyner_v1.View
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
             int id;
-
             if(datagrid1.SelectedItem != null)
                 id = ((Controller.UserTests)datagrid1.SelectedItem).IdTest; //id of selected test (if is available)
             else

@@ -41,7 +41,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Час" Binding="{Binding Time}" />
+                <DataGridTextColumn Header="Час" Width="45" Binding="{Binding Time}" />
                 <DataGridTextColumn Header="Помилки" Binding="{Binding Mistakes}" />
                 <DataGridCheckBoxColumn Header="Пройдено" Binding="{Binding IsPassed}" />
             </DataGrid.Columns>

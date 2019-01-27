@@ -31,6 +31,11 @@ namespace Keyner_v1.Controller
             //return new Model.User() { Name = "Lastname Firstname"};
         }
 
+        public void UpdateUser(int id)
+        {
+            CurrentUser = getUser(id);
+        }
+
         //user tests
         public List<Model.Statistic> getUserTests()
         {
