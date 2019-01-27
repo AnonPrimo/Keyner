@@ -69,7 +69,7 @@ namespace Keyner_v1.Controller
             }
         }
 
-        ///time!!!!     ще не проходили тест - створюємо статистику
+        ///finishTime!!!!     ще не проходили тест - створюємо статистику
         public void FillNewStatistic(int id_user, int time, bool is_passed, int mistakes, int mark)
         {
             Statistic statistic = new Statistic();
@@ -177,5 +177,7 @@ namespace Keyner_v1.Controller
                     return ImageConvert.Convert(currentMonster.NeutralImage);
             }
         }
+
+
     }
 }
