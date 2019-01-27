@@ -26,8 +26,8 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="300"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <DataGrid Name="datagrid1" Grid.Column="0" Grid.RowSpan="3" Margin="10" IsReadOnly="True" AutoGenerateColumns="False" Background="Lavender" SelectionUnit="FullRow" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" SelectionChanged="datagrid1_SelectionChanged">
