@@ -60,9 +60,11 @@ namespace Keyner_v1.View
         bool isTestCompleted = false;
         TextRange textRange;
         int IdUser;
+        int IdTest;
 
         string str;
         bool IsTestNew = false;
+        int finishTime;
 
         public Test()
         {
@@ -81,7 +83,7 @@ namespace Keyner_v1.View
             ClearColors();
             label_error.Visibility = Visibility.Collapsed;
             IdUser = user_id;
-
+            IdTest = test_id;
             IsTestNew = newTest;
             
             Monster(2); ///int - mood: 1- Happy 2 - Neutral 3 - Ready 4 - Sad
@@ -242,7 +244,7 @@ namespace Keyner_v1.View
 
                 bool is_passed = false;
                 string avgSpeed = Math.Round(InputText.Text.Length / (TimeSpentMinutes()), 2).ToString();
-                string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)((InputText.Text.Length + mistakes))) * 100), 2).ToString();
+                string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)(InputText.Text.Length + mistakes)) * 100), 2).ToString();
                 string toShow;
                 if (mistakes > controller.currentTest.CountMistakes)
                 {
@@ -257,21 +259,46 @@ namespace Keyner_v1.View
                     toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: " + controller.GetMoney(GetMark(is_passed)) + "\nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
                 }
                 MessageBox.Show(toShow);
-                int time = startTime.Elapsed.Minutes*60 + startTime.Elapsed.Seconds;
+                finishTime = startTime.Elapsed.Minutes*60 + startTime.Elapsed.Seconds;
                 if (!IsTestNew)
-                    controller.FillNewStatistic(IdUser, time, is_passed, mistakes, GetMark(is_passed)); /// mark
+                    controller.FillNewStatistic(IdUser, finishTime, is_passed, mistakes, GetMark(is_passed)); 
                 else
-                    controller.UpdateStatisctic(IdUser, time, mistakes, GetMark(is_passed), is_passed);
+                    controller.UpdateStatisctic(IdUser, finishTime, mistakes, GetMark(is_passed), is_passed);
                 this.Close();
             }
         }
-
-        ///  to do
+        
         private int GetMark(bool is_passed)
         {
+            double procMistakes = controller.currentTest.CountMistakes / 100 * mistakes;
             if (is_passed)
             {
-                return 2;
+                if(IdTest < 185)
+                    if (finishTime <= 60 && procMistakes <= 20)
+                        return 3;
+                    else
+                    if (finishTime <= 60 && procMistakes <= 60)
+                        return 2;
+                    else
+                        return 1;
+                else
+                    if(IdTest < 213)
+                    if (finishTime <= 90 && procMistakes <= 20)
+                        return 3;
+                    else
+                   if (finishTime <= 90 && procMistakes <= 60)
+                        return 2;
+                    else
+                        return 1;
+                else
+                    if(IdTest >= 213)
+                    if (finishTime <= 120 && procMistakes <= 20)
+                        return 3;
+                    else
+                   if (finishTime <= 120 && procMistakes <= 60)
+                        return 2;
+                    else
+                        return 1;
             }
             return 0;
         }
