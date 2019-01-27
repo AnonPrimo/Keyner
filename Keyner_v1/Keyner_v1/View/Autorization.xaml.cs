@@ -54,6 +54,7 @@ namespace Keyner_v1.View
             if (comboBoxUser.SelectedValue is Model.User)
                 if (aar.GetPass((comboBoxUser.SelectedValue as Model.User).Id, passBox.Password))
                 {
+                    wrongPass.Visibility = Visibility.Collapsed;
                     MainUserWindow mw = new MainUserWindow((comboBoxUser.SelectedValue as Model.User).Id);
                     this.Hide();
                     if (mw.ShowDialog() == true)
@@ -65,6 +66,8 @@ namespace Keyner_v1.View
                     else
                         this.Close();
                 }
+                else
+                    wrongPass.Visibility = Visibility.Visible;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
