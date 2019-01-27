@@ -77,9 +77,15 @@ namespace Keyner_v1.Controller
                 user.Password = pass;
                 user.Id_Group = group;
                 user.Id_Monster = keyCont.MonsterSet.Where(m => m.Name == "Monster1").ToList()[0].Id;
-                user.Money = 1500;
+                user.Money = 500;
 
                 keyCont.UserSet.Add(user);
+
+                //Purchase purchase = new Purchase();
+                //purchase.Id_Monster = user.Id_Monster;
+                //purchase.Id_User = user.Id;
+                //keyCont.PurchaseSet.Add(purchase);
+
                 keyCont.SaveChanges();
 
                 MakeFirstPurchase(user.Id, user.Id_Monster);

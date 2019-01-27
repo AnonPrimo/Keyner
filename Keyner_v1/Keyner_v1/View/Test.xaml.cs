@@ -83,6 +83,8 @@ namespace Keyner_v1.View
             IdUser = user_id;
 
             IsTestNew = newTest;
+            
+            Monster(2); ///int - mood: 1- Happy 2 - Neutral 3 - Ready 4 - Sad
         }
 
         private void FillForm(int test_id)
@@ -209,11 +211,13 @@ namespace Keyner_v1.View
             }
             if (!isTestCompleted)
             {
+                Monster(2);
                 label_error.Visibility = Visibility.Collapsed;
                 ClearColors();
                 Key pressedKey = e.Key;
                 if (pressedKey == listKeys[FindByChar(TestController.collection[0].ToString())].key)
                 {
+                    Monster(1);
                     CorrectSymbol();
                     TestController.collection.RemoveAt(0);
                     if (TestController.collection.Count == 0) isTestCompleted = true;
@@ -221,6 +225,7 @@ namespace Keyner_v1.View
                 }
                 else
                 {
+                    Monster(3);
                     int i = FindByKey(pressedKey);
                     if (i >= 0)
                         listKeys[i].txt.Background = Brushes.Red;
@@ -239,16 +244,21 @@ namespace Keyner_v1.View
                 string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)((InputText.Text.Length + mistakes))) * 100), 2).ToString();
                 string toShow;
                 if (mistakes > controller.currentTest.CountMistakes)
+                {
+                    Monster(4);
                     toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+                   
+                }
                 else
                 {
+                    Monster(1);
                     is_passed = true;
-                    toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: "+ controller.GetMoney(GetMark(is_passed))+"\nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+                    toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: " + controller.GetMoney(GetMark(is_passed)) + "\nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
                 }
                 MessageBox.Show(toShow);
                 int time = startTime.Elapsed.Minutes*60 + startTime.Elapsed.Seconds;
                 if (!IsTestNew)
-                    controller.FillNewStatistic(IdUser, time, is_passed, mistakes, GetMark(is_passed)); ///time!!!!! in controller!!!! + mark
+                    controller.FillNewStatistic(IdUser, time, is_passed, mistakes, GetMark(is_passed)); /// mark
                 else
                     controller.UpdateStatisctic(IdUser, time, mistakes, GetMark(is_passed), is_passed);
                 this.Close();
@@ -260,7 +270,6 @@ namespace Keyner_v1.View
         {
             if (is_passed)
             {
-               
                 return 2;
             }
             return 0;
@@ -338,12 +347,7 @@ namespace Keyner_v1.View
             current = textRange.Text;
 
         }
-
-        /// <summary>
-        /// returns color to black if pressed the right button
-        /// </summary>
-
-
+        
         /// <summary>
         /// finds a needed listKeys index by Key
         /// </summary>
@@ -365,5 +369,11 @@ namespace Keyner_v1.View
             }
             return -1;
         }
+
+        private void Monster(int mood)
+        {
+            MonsterImage.Source = controller.GetMonster(IdUser, mood);
+        }
+
     }
 }

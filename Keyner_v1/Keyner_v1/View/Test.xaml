@@ -144,7 +144,7 @@
             <Label Name ="TimeSpentLabel" Content="Час: 0:0.0" Style="{StaticResource InfoLabel_style}"/>
             <Label Name="BestTimeLabel" Content="Рекорд: " Style="{StaticResource InfoLabel_style}"/>
             <Separator/>
-            <Image gif:ImageBehavior.AnimatedSource="/Monster/base.gif" Margin="5"/>
+            <Image Name="MonsterImage" Margin="5"/>
             <Separator/>
             <TextBlock Name="label_error" Foreground="Red" FontSize="230" Text="!" FontWeight="Bold" TextAlignment="Center"/>
         </StackPanel>
