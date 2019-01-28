@@ -52,6 +52,13 @@ namespace Keyner_v1.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (comboBoxUser.SelectedValue is Model.User)
+            {
+                if (passBox.Password == "")
+                {
+                    MessageBox.Show("Введіть усі дані");
+                    return;
+                }
+
                 if (aar.GetPass((comboBoxUser.SelectedValue as Model.User).Id, passBox.Password))
                 {
                     wrongPass.Visibility = Visibility.Collapsed;
@@ -68,6 +75,10 @@ namespace Keyner_v1.View
                 }
                 else
                     wrongPass.Visibility = Visibility.Visible;
+            }
+            else
+                MessageBox.Show("Введіть усі дані");
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

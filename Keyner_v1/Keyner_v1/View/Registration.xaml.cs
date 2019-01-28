@@ -33,6 +33,24 @@ namespace Keyner_v1.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (comboBoxGroup.SelectionBoxItem == "")
+            {
+                MessageBox.Show("Введіть усі дані");
+                return;
+            }
+
+            if(fio.Text == "")
+            {
+                MessageBox.Show("Введіть ім'я користувача");
+                return;
+            }
+
+            if (passBox.Password.Length == 0)
+            {
+                MessageBox.Show("Пароль не введено!");
+                return;
+            }
+
             if (passBox.Password == passBox_Copy.Password)
             {
                 aar.AddUser(fio.Text, passBox.Password, (comboBoxGroup.SelectedValue as Model.Group).Id);
@@ -43,6 +61,12 @@ namespace Keyner_v1.View
                 mw.ShowDialog();
                 this.Close();
             }
+            else
+                if(passBox_Copy.Password == "")
+                MessageBox.Show("Не введено підтвердження пароля");
+            else
+                MessageBox.Show("Паролі не співпадають!");
+
         }
     }
 }
