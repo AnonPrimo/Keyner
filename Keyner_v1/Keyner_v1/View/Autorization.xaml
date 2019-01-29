@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Autorization" Height="400" Width="600"
         WindowStartupLocation="CenterScreen"
-        Background="CadetBlue">
+        Background="CadetBlue"
+        KeyDown="Window_KeyDown">
 
     <Window.Resources>
         <Style x:Key="ButtonStyle">
@@ -105,7 +106,7 @@
         <PasswordBox Name="passBox" PasswordChar="☺" Grid.Row="3" Grid.Column="1" Style="{StaticResource PBstyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="264"/>
         <TextBlock Name="wrongPass" Grid.Row="3" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" FontFamily="Comic Sans MS" Foreground="Red" TextWrapping="Wrap" Text="Невірний пароль"/>
 
-        <Button Content="Увійти" Click="Button_Click"  Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300"  Style="{StaticResource ButtonStyle}"/>
+        <Button Name="b1" Content="Увійти" Click="Button_Click"  Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300"  Style="{StaticResource ButtonStyle}"/>
         <Button Content="Реєстрація" Click="Button_Click_1"  Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Style="{StaticResource ButtonStyle}"/>
 
 

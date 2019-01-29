@@ -34,7 +34,7 @@
         </Grid.ColumnDefinitions>
 
         <DockPanel Grid.ColumnSpan="2" Grid.Row="0">
-            <Button Name="backButton" Content="Back" Width="70" Margin="5" HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" Click="backButton_Click"/>
+            <Button Name="backButton" Content="Назад" Width="70" Margin="5" HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" Click="backButton_Click"/>
             <Button Name="freeUserButton" Content="Очистити користувача" HorizontalAlignment="Right" Width="220" Margin="5" Style="{StaticResource ButtonStyle}" Click="freeUserButton_Click"/>
         </DockPanel>
         

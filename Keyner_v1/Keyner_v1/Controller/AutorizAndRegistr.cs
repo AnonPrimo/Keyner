@@ -131,5 +131,17 @@ namespace Keyner_v1.Controller
             return false;
         }
 
+        public bool CheckName(string name)
+        {
+            using (keyCont = new KeynerContext())
+            {
+                foreach (var item in keyCont.UserSet.ToList())
+                {
+                    if (item.Name == name)
+                        return true;
+                }
+                return false;
+            }
+        }
     }
 }

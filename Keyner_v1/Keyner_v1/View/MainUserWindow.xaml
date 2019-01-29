@@ -66,14 +66,14 @@
         <Image Name="monster" Grid.Column="1" Grid.Row="1" Margin="20"></Image>
         
         <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" >
-            <Button Name="gamebutton" Content="Go" FontSize="25" FontWeight="Bold" Width="70" Margin="5"  Background="Crimson" HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" Click="gamebutton_Click"></Button>
-            <Button Name="shopbutton" Content="Shop"  Margin="5" Width="60" Background="Cyan" Click="shopbutton_Click"></Button>
-            <Button Name="settingbutton" Margin="10" Width="50" Height="50" Click="settingbutton_Click" >
+            <Button Name="gamebutton" Content="Пройти" FontSize="20" FontWeight="Bold" Width="90" Margin="5"  Background="Crimson" HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" Click="gamebutton_Click"></Button>
+            <Button Name="shopbutton" Content="Магазин"  Margin="5" Width="70" Background="Cyan" FontSize="14" Click="shopbutton_Click"></Button>
+            <Button Name="settingbutton" Margin="10"  Width="50" Height="50" Click="settingbutton_Click" >
                 <Button.Background>
                     <ImageBrush ImageSource="../Pictures/setting-icon.png"></ImageBrush>
                 </Button.Background>
             </Button>
-            <Button Name="exitbutton" Content="Exit"  Margin="5,10" Width="50" Background="Teal" IsDefault="True" Click="exitbutton_Click"></Button>
+            <Button Name="exitbutton" Content="Вихід" FontSize="14" Margin="5,10" Width="50" Background="Teal" IsDefault="True" Click="exitbutton_Click"></Button>
         </DockPanel>
         
     </Grid>

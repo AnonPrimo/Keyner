@@ -37,7 +37,7 @@
         </Grid.ColumnDefinitions>
 
         <DockPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left">
-            <Button Name="backButton" Content="Back" Margin="5" Width="50" Style="{StaticResource TriggerStyle}" Click="backButton_Click"></Button>
+            <Button Name="backButton" Content="Назад" Margin="5" Width="50" Style="{StaticResource TriggerStyle}" Click="backButton_Click"></Button>
         </DockPanel>
         <TextBlock Name="txt1" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" FontSize="25" FontWeight="UltraBold" Margin="5"></TextBlock>
 
@@ -46,7 +46,7 @@
             <TextBlock Name="txt2" VerticalAlignment="Center" FontSize="20"></TextBlock>
         </DockPanel>
 
-        <StackPanel Name="stackpanel1" Grid.Column="0" Grid.Row="1" Margin="20, 20,20,65" Background="MistyRose" >
+        <StackPanel Name="stackpanel1" Grid.Column="0" Grid.Row="1" Margin="20, 20,20,65" MouseDown="stackpanel1_MouseDown" Background="MistyRose" >
             <TextBlock Name="txtname1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Style="{StaticResource TextBlockStyle}"/>
             <Image Name="monsterIm1" Height="250" Margin="5"/>
             <Button Name="MonsterButton1" Width="200" Height="50" Background="PeachPuff" FontSize="20" />
@@ -61,19 +61,19 @@
             </StackPanel>
         </Border>
 
-        <StackPanel Name="stackpanel3" Grid.Column="2" Grid.Row="1" Margin="20, 20,20,65" Background="MistyRose">
+        <StackPanel Name="stackpanel3" Grid.Column="2" Grid.Row="1" Margin="20, 20,20,65" MouseDown="stackpanel3_MouseDown" Background="MistyRose">
             <TextBlock Name="txtname3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Style="{StaticResource TextBlockStyle}"/>
             <Image Name="monsterIm3" Height="250" Margin="5"/>
             <Button Name="MonsterButton3" Width="200" Height="50" Background="PeachPuff" FontSize="20"/>
         </StackPanel>
 
-        <DockPanel Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+        <DockPanel Grid.ColumnSpan="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
             <Button Name="prevButton" Height="50" Width="50" Margin="20,0" BorderThickness="0" Click="prevImage_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="../Pictures/arrow_prev.png"></ImageBrush>
                 </Button.Background>
             </Button>
-            <Button Name="buyButton" Content="Buy" Width="70" Background="DarkViolet" FontSize="23" Click="buybutton_Click"></Button>
+            <Button Name="buyButton" Content="Купити" Width="100" Background="DarkViolet" FontSize="23" Click="buybutton_Click"></Button>
             <Button Name="nextButton" Height="50" Width="50" Margin="20,0" BorderThickness="0" Click="nextButton_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="../Pictures/arrow_next.png"></ImageBrush>

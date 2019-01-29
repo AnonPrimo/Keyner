@@ -270,7 +270,7 @@ namespace Keyner_v1.View
         
         private int GetMark(bool is_passed)
         {
-            double procMistakes = controller.currentTest.CountMistakes / 100 * mistakes;
+            double procMistakes = 100 * mistakes / controller.currentTest.CountMistakes;
             if (is_passed)
             {
                 if(IdTest < 185)

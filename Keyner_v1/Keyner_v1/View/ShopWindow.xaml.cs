@@ -203,5 +203,23 @@ namespace Keyner_v1.View
                 fillMosterFields();
             }
         }
+
+        private void stackpanel3_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (index < monList.Count - 1)
+            {
+                index++;
+                fillMosterFields();
+            }
+        }
+
+        private void stackpanel1_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (index > 0)
+            {
+                index--;
+                fillMosterFields();
+            }
+        }
     }
 }

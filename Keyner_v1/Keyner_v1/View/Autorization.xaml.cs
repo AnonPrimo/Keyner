@@ -43,7 +43,6 @@ namespace Keyner_v1.View
             comboBoxGroup.SelectedValue = "Id";
             comboBoxGroup.ItemsSource = aar.GetGroupList();
             
-
             //comboBoxUser.DataContext = keynerContext.UserSet.ToList();
             //comboBoxUser.DisplayMemberPath = "Name";
             //comboBoxUser.SelectedValue = "Id";
@@ -69,6 +68,8 @@ namespace Keyner_v1.View
                         passBox.Clear();
                         comboBoxGroup.SelectedItem = 0;
                         this.Show();
+                        RefreshAutor();
+
                     }
                     else
                         this.Close();
@@ -137,6 +138,34 @@ namespace Keyner_v1.View
             comboBoxUser.DisplayMemberPath = "Name";
             comboBoxUser.SelectedValue = "Id";
             comboBoxUser.ItemsSource = us;
+        }
+
+        private void RefreshAutor()
+        {
+            //comboBoxGroup.Items.Clear();
+
+            //comboBoxGroup.DisplayMemberPath = "Name";
+            //comboBoxGroup.SelectedValue = "Id";
+            //comboBoxGroup.ItemsSource = aar.GetGroupList();
+
+
+            List<Model.User> us = new List<Model.User>();
+
+            foreach (var item in keynerContext.UserSet)
+            {
+                if (1 == item.Id_Group)
+                    us.Add(item);
+            }
+
+            comboBoxUser.DisplayMemberPath = "Name";
+            comboBoxUser.SelectedValue = "Id";
+            comboBoxUser.ItemsSource = us;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.Key == Key.Enter)
+            //    b1.Click() += Button_Click(sender, e);
         }
     }
 }
