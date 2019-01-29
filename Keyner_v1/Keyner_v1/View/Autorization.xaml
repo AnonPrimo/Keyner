@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="Autorization" Height="400" Width="600"
         WindowStartupLocation="CenterScreen"
-        Background="CadetBlue"
-        KeyDown="Window_KeyDown">
+        Background="CadetBlue">
 
     <Window.Resources>
         <Style x:Key="ButtonStyle">

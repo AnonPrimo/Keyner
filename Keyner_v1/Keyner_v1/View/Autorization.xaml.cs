@@ -41,8 +41,9 @@ namespace Keyner_v1.View
 
             comboBoxGroup.DisplayMemberPath = "Name";
             comboBoxGroup.SelectedValue = "Id";
-            comboBoxGroup.ItemsSource = aar.GetGroupList();
-            
+            comboBoxGroup.ItemsSource = aar.GetGroupList().OrderBy(g=>g.Name);
+
+
             //comboBoxUser.DataContext = keynerContext.UserSet.ToList();
             //comboBoxUser.DisplayMemberPath = "Name";
             //comboBoxUser.SelectedValue = "Id";
@@ -137,7 +138,8 @@ namespace Keyner_v1.View
 
             comboBoxUser.DisplayMemberPath = "Name";
             comboBoxUser.SelectedValue = "Id";
-            comboBoxUser.ItemsSource = us;
+            comboBoxUser.ItemsSource = us.OrderBy(u=>u.Name);
+
         }
 
         private void RefreshAutor()
@@ -157,15 +159,13 @@ namespace Keyner_v1.View
                     us.Add(item);
             }
 
+            us.OrderBy(o => o.Name);
+
             comboBoxUser.DisplayMemberPath = "Name";
             comboBoxUser.SelectedValue = "Id";
-            comboBoxUser.ItemsSource = us;
+            comboBoxUser.ItemsSource = us.OrderBy(u => u.Name);
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            //if (e.Key == Key.Enter)
-            //    b1.Click() += Button_Click(sender, e);
-        }
+        
     }
 }
