@@ -178,6 +178,21 @@ namespace Keyner_v1.Controller
             }
         }
 
+        public int GetSpeed(int id_user, int finishTime)
+        {
+            int time = finishTime;
+            int count = 1;
+            List<Statistic> statistic = context.StatisticSet.Where(s => s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList();
+
+            foreach (var item in statistic)
+            {
+                time += item.Time;
+                count++;
+            }
+
+            return time / count;
+
+        }
 
     }
 }

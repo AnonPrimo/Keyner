@@ -241,9 +241,9 @@ namespace Keyner_v1.View
                 updateTime.Stop();
                 startTime.Stop();
                 ClearColors();
-
+                finishTime = startTime.Elapsed.Minutes * 60 + startTime.Elapsed.Seconds;
                 bool is_passed = false;
-                string avgSpeed = Math.Round(InputText.Text.Length / (TimeSpentMinutes()), 2).ToString();
+                string avgSpeed = controller.GetSpeed(IdUser, finishTime).ToString();
                 string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)(InputText.Text.Length + mistakes)) * 100), 2).ToString();
                 string toShow;
                 if (mistakes > controller.currentTest.CountMistakes)
@@ -259,7 +259,6 @@ namespace Keyner_v1.View
                     toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: " + controller.GetMoney(GetMark(is_passed)) + "\nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
                 }
                 MessageBox.Show(toShow);
-                finishTime = startTime.Elapsed.Minutes*60 + startTime.Elapsed.Seconds;
                 if (!IsTestNew)
                     controller.FillNewStatistic(IdUser, finishTime, is_passed, mistakes, GetMark(is_passed)); 
                 else
