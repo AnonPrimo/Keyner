@@ -113,20 +113,32 @@ namespace Keyner_v1.View
         private void gamebutton_Click(object sender, RoutedEventArgs e)
         {
             int id;
-            if(datagrid1.SelectedItem != null)
+            string testNum = txt3.Text;
+            if (datagrid1.SelectedItem != null)
+            {
+                testNum = ((Controller.UserTests)datagrid1.SelectedItem).TestName;
                 id = ((Controller.UserTests)datagrid1.SelectedItem).IdTest; //id of selected test (if is available)
+            }
             else
                 id = usercon.UserTest[indexOfCurrentTest].IdTest;   //id of current test
 
             bool isOld = usercon.StatisticTestCheck(id);
             Test test = new Test(usercon.CurrentUser.Id, id, isOld);
-            test.Title = "Тест " + (indexOfCurrentTest+1);
+            test.Title = "Тест " + GetTestNum(testNum);
             this.Hide();        
             test.ShowDialog();
 
             //update window after test
             fillWindowFields(usercon.CurrentUser.Id);
             this.ShowDialog();
+        }
+
+        private int GetTestNum(string s)
+        {
+            string num = s.Split('№')[1];
+            int i;
+            int.TryParse(num, out i);
+            return i;
         }
 
         //check if test is available
