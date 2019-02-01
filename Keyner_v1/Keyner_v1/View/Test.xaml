@@ -139,14 +139,19 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="2" Background="Wheat">
-            <Label Name="MistakesLabel" Content="Кількість помилок: 0" Style="{StaticResource InfoLabel_style}"/>
-            <Label Name ="TimeSpentLabel" Content="Час: 0:0.0" Style="{StaticResource InfoLabel_style}"/>
-            <Label Name="BestTimeLabel" Content="Рекорд: " Style="{StaticResource InfoLabel_style}"/>
-            <Separator/>
-            <Image Name="MonsterImage"  Margin="5"/>
-            <Separator/>
-            <TextBlock Name="label_error" Foreground="Red" FontSize="230" Text="!" FontWeight="Bold" Height="300"  TextAlignment="Center"/>
-        </StackPanel>
+        <Grid Grid.Column="2" Background="Wheat">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <Label Name="MistakesLabel" Content="Кількість помилок: 0" Style="{StaticResource InfoLabel_style}"/>
+                <Label Name ="TimeSpentLabel" Content="Час: 0:0.0" Style="{StaticResource InfoLabel_style}"/>
+                <Label Name="BestTimeLabel" Content="Рекорд: " Style="{StaticResource InfoLabel_style}"/>
+            </StackPanel>
+            <Image Grid.Row="1" Name="MonsterImage"  Margin="5"/>
+            <TextBlock Grid.Row="2" Name="label_error" Foreground="Red" FontSize="230" Text="!" FontWeight="Bold" Height="300"  TextAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>
