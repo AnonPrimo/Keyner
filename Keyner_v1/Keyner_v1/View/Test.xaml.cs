@@ -413,5 +413,10 @@ namespace Keyner_v1.View
             if (this.Title == "Тест 1")
                 RulesOfTest();
         }
+
+        private void Rules_Click(object sender, RoutedEventArgs e)
+        {
+            RulesOfTest();
+        }
     }
 }

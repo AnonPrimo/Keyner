@@ -146,7 +146,14 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
-                <Label Name="MistakesLabel" Content="Кількість помилок: 0" Style="{StaticResource InfoLabel_style}"/>
+                <DockPanel>
+                <Label Name="MistakesLabel" Content="Кількість помилок: 0" Width="220" Style="{StaticResource InfoLabel_style}"/>
+                    <Button Name="Rules" Width="50" Click="Rules_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="..\Pictures\Info.png"/>
+                        </Button.Background>
+                    </Button>
+                </DockPanel>
                 <Label Name ="TimeSpentLabel" Content="Час: 0:0.0" Style="{StaticResource InfoLabel_style}"/>
                 <Label Name="BestTimeLabel" Content="Рекорд: " Style="{StaticResource InfoLabel_style}"/>
             </StackPanel>
