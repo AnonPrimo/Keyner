@@ -101,6 +101,7 @@ namespace Keyner_v1.View
             updateTime = new DispatcherTimer();
             updateTime.Interval = new TimeSpan(0, 0, 0, 0, 10);
             updateTime.Tick += timer_tick;
+            
         }
 
         private void timer_tick(object sender, EventArgs e)
@@ -402,5 +403,15 @@ namespace Keyner_v1.View
             MonsterImage.Source = controller.GetMonster(IdUser, mood);
         }
 
+        private void RulesOfTest()
+        {
+            MessageBox.Show("Умови проходження тесту: \nМаксимальний час:"+ controller.+ "секунд \nКількість помилок: до " + controller.currentTest.CountMistakes + "\nУдачі!");
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (this.Title == "Тест 1")
+                RulesOfTest();
+        }
     }
 }

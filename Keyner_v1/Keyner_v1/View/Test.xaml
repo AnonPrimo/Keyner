@@ -6,7 +6,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Test" Height="690" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+        Title="Test" Height="690" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" Loaded="Window_Loaded">
 
     <Window.Resources>
         <Style x:Key="keyboardButtonsStyle">
@@ -46,12 +46,14 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="59*"/>
-            <ColumnDefinition Width="288*"/>
-            <ColumnDefinition Width="149*"/>
+            <ColumnDefinition Width="12*"/>
+            <ColumnDefinition Width="106*"/>
+            <ColumnDefinition Width="95*"/>
+            <ColumnDefinition Width="482*"/>
+            <ColumnDefinition Width="299*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="0" Grid.ColumnSpan="2">
+        <StackPanel Grid.Column="0" Margin="0" Grid.ColumnSpan="4">
             <Border BorderThickness="1" Margin="5" BorderBrush="Black">
                 <RichTextBox Name="TextToWrite" FontSize="20" Height="200">
                     <RichTextBox.Resources>
@@ -139,7 +141,7 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="2" Background="Wheat">
+        <StackPanel Orientation="Vertical" Grid.Column="4" Background="Wheat">
             <Label Name="MistakesLabel" Content="Кількість помилок: 0" Style="{StaticResource InfoLabel_style}"/>
             <Label Name ="TimeSpentLabel" Content="Час: 0:0.0" Style="{StaticResource InfoLabel_style}"/>
             <Label Name="BestTimeLabel" Content="Рекорд: " Style="{StaticResource InfoLabel_style}"/>
