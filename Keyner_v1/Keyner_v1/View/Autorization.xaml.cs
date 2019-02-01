@@ -166,6 +166,10 @@ namespace Keyner_v1.View
             comboBoxUser.ItemsSource = us.OrderBy(u => u.Name);
         }
 
-        
+        private void passBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                this.Button_Click(sender, e);
+        }
     }
 }
