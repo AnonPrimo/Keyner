@@ -405,7 +405,7 @@ namespace Keyner_v1.View
 
         private void RulesOfTest()
         {
-            MessageBox.Show("Умови проходження тесту: \nМаксимальний час:"+ controller.+ "секунд \nКількість помилок: до " + controller.currentTest.CountMistakes + "\nУдачі!");
+            MessageBox.Show("Умови проходження тесту: \nМаксимальний час:"+ 60+ "секунд \nКількість помилок: до " + controller.currentTest.CountMistakes + "\nУдачі!");
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

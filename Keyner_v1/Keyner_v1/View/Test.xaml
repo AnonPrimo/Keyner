@@ -46,11 +46,9 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="12*"/>
-            <ColumnDefinition Width="106*"/>
-            <ColumnDefinition Width="95*"/>
-            <ColumnDefinition Width="482*"/>
-            <ColumnDefinition Width="299*"/>
+            <ColumnDefinition Width="59*"/>
+            <ColumnDefinition Width="288*"/>
+            <ColumnDefinition Width="149*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Margin="0" Grid.ColumnSpan="4">
