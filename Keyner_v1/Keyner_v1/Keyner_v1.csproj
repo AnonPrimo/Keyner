@@ -73,6 +73,7 @@
     <Compile Include="Controller\ShopWindowController.cs" />
     <Compile Include="Controller\TestController.cs" />
     <Compile Include="Controller\UserFormController.cs" />
+    <Compile Include="Model\Test.cs" />
     <Compile Include="View\MainUserWindow.xaml.cs">
       <DependentUpon>MainUserWindow.xaml</DependentUpon>
     </Compile>
@@ -136,7 +137,6 @@
     <Compile Include="Model\Purchase.cs" />
     <Compile Include="Model\Shop.cs" />
     <Compile Include="Model\Statistic.cs" />
-    <Compile Include="Model\Test.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

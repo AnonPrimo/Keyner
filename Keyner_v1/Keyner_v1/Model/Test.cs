@@ -21,6 +21,8 @@ namespace Keyner_v1.Model
 
         public int BestTime { get; set; }
 
+        public int MaxTime { get; set; }
+
         public Test()
         {
 

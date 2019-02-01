@@ -21,6 +21,8 @@ namespace KeynerAdminApplication.Model
 
         public int BestTime { get; set; }
 
+        public int MaxTime { get; set; }
+
         public Test()
         {
 
