@@ -6,7 +6,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Test" Height="690" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+        Title="Test" Height="690" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" Loaded="Window_Loaded">
 
     <Window.Resources>
         <Style x:Key="keyboardButtonsStyle">
@@ -51,7 +51,7 @@
             <ColumnDefinition Width="149*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="0" Grid.ColumnSpan="2">
+        <StackPanel Grid.Column="0" Margin="0" Grid.ColumnSpan="4">
             <Border BorderThickness="1" Margin="5" BorderBrush="Black">
                 <RichTextBox Name="TextToWrite" FontSize="20" Height="200">
                     <RichTextBox.Resources>
@@ -146,7 +146,14 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
-                <Label Name="MistakesLabel" Content="Кількість помилок: 0" Style="{StaticResource InfoLabel_style}"/>
+                <DockPanel>
+                <Label Name="MistakesLabel" Content="Кількість помилок: 0" Width="220" Style="{StaticResource InfoLabel_style}"/>
+                    <Button Name="Rules" Width="50" Click="Rules_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="..\Pictures\Info.png"/>
+                        </Button.Background>
+                    </Button>
+                </DockPanel>
                 <Label Name ="TimeSpentLabel" Content="Час: 0:0.0" Style="{StaticResource InfoLabel_style}"/>
                 <Label Name="BestTimeLabel" Content="Рекорд: " Style="{StaticResource InfoLabel_style}"/>
             </StackPanel>
