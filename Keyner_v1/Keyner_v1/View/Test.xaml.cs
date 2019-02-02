@@ -272,7 +272,7 @@ namespace Keyner_v1.View
                     controller.UpdateStatisctic(IdUser, finishTime, mistakes, GetMark(is_passed), is_passed);
                 this.Close();
             }*/
-        }
+         }
 
         private int GetMark(bool is_passed)
         {

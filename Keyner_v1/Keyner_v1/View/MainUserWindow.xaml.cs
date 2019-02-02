@@ -128,8 +128,12 @@ namespace Keyner_v1.View
             bool isOld = usercon.StatisticTestCheck(id);
             Test test = new Test(usercon.CurrentUser.Id, id, isOld);
             test.Title = "Тест " + GetTestNum(testNum);
-            this.Hide();        
-            test.ShowDialog();
+            this.Hide();
+            try
+            {
+                test.ShowDialog();
+            }
+            catch { }
 
             int oldLvl = userLevel;
             //update window after test
