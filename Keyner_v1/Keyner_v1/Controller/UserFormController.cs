@@ -16,7 +16,6 @@ namespace Keyner_v1.Controller
         {
             CurrentUser = getUser(id);
             UserTest = new List<UserTests>();
-            //fillUserTests();
 
             //test
             //fillUserLocal();
@@ -56,8 +55,6 @@ namespace Keyner_v1.Controller
                 int j = 1;
                 foreach (var item in db.TestSet)
                 {
-                    if (j == 7)
-                        System.Diagnostics.Debug.WriteLine(item.BestTime);
                     UserTest.Add(new UserTests() { IdTest = item.Id, TestName = "Тест №" + j, BestTime = item.BestTime, Mark = SetMarkStar(0) });
                     j++;
                 }
@@ -116,6 +113,23 @@ namespace Keyner_v1.Controller
             }
         }
 
+        public double GetUserLevel(int currentTest)
+        {
+            int testCount = getTestCount(); //count of all tests
+            using (db = new Model.KeynerContext()) {
+
+                int count_of_passed_tests = currentTest;  //count of passed tests
+
+                int levelCount = db.MonsterLevelSet.Count(m => m.Id_Monster == CurrentUser.Id_Monster);     //count of levels in certain monster
+
+                double lvlStep = (double)testCount / levelCount;   
+                double index = (double)count_of_passed_tests / lvlStep;     //approximate user level
+
+                return index;
+                //return Math.Round(index, MidpointRounding.AwayFromZero);
+            }
+        }
+
         //mark images
         private BitmapImage SetMarkStar(int mark)
         {
@@ -138,13 +152,13 @@ namespace Keyner_v1.Controller
         }
 
         //get byte array from db
-        private byte[] getMonsterImageByteArray()
+        private byte[] getMonsterImageByteArray(int index)
         {
             using (db = new Model.KeynerContext())
             {
                 var list = db.MonsterLevelSet.Where(l => l.Id_Monster == CurrentUser.Id_Monster).ToList();
                 if (list.Count > 0)
-                    return list[0].NeutralImage;
+                    return list[index].NeutralImage;
                 return null;
             }
         }
@@ -156,9 +170,9 @@ namespace Keyner_v1.Controller
         }
 
         //convert byte array to bitmap image
-        public bool getMonsterImage(ref BitmapImage image)
+        public bool getMonsterImage(ref BitmapImage image, int userlvl)
         {
-            var imageData = getMonsterImageByteArray();
+            var imageData = getMonsterImageByteArray(userlvl);
 
             //test
             //var imageData = getMonsterImageTest();

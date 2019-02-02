@@ -56,7 +56,8 @@ namespace Keyner_v1.View
             {
                 ClearStackpnl(stackpanel1);
                 fillMonsterStackpnl(monList[index], stackpanel2);
-                fillMonsterStackpnl(monList[index + 1], stackpanel3);
+                if(monList.Count > 1)
+                    fillMonsterStackpnl(monList[index + 1], stackpanel3);
                 return;
             }
 

@@ -26,6 +26,7 @@ namespace KeynerAdminApplication
             _test = test;
             richTextBoxText.Text = _test.Text;
             numericUpDownCountMistakes.Value = _test.CountMistakes;
+            numericUpDownMaxTime.Value = _test.MaxTime;
             _modified = true;
         }
 
