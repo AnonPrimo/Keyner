@@ -277,31 +277,32 @@ namespace Keyner_v1.View
         private int GetMark(bool is_passed)
         {
             double procMistakes = 100 * mistakes / controller.currentTest.CountMistakes;
+            int time = controller.currentTest.MaxTime;
             if (is_passed)
             {
                 if (IdTest < 185)
-                    if (finishTime <= 60 && procMistakes <= 20)
+                    if (finishTime <= time && procMistakes <= 20)
                         return 3;
                     else
-                    if (finishTime <= 60 && procMistakes <= 60)
+                    if (finishTime <= time && procMistakes <= 60)
                         return 2;
                     else
                         return 1;
                 else
                     if (IdTest < 213)
-                    if (finishTime <= 90 && procMistakes <= 20)
+                    if (finishTime <= time && procMistakes <= 20)
                         return 3;
                     else
-                   if (finishTime <= 90 && procMistakes <= 60)
+                   if (finishTime <= time && procMistakes <= 60)
                         return 2;
                     else
                         return 1;
                 else
                     if (IdTest >= 213)
-                    if (finishTime <= 120 && procMistakes <= 20)
+                    if (finishTime <= time && procMistakes <= 20)
                         return 3;
                     else
-                   if (finishTime <= 120 && procMistakes <= 60)
+                   if (finishTime <= time && procMistakes <= 60)
                         return 2;
                     else
                         return 1;
