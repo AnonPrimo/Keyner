@@ -6,7 +6,11 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Test" Height="690" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" Loaded="Window_Loaded">
+        Title="Test" Height="690" Width="1000" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        KeyDown="Window_KeyDown"
+        PreviewTextInput="Window_PreviewTextInput">
 
     <Window.Resources>
         <Style x:Key="keyboardButtonsStyle">
