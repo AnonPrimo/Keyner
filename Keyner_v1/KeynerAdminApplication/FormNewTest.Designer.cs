@@ -147,6 +147,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBoxText);
             this.Name = "FormNewTest";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormNewTest";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountMistakes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountRepeat)).EndInit();

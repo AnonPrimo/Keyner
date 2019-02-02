@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="MainUserWindow" Height="450" Width="850" Background="MediumTurquoise" WindowStartupLocation="CenterScreen">
+        Title="Головне вікно користувача" Height="450" Width="850" Background="MediumTurquoise" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key = "ButtonStyle" TargetType = "Button">
             <Setter Property = "Foreground" Value = "Black" />
