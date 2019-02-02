@@ -52,6 +52,11 @@ namespace Keyner_v1.Controller
                 user.Money = 500;
                 user.Id_Monster = context.MonsterSet.Where(m => m.Name == "Monster1").First().Id;
 
+                Model.Purchase purchase = new Model.Purchase();
+                purchase.Id_Monster = user.Id_Monster;
+                purchase.Id_User = user.Id;
+                context.PurchaseSet.Add(purchase);
+
                 context.SaveChanges();
             }
         }

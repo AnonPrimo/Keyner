@@ -22,7 +22,7 @@ namespace Keyner_v1.View
     {
         public TextBlock txt;
         public Key key;
-        string charKey;
+        public string charKey;
         public Brush background;
 
         public KeyboardKey(TextBlock txt, Key k, string ch)
@@ -85,7 +85,7 @@ namespace Keyner_v1.View
             IdUser = user_id;
             IdTest = test_id;
             IsTestNew = newTest;
-            
+
             Monster(2); ///int - mood: 1- Happy 2 - Neutral 3 - Ready 4 - Sad
         }
 
@@ -101,7 +101,7 @@ namespace Keyner_v1.View
             updateTime = new DispatcherTimer();
             updateTime.Interval = new TimeSpan(0, 0, 0, 0, 10);
             updateTime.Tick += timer_tick;
-            
+
         }
 
         private void timer_tick(object sender, EventArgs e)
@@ -177,6 +177,7 @@ namespace Keyner_v1.View
             listKeys.Add(new KeyboardKey(txt_x, Key.X, "ч"));
             listKeys.Add(new KeyboardKey(txt_y, Key.Y, "н"));
             listKeys.Add(new KeyboardKey(txt_z, Key.Z, "я"));
+            
             listKeys.Add(new KeyboardKey(txt_apostrof, Key.Oem3, "'"));
             listKeys.Add(new KeyboardKey(txt_minus, Key.OemMinus, "-"));
             listKeys.Add(new KeyboardKey(txt_eql, Key.OemPlus, "="));
@@ -187,11 +188,16 @@ namespace Keyner_v1.View
             listKeys.Add(new KeyboardKey(txt_caps, Key.Capital, "caps"));
             listKeys.Add(new KeyboardKey(txt_semikolon, Key.Oem1, "ж"));
             listKeys.Add(new KeyboardKey(txt_quotes, Key.OemQuotes, "є"));
+            //listKeys.Add(new KeyboardKey(txt_enter, Key.Return, Key.Return.ToString()/*"\n"*/));
+
             listKeys.Add(new KeyboardKey(txt_enter, Key.Return, "\n"));
+
+
             listKeys.Add(new KeyboardKey(txt_shift, Key.LeftShift, "lShift"));
             listKeys.Add(new KeyboardKey(txt_coma, Key.OemComma, "б"));
             listKeys.Add(new KeyboardKey(txt_slash, Key.OemQuestion, "."));
             listKeys.Add(new KeyboardKey(txt_dot, Key.OemPeriod, "ю"));
+            
             listKeys.Add(new KeyboardKey(txt_rightShift, Key.RightShift, "rShift"));
             listKeys.Add(new KeyboardKey(txt_leftCtrl, Key.LeftCtrl, "lCtrl"));
             listKeys.Add(new KeyboardKey(txt_leftAlt, Key.LeftAlt, "lAlt"));
@@ -205,12 +211,12 @@ namespace Keyner_v1.View
         /// checks is pressed the correct button
         /// </summary>
         private void Window_KeyDown(object sender, KeyEventArgs e)
-         {
+        {
+          /*  // MessageBox.Show(e.Key.ToString());
             if (!updateTime.IsEnabled)
             {
                 startTime.Start();
                 updateTime.Start();
-                
             }
             if (!isTestCompleted)
             {
@@ -251,7 +257,7 @@ namespace Keyner_v1.View
                 {
                     Monster(4);
                     toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
-                   
+
                 }
                 else
                 {
@@ -261,19 +267,19 @@ namespace Keyner_v1.View
                 }
                 MessageBox.Show(toShow);
                 if (!IsTestNew)
-                    controller.FillNewStatistic(IdUser, finishTime, is_passed, mistakes, GetMark(is_passed)); 
+                    controller.FillNewStatistic(IdUser, finishTime, is_passed, mistakes, GetMark(is_passed));
                 else
                     controller.UpdateStatisctic(IdUser, finishTime, mistakes, GetMark(is_passed), is_passed);
                 this.Close();
-            }
-        }
-        
+            }*/
+         }
+
         private int GetMark(bool is_passed)
         {
             double procMistakes = 100 * mistakes / controller.currentTest.CountMistakes;
             if (is_passed)
             {
-                if(IdTest < 185)
+                if (IdTest < 185)
                     if (finishTime <= 60 && procMistakes <= 20)
                         return 3;
                     else
@@ -282,7 +288,7 @@ namespace Keyner_v1.View
                     else
                         return 1;
                 else
-                    if(IdTest < 213)
+                    if (IdTest < 213)
                     if (finishTime <= 90 && procMistakes <= 20)
                         return 3;
                     else
@@ -291,7 +297,7 @@ namespace Keyner_v1.View
                     else
                         return 1;
                 else
-                    if(IdTest >= 213)
+                    if (IdTest >= 213)
                     if (finishTime <= 120 && procMistakes <= 20)
                         return 3;
                     else
@@ -311,7 +317,7 @@ namespace Keyner_v1.View
 
         private double TimeSpentMinutes()
         {
-            
+
             double timeSpentMinutes = startTime.Elapsed.Minutes + (startTime.Elapsed.Seconds + startTime.Elapsed.Milliseconds / 1000) / 60;
             return timeSpentMinutes;
         }
@@ -335,7 +341,7 @@ namespace Keyner_v1.View
             while (textRange.Text == "")
             {
                 c++;
-                if (c==4)
+                if (c == 4)
                     InputText.Text += Environment.NewLine;
 
                 SetPositions();
@@ -347,7 +353,7 @@ namespace Keyner_v1.View
         {
             var startPos = position.GetPositionAtOffset(0);
             var endPos = position.GetPositionAtOffset(1);
-             textRange = new TextRange(startPos, endPos);
+            textRange = new TextRange(startPos, endPos);
 
         }
 
@@ -356,15 +362,10 @@ namespace Keyner_v1.View
             foreach (KeyboardKey k in listKeys)
             {
                 k.txt.Background = k.background;
-
-
-                //if (TestController.collection.Count != 0)
-                //    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
             }
 
             if (TestController.collection.Count != 0)
                 listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
-
         }
         /// <summary>
         /// changes color of the character you need to write
@@ -373,9 +374,8 @@ namespace Keyner_v1.View
         {
             textRange.ApplyPropertyValue(TextElement.BackgroundProperty, new SolidColorBrush(Colors.Green));
             current = textRange.Text;
-
         }
-        
+
         /// <summary>
         /// finds a needed listKeys index by Key
         /// </summary>
@@ -406,7 +406,7 @@ namespace Keyner_v1.View
         //TO DO!!!!
         private void RulesOfTest()
         {
-            MessageBox.Show("Умови проходження тесту: \nМаксимальний час: "+ 60+ " секунд \nКількість помилок: до " + controller.currentTest.CountMistakes + "\nУдачі!");
+            MessageBox.Show("Умови проходження тесту: \nМаксимальний час: " + controller.currentTest.MaxTime + " секунд \nКількість помилок: до " + controller.currentTest.CountMistakes + "\nУдачі!");
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -419,5 +419,77 @@ namespace Keyner_v1.View
         {
             RulesOfTest();
         }
+
+        private void Window_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+           //MessageBox.Show($"***{e.Text}***");
+
+            if (!updateTime.IsEnabled)
+            {
+                startTime.Start();
+                updateTime.Start();
+            }
+            
+            if (!isTestCompleted)
+            {
+                Monster(2);
+                label_error.Visibility = Visibility.Collapsed;
+                ClearColors();
+                string pressedSmth = e.Text;
+
+                if (Keyboard.IsKeyDown(Key.Enter))
+                    pressedSmth = "\n";
+
+                //if (pressedSmth == listKeys[FindByChar(TestController.collection[0].ToString())].charKey.ToString())
+                if(pressedSmth == TestController.collection[0].ToString())
+                {
+                    Monster(1);
+                    CorrectSymbol();
+                    TestController.collection.RemoveAt(0);
+                    if (TestController.collection.Count == 1)
+                        isTestCompleted = true;
+                    ClearColors();
+                }
+                else
+                {
+                    Monster(3); //FindByKey
+                    int i = FindByChar(pressedSmth.ToString());
+                    if (i >= 0)
+                        listKeys[i].txt.Background = Brushes.Red;
+                    label_error.Visibility = Visibility.Visible;
+                    mistakes++;
+                    MistakesLabel.Content = "Кількість помилок: " + mistakes;
+                }
+            }
+            else
+            {
+                updateTime.Stop();
+                startTime.Stop();
+                ClearColors();
+                finishTime = startTime.Elapsed.Minutes * 60 + startTime.Elapsed.Seconds;
+                bool is_passed = false;
+                string avgSpeed = controller.GetSpeed(IdUser, finishTime).ToString();
+                string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)(InputText.Text.Length + mistakes)) * 100), 2).ToString();
+                string toShow;
+                if (mistakes > controller.currentTest.CountMistakes)
+                {
+                    Monster(4);
+                    toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+                }
+                else
+                {
+                    Monster(1);
+                    is_passed = true;
+                    toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: " + controller.GetMoney(GetMark(is_passed)) + "\nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+                }
+                MessageBox.Show(toShow);
+                if (!IsTestNew)
+                    controller.FillNewStatistic(IdUser, finishTime, is_passed, mistakes, GetMark(is_passed));
+                else
+                    controller.UpdateStatisctic(IdUser, finishTime, mistakes, GetMark(is_passed), is_passed);
+                this.Close();
+            }
+        }
+        
     }
 }
