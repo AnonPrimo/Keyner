@@ -114,7 +114,6 @@ namespace Keyner_v1.View
                 startTime.Stop();
                 c++;
                 this.PreviewTextInput -= Window_PreviewTextInput;
-                Debug.WriteLine(c.ToString());
             }
 
             if (c == 20)
@@ -184,10 +183,36 @@ namespace Keyner_v1.View
             listKeys.Add(new KeyboardKey(txt_w, Key.W, "ц"));
             listKeys.Add(new KeyboardKey(txt_x, Key.X, "ч"));
             listKeys.Add(new KeyboardKey(txt_y, Key.Y, "н"));
-            listKeys.Add(new KeyboardKey(txt_z, Key.Z, "я"));            
+            listKeys.Add(new KeyboardKey(txt_z, Key.Z, "я"));
+
+            //testing
+            listKeys.Add(new KeyboardKey(txt_1, Key.D1, "1"));
+            listKeys.Add(new KeyboardKey(txt_1, Key.D1, "!"));
+            listKeys.Add(new KeyboardKey(txt_2, Key.D2, "2"));
+            listKeys.Add(new KeyboardKey(txt_2, Key.D2, "\""));
+            listKeys.Add(new KeyboardKey(txt_3, Key.D3, "3"));
+            listKeys.Add(new KeyboardKey(txt_3, Key.D3, "№"));
+            listKeys.Add(new KeyboardKey(txt_4, Key.D4, "4"));
+            listKeys.Add(new KeyboardKey(txt_4, Key.D4, ";"));
+            listKeys.Add(new KeyboardKey(txt_5, Key.D5, "5"));
+            listKeys.Add(new KeyboardKey(txt_5, Key.D5, "%"));
+            listKeys.Add(new KeyboardKey(txt_6, Key.D6, "6"));
+            listKeys.Add(new KeyboardKey(txt_6, Key.D6, ":"));
+            listKeys.Add(new KeyboardKey(txt_7, Key.D7, "7"));
+            listKeys.Add(new KeyboardKey(txt_7, Key.D7, "?"));
+            listKeys.Add(new KeyboardKey(txt_8, Key.D8, "8"));
+            listKeys.Add(new KeyboardKey(txt_8, Key.D8, "*"));
+            listKeys.Add(new KeyboardKey(txt_9, Key.D9, "9"));
+            listKeys.Add(new KeyboardKey(txt_9, Key.D9, "("));
+            listKeys.Add(new KeyboardKey(txt_0, Key.D0, "0"));
+            listKeys.Add(new KeyboardKey(txt_0, Key.D0, ")"));
+
+            //testing
+
             listKeys.Add(new KeyboardKey(txt_apostrof, Key.Oem3, "'"));
             listKeys.Add(new KeyboardKey(txt_minus, Key.OemMinus, "-"));
             listKeys.Add(new KeyboardKey(txt_eql, Key.OemPlus, "="));
+            listKeys.Add(new KeyboardKey(txt_eql, Key.OemPlus, "+"));
             listKeys.Add(new KeyboardKey(txt_backspace, Key.Back, "bcksp"));
             listKeys.Add(new KeyboardKey(txt_tab, Key.Tab, "tab"));
             listKeys.Add(new KeyboardKey(txt_sqrBracketLeft, Key.OemOpenBrackets, "х"));
@@ -199,6 +224,7 @@ namespace Keyner_v1.View
             listKeys.Add(new KeyboardKey(txt_shift, Key.LeftShift, "lShift"));
             listKeys.Add(new KeyboardKey(txt_coma, Key.OemComma, "б"));
             listKeys.Add(new KeyboardKey(txt_slash, Key.OemQuestion, "."));
+            listKeys.Add(new KeyboardKey(txt_slash, Key.OemQuestion, ","));
             listKeys.Add(new KeyboardKey(txt_dot, Key.OemPeriod, "ю"));            
             listKeys.Add(new KeyboardKey(txt_rightShift, Key.RightShift, "rShift"));
             listKeys.Add(new KeyboardKey(txt_leftCtrl, Key.LeftCtrl, "lCtrl"));
@@ -297,13 +323,28 @@ namespace Keyner_v1.View
                 k.txt.Background = k.background;
             }
 
+            bool symbol;
+
             if (TestController.collection.Count != 0)
             {
+                symbol = false;
                 if (char.IsUpper(TestController.collection[0]))
+                {
                     listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                }
+                else if (char.IsPunctuation(TestController.collection[0]) && TestController.collection[0] != '.' && TestController.collection[0] != '=')
+                {
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                    symbol = true;
+                }
                 else
                     listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.LightBlue;
 
+                if (symbol)
+                {
+                    int i = FindByChar(TestController.collection[0].ToString());
+                    listKeys[i].txt.Background = Brushes.Green;
+                }
                 listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
             }
         }

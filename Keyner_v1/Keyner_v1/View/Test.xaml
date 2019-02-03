@@ -70,18 +70,18 @@
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Height="45" >
                     <TextBlock Name="txt_apostrof" Width="36" Text="'" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_1" Width="36" Text="1"  Style="{StaticResource ring    }"/>
-                    <TextBlock Name="txt_2" Width="36" Text="2" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_3" Width="36" Text="3" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_4" Width="36" Text="4" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_5" Width="36" Text="5" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_6" Width="36" Text="6" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_7" Width="36" Text="7" Style="{StaticResource rightPointer}"/>
-                    <TextBlock Name="txt_8" Width="36" Text="8" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_9" Width="36" Text="9" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_0" Width="36" Text="0" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_minus" Width="36" Text="-" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_eql" Width="36" Text="=" Style="{StaticResource pinky}"/>
+                    <TextBlock Name="txt_1" Width="36" Text="1!"  Style="{StaticResource ring    }"/>
+                    <TextBlock Name="txt_2" Width="36" Text="2&quot;" Style="{StaticResource ring}"/>
+                    <TextBlock Name="txt_3" Width="38" Text="3№" Style="{StaticResource middle}"/>
+                    <TextBlock Name="txt_4" Width="36" Text="4;" Style="{StaticResource middle}"/>
+                    <TextBlock Name="txt_5" Width="36" Text="5%" Style="{StaticResource leftPointer}"/>
+                    <TextBlock Name="txt_6" Width="36" Text="6:" Style="{StaticResource leftPointer}"/>
+                    <TextBlock Name="txt_7" Width="36" Text="7?" Style="{StaticResource rightPointer}"/>
+                    <TextBlock Name="txt_8" Width="36" Text="8*" Style="{StaticResource middle}"/>
+                    <TextBlock Name="txt_9" Width="36" Text="9(" Style="{StaticResource middle}"/>
+                    <TextBlock Name="txt_0" Width="36" Text="0)" Style="{StaticResource ring}"/>
+                    <TextBlock Name="txt_minus" Width="36" Text="-_" Style="{StaticResource pinky}"/>
+                    <TextBlock Name="txt_eql" Width="36" Text="=+" Style="{StaticResource pinky}"/>
                     <TextBlock Name="txt_backspace" Width="82" Text="←" Style="{StaticResource pinky}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="45">
