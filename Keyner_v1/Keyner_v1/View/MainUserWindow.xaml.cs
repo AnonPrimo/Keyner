@@ -41,6 +41,7 @@ namespace Keyner_v1.View
             MoneyImage.Source = new BitmapImage(new Uri("/Pictures/money_im.png", UriKind.Relative));
 
             datagrid1.SelectedIndex = indexOfCurrentTest;
+            datagrid1.ScrollIntoView(datagrid1.SelectedItem);   //scrolling to current test
 
             userLevel = (int)usercon.GetUserLevel(indexOfCurrentTest);  //find user level
             //testing
