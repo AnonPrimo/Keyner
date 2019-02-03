@@ -117,7 +117,7 @@ namespace Keyner_v1.View
                 Debug.WriteLine(c.ToString());
             }
 
-            if (c == 30)
+            if (c == 20)
             {
                 startTime.Start();
                 c = 0;
