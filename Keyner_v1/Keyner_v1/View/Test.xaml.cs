@@ -123,6 +123,9 @@ namespace Keyner_v1.View
                 c = 0;
                 error = false;
                 this.PreviewTextInput += Window_PreviewTextInput;
+                Monster(2);
+                label_error.Visibility = Visibility.Collapsed;
+                ClearColors();
             }
         }
         
@@ -361,9 +364,9 @@ namespace Keyner_v1.View
 
             if (!isTestCompleted)
             {
-                Monster(2);
-                label_error.Visibility = Visibility.Collapsed;
-                ClearColors();
+                //Monster(2);
+                //label_error.Visibility = Visibility.Collapsed;
+                //ClearColors();
                 string pressedSmth = e.Text;
 
                 if (Keyboard.IsKeyDown(Key.Enter))
@@ -397,14 +400,6 @@ namespace Keyner_v1.View
 
                     error = true;
                 }
-
-                //if (error)
-                //{
-                //    error = false;
-                //    Thread.Sleep(2000);
-                //}
-                //startTime.Start();
-
             }
             else
                 EndTest();
