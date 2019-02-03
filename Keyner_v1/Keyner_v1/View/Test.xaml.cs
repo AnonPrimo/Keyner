@@ -117,9 +117,8 @@ namespace Keyner_v1.View
                 Debug.WriteLine(c.ToString());
             }
 
-            if (c == 20)
+            if (c == 25)
             {
-                startTime.Start();
                 c = 0;
                 error = false;
                 this.PreviewTextInput += Window_PreviewTextInput;
@@ -367,6 +366,7 @@ namespace Keyner_v1.View
                 //Monster(2);
                 //label_error.Visibility = Visibility.Collapsed;
                 //ClearColors();
+
                 string pressedSmth = e.Text;
 
                 if (Keyboard.IsKeyDown(Key.Enter))
@@ -375,7 +375,7 @@ namespace Keyner_v1.View
            
                 if (pressedSmth == TestController.collection[0].ToString())
                 {
-                    
+                    startTime.Start();
                     Monster(1);
                     CorrectSymbol();
                     TestController.collection.RemoveAt(0);
@@ -385,8 +385,6 @@ namespace Keyner_v1.View
                 }
                 else
                 {
-                    //startTime.Stop();
-                    
                     Monster(3);
                     int i = FindByChar(pressedSmth.ToString());
                     if (i >= 0)
