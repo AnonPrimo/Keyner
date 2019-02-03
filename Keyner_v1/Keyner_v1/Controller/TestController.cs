@@ -41,10 +41,6 @@ namespace Keyner_v1.Controller
             //{
             for (int j = 0; j < text.Length; j++)
                 {
-                //if (text[j] == '\n')
-                //{
-                //    continue;
-                //}
                 collection.Add(text[j]);
                 }
             //}
