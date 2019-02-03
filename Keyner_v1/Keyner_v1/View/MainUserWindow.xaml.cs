@@ -78,7 +78,6 @@ namespace Keyner_v1.View
         private void fillUserInfo(string name, string money)
         {
             txt1.Text = name;
-            txt1.FontSize = 20;
 
             txt2.Text = money;
             txt2.FontSize = 20;
