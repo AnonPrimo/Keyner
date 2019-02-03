@@ -407,7 +407,9 @@ namespace Keyner_v1.View
         //TO DO!!!!
         private void RulesOfTest()
         {
-            MessageBox.Show("Умови проходження тесту: \nМаксимальний час: " + controller.currentTest.MaxTime + " секунд \nКількість помилок: до " + controller.currentTest.CountMistakes + "\nУдачі!");
+            startTime.Stop();
+            if (MessageBox.Show("Умови проходження тесту: \nМаксимальний час: " + controller.currentTest.MaxTime + " секунд \nКількість помилок: до " + controller.currentTest.CountMistakes + "\nУдачі!") == MessageBoxResult.OK)
+                startTime.Start();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -419,6 +421,7 @@ namespace Keyner_v1.View
         private void Rules_Click(object sender, RoutedEventArgs e)
         {
             RulesOfTest();
+            TextToWrite.Focus();
         }
 
         private void Window_PreviewTextInput(object sender, TextCompositionEventArgs e)
