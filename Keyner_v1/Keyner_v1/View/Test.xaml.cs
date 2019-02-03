@@ -366,7 +366,16 @@ namespace Keyner_v1.View
             }
 
             if (TestController.collection.Count != 0)
+            {
+                Debug.WriteLine(TestController.collection[0]);
+
+                if (char.IsUpper(TestController.collection[0]))
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                else
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.LightBlue;
+
                 listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+            }
         }
         /// <summary>
         /// changes color of the character you need to write
@@ -414,19 +423,19 @@ namespace Keyner_v1.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (this.Title == "Тест 1")
-                RulesOfTest();
+            //if (this.Title == "Тест 1")
+            //    RulesOfTest();
         }
 
         private void Rules_Click(object sender, RoutedEventArgs e)
         {
             RulesOfTest();
-            TextToWrite.Focus();
+            
         }
 
         private void Window_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-           //MessageBox.Show($"***{e.Text}***");
+            //MessageBox.Show($"***{e.Text}***");
 
             if (!updateTime.IsEnabled)
             {

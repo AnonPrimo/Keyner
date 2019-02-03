@@ -27,6 +27,7 @@ namespace Keyner_v1.View
         {
             usercon = getUserFormController(id);
             fillWindowFields(id);
+            gamebutton.Focus();
         }
 
         //fill all user info
@@ -109,6 +110,7 @@ namespace Keyner_v1.View
             sw.ShowDialog();
 
             fillWindowFields(usercon.CurrentUser.Id);
+            gamebutton.Focus();
             this.ShowDialog();
         }
 
@@ -142,6 +144,7 @@ namespace Keyner_v1.View
             if (LvlChangeCheck(oldLvl))
                 MessageBox.Show("\tВІТАЄМО!!!\nВаш монстр став дорослішим!");
 
+            gamebutton.Focus();
             this.ShowDialog();
         }
 
