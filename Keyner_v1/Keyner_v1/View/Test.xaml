@@ -9,7 +9,6 @@
         Title="Test" Height="690" Width="1000" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
-        KeyDown="Window_KeyDown"
         PreviewTextInput="Window_PreviewTextInput">
 
     <Window.Resources>
