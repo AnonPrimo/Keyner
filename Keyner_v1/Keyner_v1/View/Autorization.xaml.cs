@@ -70,7 +70,6 @@ namespace Keyner_v1.View
                         passBox.Clear();
                         comboBoxGroup.SelectedItem = 0;
                         this.Show();
-                        RefreshAutor();
 
                     }
                     else
@@ -90,6 +89,7 @@ namespace Keyner_v1.View
             this.Hide();
             r.ShowDialog();
             this.Show();
+            RefreshAutor();
         }
 
         public void ConTest()

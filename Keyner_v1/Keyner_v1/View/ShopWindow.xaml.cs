@@ -148,6 +148,7 @@ namespace Keyner_v1.View
         {
             shopcon.SetMainMonster(monList[index].Id_Monster);
             mainMonsterButton.Background = Brushes.Cyan;
+
         }
 
         //if selected monster is set as main
