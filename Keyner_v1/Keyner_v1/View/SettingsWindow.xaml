@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="450" Width="500" WindowStartupLocation="CenterScreen" Background="CadetBlue">
-    
+        Title="Налаштування" Height="427.311" Width="597.059" WindowStartupLocation="CenterScreen" Background="CadetBlue">
+
     <Window.Resources>
         <Style x:Key="ButtonStyle">
             <Setter Property="Button.FontFamily" Value="Comic Sans MS"/>
@@ -37,8 +37,8 @@
             <Button Name="backButton" Content="Назад" Width="70" Margin="5" HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" Click="backButton_Click"/>
             <Button Name="freeUserButton" Content="Очистити користувача" HorizontalAlignment="Right" Width="220" Margin="5" Style="{StaticResource ButtonStyle}" Click="freeUserButton_Click"/>
         </DockPanel>
-        
-        <StackPanel  Grid.Row="1"  Grid.ColumnSpan="2" Background="CadetBlue" Margin="10">
+
+        <StackPanel  Grid.Row="1"  Grid.ColumnSpan="2" Background="CadetBlue" Margin="29,10,0,23" HorizontalAlignment="Left" Width="520">
             <TextBlock Text="Змінити пароль" Margin="5" FontSize="30" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TBstyle}"></TextBlock>
             <DockPanel Margin="0,5">
                 <TextBlock Text="Старий пароль:" FontSize="20" Margin="20,5,0,5" Style="{StaticResource TBstyle}"></TextBlock>
@@ -54,6 +54,6 @@
             </DockPanel>
             <Button Name="passwordButton" Content="OK" FontSize="20" HorizontalAlignment="Right" Margin="5" Width="150" Height="40" Style="{StaticResource ButtonStyle}" Click="passwordButton_Click"></Button>
         </StackPanel>
-       
+
     </Grid>
 </Window>

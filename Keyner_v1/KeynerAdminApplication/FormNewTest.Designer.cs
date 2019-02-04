@@ -35,8 +35,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDownCountRepeat = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numericUpDownMaxTime = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountMistakes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountRepeat)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxTime)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBoxText
@@ -108,11 +111,34 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Count of repeat";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(972, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Max time";
+            // 
+            // numericUpDownMaxTime
+            // 
+            this.numericUpDownMaxTime.Location = new System.Drawing.Point(969, 144);
+            this.numericUpDownMaxTime.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownMaxTime.Name = "numericUpDownMaxTime";
+            this.numericUpDownMaxTime.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownMaxTime.TabIndex = 7;
+            // 
             // FormNewTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1125, 410);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.numericUpDownMaxTime);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.numericUpDownCountRepeat);
             this.Controls.Add(this.label2);
@@ -121,9 +147,11 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBoxText);
             this.Name = "FormNewTest";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormNewTest";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountMistakes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountRepeat)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,5 +166,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDownCountRepeat;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDownMaxTime;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,7 +22,7 @@ namespace Keyner_v1.View
     {
         public TextBlock txt;
         public Key key;
-        string charKey;
+        public string charKey;
         public Brush background;
 
         public KeyboardKey(TextBlock txt, Key k, string ch)
@@ -61,10 +61,13 @@ namespace Keyner_v1.View
         TextRange textRange;
         int IdUser;
         int IdTest;
-
         string str;
         bool IsTestNew = false;
         int finishTime;
+
+        //testing 
+        bool error = false;
+        int c = 0;
 
         public Test()
         {
@@ -85,7 +88,7 @@ namespace Keyner_v1.View
             IdUser = user_id;
             IdTest = test_id;
             IsTestNew = newTest;
-            
+
             Monster(2); ///int - mood: 1- Happy 2 - Neutral 3 - Ready 4 - Sad
         }
 
@@ -106,11 +109,25 @@ namespace Keyner_v1.View
         private void timer_tick(object sender, EventArgs e)
         {
             TimeSpentLabel.Content = "Час: " + TimeSpent();
-        }
+            if (error)
+            {
+                startTime.Stop();
+                c++;
+                this.PreviewTextInput -= Window_PreviewTextInput;
+            }
 
-        /// <summary>
+            if (c == 25)
+            {
+                c = 0;
+                error = false;
+                this.PreviewTextInput += Window_PreviewTextInput;
+                Monster(2);
+                label_error.Visibility = Visibility.Collapsed;
+                ClearColors();
+            }
+        }
+        
         /// test method will be replaced
-        /// </summary>
         private void FillText()
         {
             int addText = controller.RepeatCount;
@@ -125,29 +142,19 @@ namespace Keyner_v1.View
             TextToWrite.Document = flowDoc;
             position = TextToWrite.Document.ContentStart.GetPositionAtOffset(0);
         }
-
-        /// <summary>
+        
         /// Gets the text to write from database
-        /// </summary>
-        /// 
         private void FillTextFromDatabase()
         {
-            //string str = controller.GetText(id_test);
-            //TextToWrite.Document.Blocks.Add(new Paragraph(new Run(str)));
-            //position = TextToWrite.Document.ContentStart.GetPositionAtOffset(0);
-
-
             str = controller.GetText();
             FlowDocument flowDoc = new FlowDocument();
             flowDoc.Blocks.Add(new Paragraph(new Run(str)));
             TextToWrite.Document = flowDoc;
             position = TextToWrite.Document.ContentStart.GetPositionAtOffset(0);
         }
+        
 
-        /// <summary>
         /// fills keys dictionary
-        /// </summary>
-        /// 
         private void FillKeys()
         {
             listKeys.Add(new KeyboardKey(txt_a, Key.A, "ф"));
@@ -176,9 +183,35 @@ namespace Keyner_v1.View
             listKeys.Add(new KeyboardKey(txt_x, Key.X, "ч"));
             listKeys.Add(new KeyboardKey(txt_y, Key.Y, "н"));
             listKeys.Add(new KeyboardKey(txt_z, Key.Z, "я"));
+
+            //testing
+            listKeys.Add(new KeyboardKey(txt_1, Key.D1, "1"));
+            listKeys.Add(new KeyboardKey(txt_1, Key.D1, "!"));
+            listKeys.Add(new KeyboardKey(txt_2, Key.D2, "2"));
+            listKeys.Add(new KeyboardKey(txt_2, Key.D2, "\""));
+            listKeys.Add(new KeyboardKey(txt_3, Key.D3, "3"));
+            listKeys.Add(new KeyboardKey(txt_3, Key.D3, "№"));
+            listKeys.Add(new KeyboardKey(txt_4, Key.D4, "4"));
+            listKeys.Add(new KeyboardKey(txt_4, Key.D4, ";"));
+            listKeys.Add(new KeyboardKey(txt_5, Key.D5, "5"));
+            listKeys.Add(new KeyboardKey(txt_5, Key.D5, "%"));
+            listKeys.Add(new KeyboardKey(txt_6, Key.D6, "6"));
+            listKeys.Add(new KeyboardKey(txt_6, Key.D6, ":"));
+            listKeys.Add(new KeyboardKey(txt_7, Key.D7, "7"));
+            listKeys.Add(new KeyboardKey(txt_7, Key.D7, "?"));
+            listKeys.Add(new KeyboardKey(txt_8, Key.D8, "8"));
+            listKeys.Add(new KeyboardKey(txt_8, Key.D8, "*"));
+            listKeys.Add(new KeyboardKey(txt_9, Key.D9, "9"));
+            listKeys.Add(new KeyboardKey(txt_9, Key.D9, "("));
+            listKeys.Add(new KeyboardKey(txt_0, Key.D0, "0"));
+            listKeys.Add(new KeyboardKey(txt_0, Key.D0, ")"));
+
+            //testing
+
             listKeys.Add(new KeyboardKey(txt_apostrof, Key.Oem3, "'"));
             listKeys.Add(new KeyboardKey(txt_minus, Key.OemMinus, "-"));
             listKeys.Add(new KeyboardKey(txt_eql, Key.OemPlus, "="));
+            listKeys.Add(new KeyboardKey(txt_eql, Key.OemPlus, "+"));
             listKeys.Add(new KeyboardKey(txt_backspace, Key.Back, "bcksp"));
             listKeys.Add(new KeyboardKey(txt_tab, Key.Tab, "tab"));
             listKeys.Add(new KeyboardKey(txt_sqrBracketLeft, Key.OemOpenBrackets, "х"));
@@ -190,7 +223,8 @@ namespace Keyner_v1.View
             listKeys.Add(new KeyboardKey(txt_shift, Key.LeftShift, "lShift"));
             listKeys.Add(new KeyboardKey(txt_coma, Key.OemComma, "б"));
             listKeys.Add(new KeyboardKey(txt_slash, Key.OemQuestion, "."));
-            listKeys.Add(new KeyboardKey(txt_dot, Key.OemPeriod, "ю"));
+            listKeys.Add(new KeyboardKey(txt_slash, Key.OemQuestion, ","));
+            listKeys.Add(new KeyboardKey(txt_dot, Key.OemPeriod, "ю"));            
             listKeys.Add(new KeyboardKey(txt_rightShift, Key.RightShift, "rShift"));
             listKeys.Add(new KeyboardKey(txt_leftCtrl, Key.LeftCtrl, "lCtrl"));
             listKeys.Add(new KeyboardKey(txt_leftAlt, Key.LeftAlt, "lAlt"));
@@ -200,101 +234,36 @@ namespace Keyner_v1.View
             listKeys.Add(new KeyboardKey(txt_rightCtrl, Key.RightCtrl, "rCtrl"));
         }
 
-        /// <summary>
-        /// checks is pressed the correct button
-        /// </summary>
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-         {
-            if (!updateTime.IsEnabled)
-            {
-                startTime.Start();
-                updateTime.Start();
-                
-            }
-            if (!isTestCompleted)
-            {
-                Monster(2);
-                label_error.Visibility = Visibility.Collapsed;
-                ClearColors();
-                Key pressedKey = e.Key;
-                if (pressedKey == listKeys[FindByChar(TestController.collection[0].ToString())].key)
-                {
-                    Monster(1);
-                    CorrectSymbol();
-                    TestController.collection.RemoveAt(0);
-                    if (TestController.collection.Count == 1) isTestCompleted = true;
-                    ClearColors();
-                }
-                else
-                {
-                    Monster(3);
-                    int i = FindByKey(pressedKey);
-                    if (i >= 0)
-                        listKeys[i].txt.Background = Brushes.Red;
-                    label_error.Visibility = Visibility.Visible;
-                    mistakes++;
-                    MistakesLabel.Content = "Кількість помилок: " + mistakes;
-                }
-            }
-            else
-            {
-                updateTime.Stop();
-                startTime.Stop();
-                ClearColors();
-                finishTime = startTime.Elapsed.Minutes * 60 + startTime.Elapsed.Seconds;
-                bool is_passed = false;
-                string avgSpeed = controller.GetSpeed(IdUser, finishTime).ToString();
-                string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)(InputText.Text.Length + mistakes)) * 100), 2).ToString();
-                string toShow;
-                if (mistakes > controller.currentTest.CountMistakes)
-                {
-                    Monster(4);
-                    toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
-                   
-                }
-                else
-                {
-                    Monster(1);
-                    is_passed = true;
-                    toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: " + controller.GetMoney(GetMark(is_passed)) + "\nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
-                }
-                MessageBox.Show(toShow);
-                if (!IsTestNew)
-                    controller.FillNewStatistic(IdUser, finishTime, is_passed, mistakes, GetMark(is_passed)); 
-                else
-                    controller.UpdateStatisctic(IdUser, finishTime, mistakes, GetMark(is_passed), is_passed);
-                this.Close();
-            }
-        }
-        
+
         private int GetMark(bool is_passed)
         {
             double procMistakes = 100 * mistakes / controller.currentTest.CountMistakes;
+            int time = controller.currentTest.MaxTime;
             if (is_passed)
             {
-                if(IdTest < 185)
-                    if (finishTime <= 60 && procMistakes <= 20)
+                if (IdTest < 185)
+                    if (finishTime <= time && procMistakes <= 20)
                         return 3;
                     else
-                    if (finishTime <= 60 && procMistakes <= 60)
+                    if (finishTime <= time && procMistakes <= 60)
                         return 2;
                     else
                         return 1;
                 else
-                    if(IdTest < 213)
-                    if (finishTime <= 90 && procMistakes <= 20)
+                    if (IdTest < 213)
+                    if (finishTime <= time && procMistakes <= 20)
                         return 3;
                     else
-                   if (finishTime <= 90 && procMistakes <= 60)
+                   if (finishTime <= time && procMistakes <= 60)
                         return 2;
                     else
                         return 1;
                 else
-                    if(IdTest >= 213)
-                    if (finishTime <= 120 && procMistakes <= 20)
+                    if (IdTest >= 213)
+                    if (finishTime <= time && procMistakes <= 20)
                         return 3;
                     else
-                   if (finishTime <= 120 && procMistakes <= 60)
+                   if (finishTime <= time && procMistakes <= 60)
                         return 2;
                     else
                         return 1;
@@ -310,14 +279,11 @@ namespace Keyner_v1.View
 
         private double TimeSpentMinutes()
         {
-            
             double timeSpentMinutes = startTime.Elapsed.Minutes + (startTime.Elapsed.Seconds + startTime.Elapsed.Milliseconds / 1000) / 60;
             return timeSpentMinutes;
         }
-
-        /// <summary>
+        
         /// if pressed the correct button moves the position forward and adds the right characted in the In
-        /// </summary>
         private void CorrectSymbol()
         {
             SkipEmpty();
@@ -334,7 +300,7 @@ namespace Keyner_v1.View
             while (textRange.Text == "")
             {
                 c++;
-                if (c==4)
+                if (c == 4)
                     InputText.Text += Environment.NewLine;
 
                 SetPositions();
@@ -346,8 +312,7 @@ namespace Keyner_v1.View
         {
             var startPos = position.GetPositionAtOffset(0);
             var endPos = position.GetPositionAtOffset(1);
-             textRange = new TextRange(startPos, endPos);
-
+            textRange = new TextRange(startPos, endPos);
         }
 
         private void ClearColors()
@@ -355,39 +320,41 @@ namespace Keyner_v1.View
             foreach (KeyboardKey k in listKeys)
             {
                 k.txt.Background = k.background;
-
-
-                //if (TestController.collection.Count != 0)
-                //    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
             }
 
-            if (TestController.collection.Count != 0)
-                listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+            bool symbol;
 
+            if (TestController.collection.Count != 0)
+            {
+                symbol = false;
+                if (char.IsUpper(TestController.collection[0]))
+                {
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                }
+                else if (char.IsPunctuation(TestController.collection[0]) && TestController.collection[0] != '.' && TestController.collection[0] != '=')
+                {
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                    symbol = true;
+                }
+                else
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.LightBlue;
+
+                if (symbol)
+                {
+                    int i = FindByChar(TestController.collection[0].ToString());
+                    listKeys[i].txt.Background = Brushes.Green;
+                }
+                listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+            }
         }
-        /// <summary>
+        
         /// changes color of the character you need to write
-        /// </summary>
         private void ChangeColorByPosition()
         {
             textRange.ApplyPropertyValue(TextElement.BackgroundProperty, new SolidColorBrush(Colors.Green));
             current = textRange.Text;
-
         }
         
-        /// <summary>
-        /// finds a needed listKeys index by Key
-        /// </summary>
-        /// <param name="k"></param>
-        private int FindByKey(Key k)
-        {
-            for (int i = 0; i < listKeys.Count; i++)
-            {
-                if (listKeys[i].EqualsKey(k)) return i;
-            }
-            return -1;
-        }
-
         private int FindByChar(string k)
         {
             for (int i = 0; i < listKeys.Count; i++)
@@ -401,6 +368,109 @@ namespace Keyner_v1.View
         {
             MonsterImage.Source = controller.GetMonster(IdUser, mood);
         }
+        
+        private void RulesOfTest()
+        {
+            startTime.Stop();
+            if (MessageBox.Show("Умови проходження тесту: \nМаксимальний час: " + controller.currentTest.MaxTime + " секунд \nДопустима кількість помилок: " + controller.currentTest.CountMistakes + "\nУдачі!") == MessageBoxResult.OK)
+                startTime.Start();
+        }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (this.Title == "Тест 1")
+                RulesOfTest();
+        }
+
+        private void Rules_Click(object sender, RoutedEventArgs e)
+        {
+            RulesOfTest();
+            Rules.Focusable = false;
+
+        }
+
+        private void Window_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+            //string keyChar1 = (Char)System.Text.Encoding.Unicode.GetBytes(e.Text)[0] + (Char)System.Text.Encoding.Unicode.GetBytes(e.Text)[1]+"";
+            //Char keyChar = (Char)int.Parse(keyChar1); 
+            //Debug.WriteLine("Key code: " + keyChar1 + "Key: " + keyChar );
+         
+            if (!updateTime.IsEnabled)
+            {
+                startTime.Start();
+                updateTime.Start();
+            }
+
+            if (!isTestCompleted)
+            {
+                //Monster(2);
+                //label_error.Visibility = Visibility.Collapsed;
+                //ClearColors();
+
+                string pressedSmth = e.Text;
+
+                if (Keyboard.IsKeyDown(Key.Enter))
+                    pressedSmth = "\n";
+
+           
+                if (pressedSmth == TestController.collection[0].ToString())
+                {
+                    startTime.Start();
+                    Monster(1);
+                    CorrectSymbol();
+                    TestController.collection.RemoveAt(0);
+                    if (TestController.collection.Count == 1)
+                        isTestCompleted = true;
+                    ClearColors();
+                }
+                else
+                {
+                    Monster(3);
+                    int i = FindByChar(pressedSmth.ToString());
+                    if (i >= 0)
+                        listKeys[i].txt.Background = Brushes.Red;
+                    label_error.Visibility = Visibility.Visible;
+                    mistakes++;
+                    MistakesLabel.Content = "Кількість помилок: " + mistakes;
+
+                    if (mistakes > controller.currentTest.CountMistakes)
+                        EndTest();
+
+                    error = true;
+                }
+            }
+            else
+                EndTest();
+        }
+        
+        private void EndTest()
+        {
+            updateTime.Stop();
+            startTime.Stop();
+            ClearColors();
+            finishTime = startTime.Elapsed.Minutes * 60 + startTime.Elapsed.Seconds;
+            bool is_passed = false;
+            string avgSpeed = controller.GetSpeed(IdUser, finishTime).ToString();
+            string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)(InputText.Text.Length + mistakes)) * 100), 2).ToString();
+            string toShow;
+            if (mistakes > controller.currentTest.CountMistakes)
+            {
+                Monster(4);
+                toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+            }
+            else
+            {
+                Monster(1);
+                is_passed = true;
+                toShow = "Ви успішно пройшли тест!\nЧасу витрачено: " + TimeSpent() + "\nЗароблено монет: " + controller.GetMoney(GetMark(is_passed)) + "\nСередня швидкість: " + avgSpeed + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
+            }
+            MessageBox.Show(toShow);
+            if (!IsTestNew)
+                controller.FillNewStatistic(IdUser, finishTime, is_passed, mistakes, GetMark(is_passed));
+            else
+                controller.UpdateStatisctic(IdUser, finishTime, mistakes, GetMark(is_passed), is_passed);
+            this.Close();
+        }
     }
 }

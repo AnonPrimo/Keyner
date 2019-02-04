@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Shop" Height="650" Width="800" Background="MintCream" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Магазин" Height="650" Width="800" Background="MintCream" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Window.Resources>
         <Style x:Key="TextBlockStyle">
             <Setter Property="TextBlock.FontFamily" Value="Times New Roman" />

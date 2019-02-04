@@ -41,7 +41,7 @@ namespace Keyner_v1.Controller
             //{
             for (int j = 0; j < text.Length; j++)
                 {
-                    collection.Add(text[j]);
+                collection.Add(text[j]);
                 }
             //}
             return text;

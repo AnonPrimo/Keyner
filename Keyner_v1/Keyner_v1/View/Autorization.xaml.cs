@@ -25,6 +25,7 @@ namespace Keyner_v1.View
 
         public List<Model.Group> group;
         public List<Model.User> user;
+        bool showPass = false;
 
         public Autorization()
         {
@@ -69,7 +70,6 @@ namespace Keyner_v1.View
                         passBox.Clear();
                         comboBoxGroup.SelectedItem = 0;
                         this.Show();
-                        RefreshAutor();
 
                     }
                     else
@@ -89,6 +89,7 @@ namespace Keyner_v1.View
             this.Hide();
             r.ShowDialog();
             this.Show();
+            RefreshAutor();
         }
 
         public void ConTest()
@@ -166,6 +167,18 @@ namespace Keyner_v1.View
             comboBoxUser.ItemsSource = us.OrderBy(u => u.Name);
         }
 
-        
+        private void passBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                this.Button_Click(sender, e);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if(!showPass)
+            {
+                passBox.Visibility = System.Windows.Visibility.Visible;
+            }
+        }
     }
 }
