@@ -90,6 +90,7 @@ namespace Keyner_v1.View
             IsTestNew = newTest;
 
             Monster(2); ///int - mood: 1- Happy 2 - Neutral 3 - Ready 4 - Sad
+            BestTimeLabel.Content += controller.currentTest.BestTime.ToString();
         }
 
         private void FillForm(int test_id)
@@ -104,6 +105,7 @@ namespace Keyner_v1.View
             updateTime = new DispatcherTimer();
             updateTime.Interval = new TimeSpan(0, 0, 0, 0, 10);
             updateTime.Tick += timer_tick;
+            
         }
 
         private void timer_tick(object sender, EventArgs e)
