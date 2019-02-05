@@ -326,25 +326,38 @@ namespace Keyner_v1.View
 
             if (TestController.collection.Count != 0)
             {
-                symbol = false;
-                if (char.IsUpper(TestController.collection[0]))
+                var tmp = listKeys.Where(k => k.charKey == TestController.collection[0].ToString()).First();
+                var pair = listKeys.Where(k => k.key == tmp.key).ToList();
+                if (TestController.collection[0].ToString() == pair[0].charKey)
                 {
-                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
-                }
-                else if (char.IsPunctuation(TestController.collection[0]) && TestController.collection[0] != '.' && TestController.collection[0] != '=')
-                {
-                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
-                    symbol = true;
+                    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
                 }
                 else
-                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.LightBlue;
-
-                if (symbol)
                 {
-                    int i = FindByChar(TestController.collection[0].ToString());
-                    listKeys[i].txt.Background = Brushes.Green;
+                    //if character is symbol press Shift
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
                 }
-                listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+
+                //symbol = false;
+                //if (char.IsUpper(TestController.collection[0]))
+                //{
+                //    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                //}
+                //else if (char.IsPunctuation(TestController.collection[0]) && TestController.collection[0] != '.' && TestController.collection[0] != '=')
+                //{
+                //    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                //    symbol = true;
+                //}
+                //else
+                //    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.LightBlue;
+
+                //if (symbol)
+                //{
+                //    int i = FindByChar(TestController.collection[0].ToString());
+                //    listKeys[i].txt.Background = Brushes.Green;
+                //}
+                //listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
             }
         }
         
@@ -374,12 +387,6 @@ namespace Keyner_v1.View
             startTime.Stop();
             if (MessageBox.Show("Умови проходження тесту: \nМаксимальний час: " + controller.currentTest.MaxTime + " секунд \nДопустима кількість помилок: " + controller.currentTest.CountMistakes + "\nУдачі!") == MessageBoxResult.OK)
                 startTime.Start();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (this.Title == "Тест 1")
-                RulesOfTest();
         }
 
         private void Rules_Click(object sender, RoutedEventArgs e)
@@ -413,8 +420,13 @@ namespace Keyner_v1.View
                 if (Keyboard.IsKeyDown(Key.Enter))
                     pressedSmth = "\n";
 
-           
-                if (pressedSmth == TestController.collection[0].ToString())
+                Key pressedKey;
+                if (listKeys.Count(k => k.charKey == pressedSmth) > 0)
+                    pressedKey = listKeys.Where(k => k.charKey == pressedSmth).First().key;
+                else
+                    pressedKey = Key.Space;
+
+                if (pressedSmth == TestController.collection[0].ToString() && Keyboard.IsKeyDown(pressedKey))
                 {
                     startTime.Start();
                     Monster(1);

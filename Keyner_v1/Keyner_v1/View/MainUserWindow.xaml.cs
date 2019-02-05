@@ -173,6 +173,8 @@ namespace Keyner_v1.View
                     gamebutton.IsEnabled = true;
                 else
                     gamebutton.IsEnabled = false;
+
+                gamebutton.Focus();
             }
             catch { }
         }

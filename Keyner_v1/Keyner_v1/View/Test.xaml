@@ -8,7 +8,6 @@
         mc:Ignorable="d"
         Title="Test" Height="690" Width="1000" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Loaded="Window_Loaded"
         PreviewTextInput="Window_PreviewTextInput">
 
     <Window.Resources>
@@ -127,7 +126,7 @@
                     <TextBlock Name="txt_m" Width="36" Text="Ь" Style="{StaticResource rightPointer}"/>
                     <TextBlock Name="txt_coma" Width="36" Text="Б" Style="{StaticResource middle}"/>
                     <TextBlock Name="txt_dot" Width="36" Text="Ю" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_slash" Width="36" Text="." Style="{StaticResource pinky}"/>
+                    <TextBlock Name="txt_slash" Width="36" Text=". ," Style="{StaticResource pinky}"/>
                     <TextBlock Name="txt_rightShift" Width="109" Text="Shift"  Style="{StaticResource pinky}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="45">
