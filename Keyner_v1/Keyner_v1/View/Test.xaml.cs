@@ -328,18 +328,25 @@ namespace Keyner_v1.View
 
             if (TestController.collection.Count != 0)
             {
-                var tmp = listKeys.Where(k => k.charKey == TestController.collection[0].ToString()).First();
+                var tmp = listKeys.Where(k => k.charKey == TestController.collection[0].ToString().ToLower()).First();
                 var pair = listKeys.Where(k => k.key == tmp.key).ToList();
-                if (TestController.collection[0].ToString() == pair[0].charKey)
+                if (Char.IsUpper(TestController.collection[0]) && TestController.collection[0].ToString() == pair[0].charKey)
                 {
-                    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+                    //if character is in upper case
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                }
+                else if (TestController.collection[0].ToString() == pair[0].charKey)
+                {
+                    //if character is in lower case
+                    ;
                 }
                 else
                 {
                     //if character is symbol press Shift
                     listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
-                    listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
                 }
+                listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+
 
                 //symbol = false;
                 //if (char.IsUpper(TestController.collection[0]))
@@ -423,8 +430,8 @@ namespace Keyner_v1.View
                     pressedSmth = "\n";
 
                 Key pressedKey;
-                if (listKeys.Count(k => k.charKey == pressedSmth) > 0)
-                    pressedKey = listKeys.Where(k => k.charKey == pressedSmth).First().key;
+                if (listKeys.Count(k => k.charKey == pressedSmth.ToLower()) > 0)
+                    pressedKey = listKeys.Where(k => k.charKey == pressedSmth.ToLower()).First().key;
                 else
                     pressedKey = Key.Space;
 
