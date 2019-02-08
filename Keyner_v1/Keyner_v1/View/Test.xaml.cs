@@ -15,6 +15,8 @@ using Keyner_v1.Controller;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Keyner_v1.View
 {
@@ -64,6 +66,7 @@ namespace Keyner_v1.View
         string str;
         bool IsTestNew = false;
         int finishTime;
+        MediaPlayer mediaPlayer;
 
         //testing 
         bool error = false;
@@ -91,6 +94,7 @@ namespace Keyner_v1.View
 
             Monster(2); ///int - mood: 1- Happy 2 - Neutral 3 - Ready 4 - Sad
             BestTimeLabel.Content += controller.currentTest.BestTime.ToString();
+
         }
 
         private void FillForm(int test_id)
@@ -118,7 +122,7 @@ namespace Keyner_v1.View
                 this.PreviewTextInput -= Window_PreviewTextInput;
             }
 
-            if (c == 25)
+            if (c == 100)
             {
                 c = 0;
                 error = false;
@@ -126,6 +130,8 @@ namespace Keyner_v1.View
                 Monster(2);
                 label_error.Visibility = Visibility.Collapsed;
                 ClearColors();
+                mediaPlayer.Stop();
+                mediaPlayer.Close();
             }
         }
         
@@ -155,7 +161,6 @@ namespace Keyner_v1.View
             position = TextToWrite.Document.ContentStart.GetPositionAtOffset(0);
         }
         
-
         /// fills keys dictionary
         private void FillKeys()
         {
@@ -348,25 +353,25 @@ namespace Keyner_v1.View
                 listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
 
 
-                //symbol = false;
-                //if (char.IsUpper(TestController.collection[0]))
-                //{
-                //    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
-                //}
-                //else if (char.IsPunctuation(TestController.collection[0]) && TestController.collection[0] != '.' && TestController.collection[0] != '=')
-                //{
-                //    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
-                //    symbol = true;
-                //}
-                //else
-                //    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.LightBlue;
+               /* symbol = false;
+                if (char.IsUpper(TestController.collection[0]))
+                {
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                }
+                else if (char.IsPunctuation(TestController.collection[0]) && TestController.collection[0] != '.' && TestController.collection[0] != '=')
+                {
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.Green;
+                    symbol = true;
+                }
+                else
+                    listKeys.Where(k => k.charKey == "lShift").First().txt.Background = Brushes.LightBlue;
 
-                //if (symbol)
-                //{
-                //    int i = FindByChar(TestController.collection[0].ToString());
-                //    listKeys[i].txt.Background = Brushes.Green;
-                //}
-                //listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;
+                if (symbol)
+                {
+                    int i = FindByChar(TestController.collection[0].ToString());
+                    listKeys[i].txt.Background = Brushes.Green;
+                }
+                listKeys[FindByChar(TestController.collection[0].ToString())].txt.Background = Brushes.Green;*/
             }
         }
         
@@ -405,9 +410,8 @@ namespace Keyner_v1.View
 
         }
 
-        private void Window_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private async void Window_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
             //string keyChar1 = (Char)System.Text.Encoding.Unicode.GetBytes(e.Text)[0] + (Char)System.Text.Encoding.Unicode.GetBytes(e.Text)[1]+"";
             //Char keyChar = (Char)int.Parse(keyChar1); 
             //Debug.WriteLine("Key code: " + keyChar1 + "Key: " + keyChar );
@@ -447,6 +451,8 @@ namespace Keyner_v1.View
                 }
                 else
                 {
+                    PlayError();
+
                     Monster(3);
                     int i = FindByChar(pressedSmth.ToString());
                     if (i >= 0)
@@ -492,6 +498,13 @@ namespace Keyner_v1.View
             else
                 controller.UpdateStatisctic(IdUser, finishTime, mistakes, GetMark(is_passed), is_passed);
             this.Close();
+        }
+        private void PlayError()
+        {
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.Open(new Uri(@"..\..\Sound_Error.wav", UriKind.Relative));
+            mediaPlayer.Play();
+            
         }
     }
 }
