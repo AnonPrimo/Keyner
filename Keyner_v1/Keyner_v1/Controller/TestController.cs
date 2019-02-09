@@ -107,8 +107,9 @@ namespace Keyner_v1.Controller
         {
             Statistic statistic;
             using (context = new KeynerContext())
+            {
                 statistic = context.StatisticSet.Where(s => s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList()[0];
-            
+            }
             if (!statistic.IsPassed && is_passed)
             {
                 //якщо тест був не пройденний і ми його пройшли
@@ -121,7 +122,7 @@ namespace Keyner_v1.Controller
                 SetUserMoney(id_user, mark);
 
                 using (context = new KeynerContext())
-                    context.SaveChanges();
+                { context.SaveChanges(); }
             }
             else if (time <= statistic.Time && mistakes <= statistic.CountMistakes && mark >= statistic.Mark)
             {
@@ -133,7 +134,7 @@ namespace Keyner_v1.Controller
                 if(is_passed)
                     BesTime(time);
                 using (context = new KeynerContext())
-                    context.SaveChanges();
+                { context.SaveChanges(); }
             }
         }
         
@@ -209,7 +210,7 @@ namespace Keyner_v1.Controller
             List<Statistic> statistic;
 
             using (context = new KeynerContext())
-                statistic = context.StatisticSet.Where(s => s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList();
+            { statistic = context.StatisticSet.Where(s => s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList(); }
 
             foreach (var item in statistic)
             {
