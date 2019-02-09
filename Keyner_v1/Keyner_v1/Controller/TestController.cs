@@ -109,32 +109,30 @@ namespace Keyner_v1.Controller
             using (context = new KeynerContext())
             {
                 statistic = context.StatisticSet.Where(s => s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList()[0];
-            }
-            if (!statistic.IsPassed && is_passed)
-            {
-                //якщо тест був не пройденний і ми його пройшли
-                statistic.IsPassed = is_passed;
-                statistic.Time = time;
-                statistic.Mark = mark;
-                statistic.CountMistakes = mistakes;
 
-                BesTime(time);
-                SetUserMoney(id_user, mark);
+                if (!statistic.IsPassed && is_passed)
+                {
+                    //якщо тест був не пройденний і ми його пройшли
+                    statistic.IsPassed = is_passed;
+                    statistic.Time = time;
+                    statistic.Mark = mark;
+                    statistic.CountMistakes = mistakes;
+                    context.SaveChanges();
 
-                using (context = new KeynerContext())
-                { context.SaveChanges(); }
-            }
-            else if (time <= statistic.Time && mistakes <= statistic.CountMistakes && mark >= statistic.Mark)
-            {
-                statistic.Time = time;
-                statistic.Mark = mark;
-                statistic.CountMistakes = mistakes;            
-
-                ///найкращий час в пройденому тесті
-                if(is_passed)
                     BesTime(time);
-                using (context = new KeynerContext())
-                { context.SaveChanges(); }
+                    SetUserMoney(id_user, mark);
+                }
+                else if (time <= statistic.Time && mistakes <= statistic.CountMistakes && mark >= statistic.Mark)
+                {
+                    statistic.Time = time;
+                    statistic.Mark = mark;
+                    statistic.CountMistakes = mistakes;
+                    context.SaveChanges();
+
+                    ///найкращий час в пройденому тесті
+                    if (is_passed)
+                        BesTime(time);
+                }
             }
         }
         
@@ -187,6 +185,7 @@ namespace Keyner_v1.Controller
             {
                 user = context.UserSet.Find(id_user);
                 currentMonster = context.MonsterLevelSet.Where(m => m.Id_Monster == user.Id_Monster).ToList()[0];
+                
             }
             switch (mood)
             {
