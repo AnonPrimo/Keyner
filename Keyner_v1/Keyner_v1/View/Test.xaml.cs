@@ -122,7 +122,7 @@ namespace Keyner_v1.View
                 this.PreviewTextInput -= Window_PreviewTextInput;
             }
 
-            if (c == 100)
+            if (c == 25)
             {
                 c = 0;
                 error = false;

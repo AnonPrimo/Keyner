@@ -17,7 +17,6 @@ namespace Keyner_v1.Controller
         public int RepeatCount { get; set; }
         public static List<Char> collection = new List<Char>();
         public Test currentTest;
-        
 
         KeynerContext context;
 
@@ -25,26 +24,36 @@ namespace Keyner_v1.Controller
 
         public TestController(int test_id)
         {
-
-            context = new KeynerContext();
-            currentTest = context.TestSet.Find(test_id);
+            GetCurrentTest(test_id);
             //myMethod();
 
+        }
+
+        private void GetCurrentTest(int id)
+        {
+            using (context = new KeynerContext())
+            {
+                currentTest = context.TestSet.Find(id);
+            }
         }
 
         public string GetText()
         {
             collection.Clear();
-            text = currentTest.Text;
-            //RepeatCount = 3;
-            //for (int i = 0; i < RepeatCount; i++)
-            //{
-            for (int j = 0; j < text.Length; j++)
+            using (context = new KeynerContext())
+            {
+                text = currentTest.Text;
+            }
+                //RepeatCount = 3;
+                //for (int i = 0; i < RepeatCount; i++)
+                //{
+                for (int j = 0; j < text.Length; j++)
                 {
-                collection.Add(text[j]);
+                    collection.Add(text[j]);
                 }
-            //}
-            return text;
+                //}
+                return text;
+            
         }
 
         public void myMethod()
@@ -86,15 +95,20 @@ namespace Keyner_v1.Controller
                 BesTime(time);
                 SetUserMoney(id_user, mark);
             }
-            context.StatisticSet.Add(statistic);
-            context.SaveChanges();
-
+            using (context = new KeynerContext())
+            {
+                context.StatisticSet.Add(statistic);
+                context.SaveChanges();
+            }
         }
 
         ///якщо тест вже існує апдейтимо його статистику 
         public void UpdateStatisctic(int id_user, int time, int mistakes, int mark, bool is_passed)
         {
-            Statistic statistic = context.StatisticSet.Where(s=>s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList()[0];
+            Statistic statistic;
+            using (context = new KeynerContext())
+                statistic = context.StatisticSet.Where(s => s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList()[0];
+            
             if (!statistic.IsPassed && is_passed)
             {
                 //якщо тест був не пройденний і ми його пройшли
@@ -106,7 +120,8 @@ namespace Keyner_v1.Controller
                 BesTime(time);
                 SetUserMoney(id_user, mark);
 
-                context.SaveChanges();
+                using (context = new KeynerContext())
+                    context.SaveChanges();
             }
             else if (time <= statistic.Time && mistakes <= statistic.CountMistakes && mark >= statistic.Mark)
             {
@@ -117,8 +132,8 @@ namespace Keyner_v1.Controller
                 ///найкращий час в пройденому тесті
                 if(is_passed)
                     BesTime(time);
-
-                context.SaveChanges();
+                using (context = new KeynerContext())
+                    context.SaveChanges();
             }
         }
         
@@ -127,8 +142,11 @@ namespace Keyner_v1.Controller
         {
             if (currentTest.BestTime > time || currentTest.BestTime == 0)
             {
-                context.TestSet.Where(t => t.Id == currentTest.Id).First().BestTime = time;
-                context.SaveChanges();
+                using (context = new KeynerContext())
+                {
+                    context.TestSet.Where(t => t.Id == currentTest.Id).First().BestTime = time;
+                    context.SaveChanges();
+                }
             }
         }
 
@@ -149,20 +167,26 @@ namespace Keyner_v1.Controller
 
         private void SetUserMoney(int id_us, int mark)
         {
-            User user = context.UserSet.Find(id_us);
-            user.Money += GetMoney(mark);
+            using (context = new KeynerContext())
+            {
+                User user = context.UserSet.Find(id_us);
+                user.Money += GetMoney(mark);
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
         }
 
         public BitmapImage GetMonster(int id_user, int mood)
         {
             BitmapImage im = new BitmapImage();
+            User user;
+            MonsterLevel currentMonster;
 
-            User user = context.UserSet.Find(id_user);
-
-            MonsterLevel currentMonster = context.MonsterLevelSet.Where(m => m.Id_Monster == user.Id_Monster).ToList()[0];
-
+            using (context = new KeynerContext())
+            {
+                user = context.UserSet.Find(id_user);
+                currentMonster = context.MonsterLevelSet.Where(m => m.Id_Monster == user.Id_Monster).ToList()[0];
+            }
             switch (mood)
             {
                 case 1:
@@ -182,17 +206,17 @@ namespace Keyner_v1.Controller
         {
             int time = finishTime;
             int count = 1;
-            List<Statistic> statistic = context.StatisticSet.Where(s => s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList();
+            List<Statistic> statistic;
+
+            using (context = new KeynerContext())
+                statistic = context.StatisticSet.Where(s => s.Id_User == id_user && s.Id_Test == currentTest.Id).ToList();
 
             foreach (var item in statistic)
             {
                 time += item.Time;
                 count++;
             }
-
             return time / count;
-
         }
-
     }
 }
