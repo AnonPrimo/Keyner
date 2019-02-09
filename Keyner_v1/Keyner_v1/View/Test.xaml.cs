@@ -114,6 +114,8 @@ namespace Keyner_v1.View
 
         private void timer_tick(object sender, EventArgs e)
         {
+            if (startTime.Elapsed.Seconds > controller.currentTest.MaxTime)
+                EndTest();
             TimeSpentLabel.Content = "Час: " + TimeSpent();
             if (error)
             {
@@ -481,7 +483,7 @@ namespace Keyner_v1.View
             string avgSpeed = controller.GetSpeed(IdUser, finishTime).ToString();
             string accuracy = Math.Round((((double)(InputText.Text.Length) / (double)(InputText.Text.Length + mistakes)) * 100), 2).ToString();
             string toShow;
-            if (mistakes > controller.currentTest.CountMistakes)
+            if (mistakes > controller.currentTest.CountMistakes || finishTime > controller.currentTest.MaxTime)
             {
                 Monster(4);
                 toShow = "Ви провалили тест.\nЧасу витрачено: " + TimeSpent() + "\nКількість помилок: " + mistakes + "\nТочність: " + accuracy + "%";
