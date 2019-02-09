@@ -5,61 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="MainUserWindow" Height="450" Width="750" Background="LightCyan">
+        Title="Головне вікно користувача" Height="467.647" Width="881.513" Background="#FF6AD7DA" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key = "ButtonStyle" TargetType = "Button">
+            <Setter Property = "Foreground" Value = "Black" />
+            <Style.Triggers>
+                <Trigger Property = "IsMouseOver" Value = "True">
+                    <Setter Property="FontSize" Value="30"/>
+                    <Setter Property = "Foreground" Value = "Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TBstyle">
+            <Setter Property="TextBlock.FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="TextBlock.FontSize" Value="35" />
+            <Setter Property="TextBlock.FontWeight" Value="Thin"/>
+            <Setter Property="TextBlock.Foreground" Value="Black"/>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="300"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Name="datagrid1" Grid.Column="0" Grid.RowSpan="3" Margin="10"  Background="Lavender" SelectionUnit="FullRow" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" SelectionChanged="datagrid1_SelectionChanged">
+        <DataGrid Name="datagrid1" Grid.Column="0" Grid.RowSpan="3" Margin="10" IsReadOnly="True" AutoGenerateColumns="False" Background="#FFC4EAEE" SelectionUnit="FullRow" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" SelectionChanged="datagrid1_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Тест" Binding="{Binding TestName}" />
                 <DataGridTextColumn Header="Найкращий час" Binding="{Binding BestTime}" />
                 <DataGridTemplateColumn Header="Оцінка">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Mark}" />
+                            <Image Source="{Binding Mark}" Width="60" Height="40" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Час" Binding="{Binding Time}" />
+                <DataGridTextColumn Header="Час" Width="45" Binding="{Binding Time}" />
                 <DataGridTextColumn Header="Помилки" Binding="{Binding Mistakes}" />
-                <DataGridTemplateColumn Header="Пройдено">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsThingPhase1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                
-
+                <DataGridCheckBoxColumn Header="Пройдено" Binding="{Binding IsPassed}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Center">
-            <TextBlock Name="txt1" Margin="5"></TextBlock>
+        <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Name="txt1" Margin="5" HorizontalAlignment="Center" FontSize="25"  ></TextBlock>
             <DockPanel>
-                <Image Name="MoneyImage" Margin="5" Height="50" Width="50"></Image>
-                <TextBlock Name="txt2" Margin="5" Width="40" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Name="txt3" Margin="5" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="Ваші кошти:" Margin="5" Width="180" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="25" ></TextBlock>
+                <TextBlock Name="txt2" Margin="5" Width="50" VerticalAlignment="Center" ></TextBlock>
+                <Image Name="MoneyImage" Margin="5" Height="50" Width="50" HorizontalAlignment="Left"></Image>
             </DockPanel>
+            <TextBlock Name="txt3" Margin="5" VerticalAlignment="Center" ></TextBlock>
         </StackPanel>
 
-            <Image Name="monster" Grid.Column="1" Grid.Row="1" Margin="20"></Image>
-        
-        <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" >
-            <Button Name="gamebutton" Content="Go" FontSize="30" FontWeight="Bold" Width="70" Margin="5"  Background="LightGreen" HorizontalAlignment="Left" Click="gamebutton_Click"></Button>
-            <Button Name="shopbutton" Content="Shop"  Margin="40,10" Width="60" Background="Cyan" Click="shopbutton_Click"></Button>
-            <Button Name="settingbutton" Content="Settings" Margin="10" Width="50" Background="CadetBlue"></Button>
+        <Image Name="monster" Grid.Column="1" Grid.Row="1" Margin="10"></Image>
+
+        <DockPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,15" Height="85" >
+            <Button Name="gamebutton" Content="Пройти" FontSize="20" Width="85" Margin="5"  Background="#FFAFFF81" HorizontalAlignment="Stretch" Style="{StaticResource ButtonStyle}" Click="gamebutton_Click"></Button>
+            <Button Name="shopbutton" Content="Магазин"  Margin="20, 10, 10, 10" Width="67"  Height="60" HorizontalAlignment="Stretch" Background="#FF12ADCF" FontSize="16" Click="shopbutton_Click"></Button>
+            <Button Name="settingbutton" Margin="10, 10, 10, 10"  Width="67" Height="60" Click="settingbutton_Click" HorizontalAlignment="Stretch" >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="-1.184"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0.61"/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Button.Background>
+                    <ImageBrush ImageSource="../Pictures/setting-icon.png"></ImageBrush>
+                </Button.Background>
+            </Button>
+            <Button Name="exitbutton" Content="Вихід" FontSize="16" Margin="10,12,10,13"  Width="67" Background="#FFC4EAEE" IsDefault="True" Click="exitbutton_Click" HorizontalAlignment="Left"/>
         </DockPanel>
-        
+
     </Grid>
 </Window>

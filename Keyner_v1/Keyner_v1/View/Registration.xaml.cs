@@ -20,31 +20,59 @@ namespace Keyner_v1.View
     public partial class Registration : Window
     {
         Controller.AutorizAndRegistr aar;
-        Autorization autor;
-
-        public Registration(Autorization a)
+      
+        public Registration()
         {
             InitializeComponent();
             aar = new Controller.AutorizAndRegistr();
 
-            autor = new Autorization();
-            autor = a;
-
             comboBoxGroup.DisplayMemberPath = "Name";
             comboBoxGroup.SelectedValue = "Id";
-            comboBoxGroup.ItemsSource = autor.group;
+            comboBoxGroup.ItemsSource = aar.GetGroupList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(passBox.Password == passBox_Copy.Password)
-                aar.AddUserTest(fio.Text, passBox.Password, (comboBoxGroup.SelectedValue as Model.Group).Id, autor.user);
+            if (comboBoxGroup.SelectionBoxItem == "")
+            {
+                MessageBox.Show("Введіть усі дані");
+                return;
+            }
 
-            int id_user = aar.GetIdUserTest(fio.Text, passBox.Password, autor);
-            MainUserWindow mw = new MainUserWindow(id_user);
-            this.Hide();
-            mw.ShowDialog();
-            this.Close();
+            if(fio.Text == "")
+            {
+                MessageBox.Show("Введіть ім'я користувача");
+                return;
+            }
+
+            if (passBox.Password.Length == 0)
+            {
+                MessageBox.Show("Пароль не введено!");
+                return;
+            }
+
+            if (passBox.Password == passBox_Copy.Password)
+            {
+                if(aar.CheckName(fio.Text))
+                {
+                    MessageBox.Show("Таке ім'я користувача вже існує");
+                    return;
+                }
+
+                aar.AddUser(fio.Text, passBox.Password, (comboBoxGroup.SelectedValue as Model.Group).Id);
+
+                int id_user = aar.GetIdUser(fio.Text, passBox.Password);
+                MainUserWindow mw = new MainUserWindow(id_user);
+                this.Hide();
+                mw.ShowDialog();
+                this.Close();
+            }
+            else
+                if(passBox_Copy.Password == "")
+                MessageBox.Show("Не введено підтвердження пароля");
+            else
+                MessageBox.Show("Паролі не співпадають!");
+
         }
     }
 }

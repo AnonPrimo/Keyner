@@ -6,7 +6,9 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:local="clr-namespace:Keyner_v1.View"
         mc:Ignorable="d"
-        Title="Test" Height="690" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+        Title="Test" Height="690" Width="1000" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        PreviewTextInput="Window_PreviewTextInput">
 
     <Window.Resources>
         <Style x:Key="keyboardButtonsStyle">
@@ -38,9 +40,8 @@
             <Setter Property="TextBlock.Background" Value="LightPink"/>
         </Style>
 
-        <Style x:Key="InfoTextBlock_style" TargetType="TextBlock">
+        <Style x:Key="InfoLabel_style" TargetType="Label">
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
 
@@ -52,7 +53,7 @@
             <ColumnDefinition Width="149*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="0" Grid.ColumnSpan="2">
+        <StackPanel Grid.Column="0" Margin="0" Grid.ColumnSpan="4">
             <Border BorderThickness="1" Margin="5" BorderBrush="Black">
                 <RichTextBox Name="TextToWrite" FontSize="20" Height="200">
                     <RichTextBox.Resources>
@@ -60,14 +61,6 @@
                             <Setter Property="Margin" Value="0" />
                         </Style>
                     </RichTextBox.Resources>
-                   
-                    <!--<FlowDocument>
-                        <Paragraph>I am a flow document. Would you like to edit me?
-                            <Bold>Go ahead.</Bold>
-                        </Paragraph>
-                        <Paragraph Foreground="Blue">I am blue I am blue I am blue.</Paragraph>
-                    </FlowDocument>-->
-                    
                 </RichTextBox>
             </Border>
             <Border BorderThickness="1" Margin="5" BorderBrush="Black">
@@ -76,18 +69,18 @@
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Height="45" >
                     <TextBlock Name="txt_apostrof" Width="36" Text="'" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_1" Width="36" Text="1"  Style="{StaticResource ring    }"/>
-                    <TextBlock Name="txt_2" Width="36" Text="2" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_3" Width="36" Text="3" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_4" Width="36" Text="4" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_5" Width="36" Text="5" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_6" Width="36" Text="6" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_7" Width="36" Text="7" Style="{StaticResource rightPointer}"/>
-                    <TextBlock Name="txt_8" Width="36" Text="8" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_9" Width="36" Text="9" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_0" Width="36" Text="0" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_minus" Width="36" Text="-" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_eql" Width="36" Text="=" Style="{StaticResource pinky}"/>
+                    <TextBlock Name="txt_1" Width="36" Text="1!"  Style="{StaticResource ring    }"/>
+                    <TextBlock Name="txt_2" Width="36" Text="2&quot;" Style="{StaticResource ring}"/>
+                    <TextBlock Name="txt_3" Width="38" Text="3№" Style="{StaticResource middle}"/>
+                    <TextBlock Name="txt_4" Width="36" Text="4;" Style="{StaticResource middle}"/>
+                    <TextBlock Name="txt_5" Width="36" Text="5%" Style="{StaticResource leftPointer}"/>
+                    <TextBlock Name="txt_6" Width="36" Text="6:" Style="{StaticResource leftPointer}"/>
+                    <TextBlock Name="txt_7" Width="36" Text="7?" Style="{StaticResource rightPointer}"/>
+                    <TextBlock Name="txt_8" Width="36" Text="8*" Style="{StaticResource middle}"/>
+                    <TextBlock Name="txt_9" Width="36" Text="9(" Style="{StaticResource middle}"/>
+                    <TextBlock Name="txt_0" Width="36" Text="0)" Style="{StaticResource ring}"/>
+                    <TextBlock Name="txt_minus" Width="36" Text="-_" Style="{StaticResource pinky}"/>
+                    <TextBlock Name="txt_eql" Width="36" Text="=+" Style="{StaticResource pinky}"/>
                     <TextBlock Name="txt_backspace" Width="82" Text="←" Style="{StaticResource pinky}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="45">
@@ -133,15 +126,14 @@
                     <TextBlock Name="txt_m" Width="36" Text="Ь" Style="{StaticResource rightPointer}"/>
                     <TextBlock Name="txt_coma" Width="36" Text="Б" Style="{StaticResource middle}"/>
                     <TextBlock Name="txt_dot" Width="36" Text="Ю" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_slash" Width="36" Text="." Style="{StaticResource pinky}"/>
-                    <TextBlock Name="rightShift" Width="109" Text="Shift"  Style="{StaticResource pinky}"/>
+                    <TextBlock Name="txt_slash" Width="36" Text=". ," Style="{StaticResource pinky}"/>
+                    <TextBlock Name="txt_rightShift" Width="109" Text="Shift"  Style="{StaticResource pinky}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="45">
                     <TextBlock Name="txt_leftCtrl" Width="36" Text="Ctrl" FontSize="19" Style="{StaticResource pinky}"/>
                     <TextBlock Name="txt_leftWin" Width="36" Text="Win" FontSize="19" Style="{StaticResource pinky}"/>
                     <TextBlock Name="txt_leftAlt" Width="36" Text="Alt" FontSize="19" Style="{StaticResource leftThumb}"/>
-                    <TextBlock Name="txt_leftSpace" Width="178" Style="{StaticResource leftThumb}" Margin="5,5,0,5" TextAlignment="Right" Text="Sp"/>
-                    <TextBlock Name="txt_rightSpace" Width="178" Style="{StaticResource rightThumb}" Margin="0,5,5,5" TextAlignment="Left" Text="ace"/>
+                    <TextBlock Name="txt_Space" Width="356" Style="{StaticResource leftThumb}" Margin="5,5,5,5" Text="Space"/>
                     <TextBlock Name="txt_rightAlt" Width="36" Text="Alt" FontSize="19" Style="{StaticResource rightThumb}"/>
                     <TextBlock Name="txt_rightWin" Width="36" Text="Win" FontSize="19" Style="{StaticResource rightThumb}"/>
                     <TextBlock Name="txt_rightPKM" Width="36" Text="⊞" Style="{StaticResource pinky}"/>
@@ -149,14 +141,26 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="2" Background="Wheat">
-            <TextBlock Text="Кількість помилок: " Style="{StaticResource InfoTextBlock_style}"/>
-            <TextBlock Text="Час: " Style="{StaticResource InfoTextBlock_style}"/>
-            <TextBlock Text="Ваш рекорд: " Style="{StaticResource InfoTextBlock_style}"/>
-            <TextBlock Text="Загальний рекорд: " Style="{StaticResource InfoTextBlock_style}"/>
-            <TextBlock Text="Швидкість набору: " Style="{StaticResource InfoTextBlock_style}"/>
-            <Separator/>
-            <Image gif:ImageBehavior.AnimatedSource="/Monster/base.gif" Margin="5"/>
-        </StackPanel>
+        <Grid Grid.Column="2" Background="Wheat">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <DockPanel>
+                <Label Name="MistakesLabel" Content="Кількість помилок: 0" Width="220" Style="{StaticResource InfoLabel_style}"/>
+                    <Button Name="Rules" Width="50" Click="Rules_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="..\Pictures\Info.png"/>
+                        </Button.Background>
+                    </Button>
+                </DockPanel>
+                <Label Name ="TimeSpentLabel" Content="Час: 0:0.0" Style="{StaticResource InfoLabel_style}"/>
+                <Label Name="BestTimeLabel" Content="Рекорд: " Style="{StaticResource InfoLabel_style}"/>
+            </StackPanel>
+            <Image Grid.Row="1" Name="MonsterImage"  Margin="5"/>
+            <TextBlock Grid.Row="2" Name="label_error" Foreground="Red" FontSize="230" Text="!" FontWeight="Bold" Height="300"  TextAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>

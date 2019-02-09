@@ -26,6 +26,7 @@ namespace KeynerAdminApplication
             _test = test;
             richTextBoxText.Text = _test.Text;
             numericUpDownCountMistakes.Value = _test.CountMistakes;
+            numericUpDownMaxTime.Value = _test.MaxTime;
             _modified = true;
         }
 
@@ -45,6 +46,7 @@ namespace KeynerAdminApplication
             }
             else _test.Text = richTextBoxText.Text;
             _test.CountMistakes = (int)numericUpDownCountMistakes.Value;
+            _test.MaxTime = (int)numericUpDownMaxTime.Value;
 
             List<ValidationResult> validationResults = new List<ValidationResult>();
             ValidationContext validationContext = new ValidationContext(_test);

@@ -69,14 +69,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controller\AutorizAndRegistr.cs" />
+    <Compile Include="Controller\SettingWinController.cs" />
     <Compile Include="Controller\ShopWindowController.cs" />
     <Compile Include="Controller\TestController.cs" />
     <Compile Include="Controller\UserFormController.cs" />
+    <Compile Include="Model\Test.cs" />
     <Compile Include="View\MainUserWindow.xaml.cs">
       <DependentUpon>MainUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ShopWindow.xaml.cs">
       <DependentUpon>ShopWindow.xaml</DependentUpon>
@@ -107,6 +112,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ShopWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,7 +137,6 @@
     <Compile Include="Model\Purchase.cs" />
     <Compile Include="Model\Shop.cs" />
     <Compile Include="Model\Statistic.cs" />
-    <Compile Include="Model\Test.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -175,7 +183,31 @@
     <Resource Include="Monster\money_im.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Monster\star.png" />
+    <Resource Include="Pictures\monster_no_im.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\money_im.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\gold_star1.png" />
+    <Resource Include="Pictures\gold_star2.png" />
+    <Resource Include="Pictures\gold_star3.png" />
+    <Resource Include="Pictures\grey_star3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\setting-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\arrow_next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\arrow_prev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Pictures\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sound_Error.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
