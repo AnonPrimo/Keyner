@@ -53,9 +53,9 @@
             <ColumnDefinition Width="149*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="0" Grid.ColumnSpan="4">
+        <StackPanel Grid.Column="0" Margin="0" Grid.ColumnSpan="2">
             <Border BorderThickness="1" Margin="5" BorderBrush="Black">
-                <RichTextBox Name="TextToWrite" FontSize="20" Height="200">
+                <RichTextBox x:Name="TextToWrite" FontSize="20" Height="200">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0" />
@@ -64,80 +64,80 @@
                 </RichTextBox>
             </Border>
             <Border BorderThickness="1" Margin="5" BorderBrush="Black">
-                <TextBlock Name="InputText" FontSize="20" Height="200"/>
+                <TextBlock x:Name="InputText" FontSize="20" Height="200"/>
             </Border>
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Height="45" >
-                    <TextBlock Name="txt_apostrof" Width="36" Text="'" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_1" Width="36" Text="1!"  Style="{StaticResource ring    }"/>
-                    <TextBlock Name="txt_2" Width="36" Text="2&quot;" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_3" Width="38" Text="3№" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_4" Width="36" Text="4;" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_5" Width="36" Text="5%" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_6" Width="36" Text="6:" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_7" Width="36" Text="7?" Style="{StaticResource rightPointer}"/>
-                    <TextBlock Name="txt_8" Width="36" Text="8*" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_9" Width="36" Text="9(" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_0" Width="36" Text="0)" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_minus" Width="36" Text="-_" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_eql" Width="36" Text="=+" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_backspace" Width="82" Text="←" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_apostrof" Width="36" Text="'" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_1" Width="36" Text="1!"  Style="{StaticResource ring}"/>
+                    <TextBlock x:Name="txt_2" Width="36" Text="2&quot;" Style="{StaticResource ring}"/>
+                    <TextBlock x:Name="txt_3" Width="38" Text="3№" Style="{StaticResource middle}"/>
+                    <TextBlock x:Name="txt_4" Width="36" Text="4;" Style="{StaticResource middle}"/>
+                    <TextBlock x:Name="txt_5" Width="36" Text="5%" Style="{StaticResource leftPointer}"/>
+                    <TextBlock x:Name="txt_6" Width="36" Text="6:" Style="{StaticResource leftPointer}"/>
+                    <TextBlock x:Name="txt_7" Width="36" Text="7?" Style="{StaticResource rightPointer}"/>
+                    <TextBlock x:Name="txt_8" Width="36" Text="8*" Style="{StaticResource middle}"/>
+                    <TextBlock x:Name="txt_9" Width="36" Text="9(" Style="{StaticResource middle}"/>
+                    <TextBlock x:Name="txt_0" Width="36" Text="0)" Style="{StaticResource ring}"/>
+                    <TextBlock x:Name="txt_minus" Width="36" Text="-_" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_eql" Width="36" Text="=+" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_backspace" Width="82" Text="←" Style="{StaticResource pinky}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="45">
-                    <TextBlock Name="txt_tab" Width="70" Text="TAB" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_q" Width="36" Text="Й" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_w" Width="36" Text="Ц" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_e" Width="36" Text="У" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_r" Width="36" Text="К" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_t" Width="36" Text="Е" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_y" Width="36" Text="Н" Style="{StaticResource rightPointer}"/>
-                    <TextBlock Name="txt_u" Width="36" Text="Г" Style="{StaticResource rightPointer}"/>
-                    <TextBlock Name="txt_i" Width="36" Text="Ш" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_o" Width="36" Text="Щ" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_p" Width="36" Text="З" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_sqrBracketLeft" Width="36" Text="Х" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_sqrBracketRight" Width="36" Text="Ї" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_backslash" Width="48" Text="\" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_tab" Width="70" Text="TAB" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_q" Width="36" Text="Й" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_w" Width="36" Text="Ц" Style="{StaticResource ring}"/>
+                    <TextBlock x:Name="txt_e" Width="36" Text="У" Style="{StaticResource middle}"/>
+                    <TextBlock x:Name="txt_r" Width="36" Text="К" Style="{StaticResource leftPointer}"/>
+                    <TextBlock x:Name="txt_t" Width="36" Text="Е" Style="{StaticResource leftPointer}"/>
+                    <TextBlock x:Name="txt_y" Width="36" Text="Н" Style="{StaticResource rightPointer}"/>
+                    <TextBlock x:Name="txt_u" Width="36" Text="Г" Style="{StaticResource rightPointer}"/>
+                    <TextBlock x:Name="txt_i" Width="36" Text="Ш" Style="{StaticResource middle}"/>
+                    <TextBlock x:Name="txt_o" Width="36" Text="Щ" Style="{StaticResource ring}"/>
+                    <TextBlock x:Name="txt_p" Width="36" Text="З" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_sqrBracketLeft" Width="36" Text="Х" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_sqrBracketRight" Width="36" Text="Ї" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_backslash" Width="48" Text="\" Style="{StaticResource pinky}"/>
 
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="45">
-                    <TextBlock Name="txt_caps" Width="72" Text="Caps" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_a" Width="36" Text="Ф" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_s" Width="36" Text="І" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_d" Width="36" Text="В" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_f" Width="36" Text="А" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_g" Width="36" Text="П" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_h" Width="36" Text="Р" Style="{StaticResource rightPointer}"/>
-                    <TextBlock Name="txt_j" Width="36" Text="О" Style="{StaticResource rightPointer}"/>
-                    <TextBlock Name="txt_k" Width="36" Text="Л" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_l" Width="36" Text="Д" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_semikolon" Width="36" Text="Ж" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_quotes" Width="36" Text="Є" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_enter" Width="92" Text="Enter" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_caps" Width="72" Text="Caps" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_a" Width="36" Text="Ф" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_s" Width="36" Text="І" Style="{StaticResource ring}"/>
+                    <TextBlock x:Name="txt_d" Width="36" Text="В" Style="{StaticResource middle}"/>
+                    <TextBlock x:Name="txt_f" Width="36" Text="А" Style="{StaticResource leftPointer}"/>
+                    <TextBlock x:Name="txt_g" Width="36" Text="П" Style="{StaticResource leftPointer}"/>
+                    <TextBlock x:Name="txt_h" Width="36" Text="Р" Style="{StaticResource rightPointer}"/>
+                    <TextBlock x:Name="txt_j" Width="36" Text="О" Style="{StaticResource rightPointer}"/>
+                    <TextBlock x:Name="txt_k" Width="36" Text="Л" Style="{StaticResource middle}"/>
+                    <TextBlock x:Name="txt_l" Width="36" Text="Д" Style="{StaticResource ring}"/>
+                    <TextBlock x:Name="txt_semikolon" Width="36" Text="Ж" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_quotes" Width="36" Text="Є" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_enter" Width="92" Text="Enter" Style="{StaticResource pinky}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="45">
-                    <TextBlock Name="txt_shift" Width="100" Text="Shift" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_z" Width="36" Text="Я" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_x" Width="36" Text="Ч" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_c" Width="36" Text="С" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_v" Width="36" Text="М" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_b" Width="36" Text="И" Style="{StaticResource leftPointer}"/>
-                    <TextBlock Name="txt_n" Width="36" Text="Т" Style="{StaticResource rightPointer}"/>
-                    <TextBlock Name="txt_m" Width="36" Text="Ь" Style="{StaticResource rightPointer}"/>
-                    <TextBlock Name="txt_coma" Width="36" Text="Б" Style="{StaticResource middle}"/>
-                    <TextBlock Name="txt_dot" Width="36" Text="Ю" Style="{StaticResource ring}"/>
-                    <TextBlock Name="txt_slash" Width="36" Text=". ," Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_rightShift" Width="109" Text="Shift"  Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_shift" Width="100" Text="Shift" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_z" Width="36" Text="Я" Style="{StaticResource ring}"/>
+                    <TextBlock x:Name="txt_x" Width="36" Text="Ч" Style="{StaticResource middle}"/>
+                    <TextBlock x:Name="txt_c" Width="36" Text="С" Style="{StaticResource leftPointer}"/>
+                    <TextBlock x:Name="txt_v" Width="36" Text="М" Style="{StaticResource leftPointer}"/>
+                    <TextBlock x:Name="txt_b" Width="36" Text="И" Style="{StaticResource leftPointer}"/>
+                    <TextBlock x:Name="txt_n" Width="36" Text="Т" Style="{StaticResource rightPointer}"/>
+                    <TextBlock x:Name="txt_m" Width="36" Text="Ь" Style="{StaticResource rightPointer}"/>
+                    <TextBlock x:Name="txt_coma" Width="36" Text="Б" Style="{StaticResource middle}"/>
+                    <TextBlock x:Name="txt_dot" Width="36" Text="Ю" Style="{StaticResource ring}"/>
+                    <TextBlock x:Name="txt_slash" Width="36" Text=". ," Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_rightShift" Width="109" Text="Shift"  Style="{StaticResource pinky}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="45">
-                    <TextBlock Name="txt_leftCtrl" Width="36" Text="Ctrl" FontSize="19" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_leftWin" Width="36" Text="Win" FontSize="19" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_leftAlt" Width="36" Text="Alt" FontSize="19" Style="{StaticResource leftThumb}"/>
-                    <TextBlock Name="txt_Space" Width="356" Style="{StaticResource leftThumb}" Margin="5,5,5,5" Text="Space"/>
-                    <TextBlock Name="txt_rightAlt" Width="36" Text="Alt" FontSize="19" Style="{StaticResource rightThumb}"/>
-                    <TextBlock Name="txt_rightWin" Width="36" Text="Win" FontSize="19" Style="{StaticResource rightThumb}"/>
-                    <TextBlock Name="txt_rightPKM" Width="36" Text="⊞" Style="{StaticResource pinky}"/>
-                    <TextBlock Name="txt_rightCtrl" Width="36" Text="Ctrl" FontSize="19" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_leftCtrl" Width="36" Text="Ctrl" FontSize="19" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_leftWin" Width="36" Text="Win" FontSize="19" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_leftAlt" Width="36" Text="Alt" FontSize="19" Style="{StaticResource leftThumb}"/>
+                    <TextBlock x:Name="txt_Space" Width="356" Style="{StaticResource leftThumb}" Margin="5,5,5,5" Text="Space"/>
+                    <TextBlock x:Name="txt_rightAlt" Width="36" Text="Alt" FontSize="19" Style="{StaticResource rightThumb}"/>
+                    <TextBlock x:Name="txt_rightWin" Width="36" Text="Win" FontSize="19" Style="{StaticResource rightThumb}"/>
+                    <TextBlock x:Name="txt_rightPKM" Width="36" Text="⊞" Style="{StaticResource pinky}"/>
+                    <TextBlock x:Name="txt_rightCtrl" Width="36" Text="Ctrl" FontSize="19" Style="{StaticResource pinky}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
@@ -149,7 +149,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <DockPanel>
-                <Label Name="MistakesLabel" Content="Кількість помилок: 0" Width="220" Style="{StaticResource InfoLabel_style}"/>
+                    <Label Name="MistakesLabel" Content="Кількість помилок: 0" Width="220" Style="{StaticResource InfoLabel_style}"/>
                     <Button Name="Rules" Width="50" Click="Rules_Click">
                         <Button.Background>
                             <ImageBrush ImageSource="..\Pictures\Info.png"/>
